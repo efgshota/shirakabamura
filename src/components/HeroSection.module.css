@@ -1,0 +1,48 @@
+.hero {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  z-index: 0;
+}
+
+.bgWrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.bgImage {
+  object-fit: cover;
+  object-position: center center;
+}
+
+.logoArea {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.logoImage {
+  opacity: 0;
+  transition: opacity 1s;
+  width: 60px;
+  height: auto;
+}
+
+.logoArea.active .logoImage {
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  .logoArea {
+    bottom: 40px;
+  }
+
+  .logoImage {
+    width: 48px;
+  }
+}

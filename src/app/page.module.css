@@ -1,0 +1,9 @@
+.page {
+  position: relative;
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  margin-top: 100svh;
+}

@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* ===== Base Reset ===== */
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+  line-height: 1;
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "kinto-sans", "Yu Gothic", YuGothic, "Hiragino Sans",
+    "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
+  font-size: 1.4rem;
+  color: #253c30;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+a:hover {
+  opacity: 0.6;
+}
+
+/* ===== Utility ===== */
+.inner {
+  max-width: 1060px;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+
+.pc {
+  display: block !important;
+}
+.sp {
+  display: none !important;
+}
+
+@media (max-width: 767px) {
+  .pc {
+    display: none !important;
+  }
+  .sp {
+    display: block !important;
+  }
+  .inner {
+    padding: 0 24px;
+  }
+}
+
+/* ===== Font Classes ===== */
+.font-tsuku {
+  font-family: "fot-tsukuardgothic-std", sans-serif;
+}
+
+.font-kinto {
+  font-family: "kinto-sans", sans-serif;
+}
+
+/* ===== Animations ===== */
+@keyframes float {
+  0% {
+    transform: translate(0, 30px);
+    opacity: 0;
+  }
+  70% {
+    transform: translate(0, 0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+/* Scroll-triggered elements */
+[data-trigger] {
+  position: relative;
+  top: 60px;
+  opacity: 0;
+  transition: top 1s, opacity 1s;
+}
+
+[data-trigger].visible {
+  top: 0;
+  opacity: 1;
+}
+
+/* ===== More Button ===== */
+.c-moreBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 158px;
+  height: 36px;
+  border-radius: 36px;
+  background: #fff;
+  font-size: 1.4rem;
+  font-family: "fot-tsukuardgothic-std", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: opacity 0.3s;
+  padding: 0 24px;
+}
+
+.c-moreBtn:hover {
+  opacity: 0.6;
+}
+
+.c-moreBtn.blue {
+  background: #a1d1db;
+  color: #fff;
+}

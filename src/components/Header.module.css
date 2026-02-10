@@ -1,0 +1,151 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  pointer-events: none;
+}
+
+.logo {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  z-index: 100;
+  pointer-events: auto;
+  display: block;
+  width: 22px;
+}
+
+.hamburger {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  z-index: 100;
+  pointer-events: auto;
+  width: 30px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger span {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  transition: transform 0.3s, background-color 0.3s, top 0.3s;
+}
+
+.hamburger span:first-child {
+  top: 4px;
+}
+
+.hamburger span:last-child {
+  top: 14px;
+}
+
+.header.scrolled .hamburger span,
+.hamburger.active span {
+  background-color: #000;
+}
+
+.hamburger.active span:first-child {
+  top: 9px;
+  transform: rotate(-35deg);
+}
+
+.hamburger.active span:last-child {
+  top: 9px;
+  transform: rotate(35deg);
+}
+
+/* Navigation Overlay */
+.gnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 98;
+  pointer-events: none;
+  background: linear-gradient(180deg, #b8ced3 0%, #bed9d2 50%, #c3e2d1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gnav.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.gnavInner {
+  text-align: center;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navList li {
+  margin-bottom: 8px;
+}
+
+.navList li a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 2.07;
+  color: #253c30;
+  letter-spacing: 0.05em;
+}
+
+.navExternal {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.navExternal a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #253c30;
+  letter-spacing: 0.05em;
+}
+
+.navExternal p {
+  margin-top: 8px;
+  font-size: 1.2rem;
+  color: #253c30;
+  opacity: 0.6;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .logo {
+    top: 20px;
+    left: 20px;
+  }
+
+  .hamburger {
+    top: 20px;
+    right: 20px;
+  }
+
+  .gnav {
+    padding: 170px 40px 120px;
+    overflow: scroll;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}

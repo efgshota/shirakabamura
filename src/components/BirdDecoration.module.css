@@ -1,0 +1,29 @@
+.wrap {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 40px 0;
+  background: #f8f8f5;
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+
+.wrap.visible {
+  opacity: 1;
+}
+
+.bird {
+  transform: rotate(-15deg);
+  opacity: 0.8;
+}
+
+@media (max-width: 767px) {
+  .wrap {
+    padding: 24px 0;
+  }
+
+  .bird {
+    width: 80px;
+    height: auto;
+  }
+}

@@ -1,0 +1,158 @@
+.property {
+  position: relative;
+  z-index: 1;
+  background: #f8f8f5;
+  padding: 378px 0 318px;
+}
+
+.inner {
+  max-width: 733px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.titleWrap {
+  text-align: center;
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.titleIcon {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translate(-50%, -54%) scale(0.3);
+  transition: transform 1s;
+  z-index: 2;
+  width: 100px;
+}
+
+.titleWrap.visible .titleIcon {
+  transform: translate(-50%, -54%) scale(1);
+}
+
+.title {
+  writing-mode: vertical-rl;
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: #253c30;
+  margin: 0 auto;
+}
+
+.subtitle {
+  margin-top: 16px;
+  font-size: 1.4rem;
+  color: #253c30;
+  opacity: 0.7;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 19px;
+  position: relative;
+  top: 60px;
+  opacity: 0;
+  transition: top 1s, opacity 1s;
+}
+
+.list.visible {
+  top: 0;
+  opacity: 1;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cardImage {
+  width: 41.58%;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.cardImg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cardBody {
+  flex: 1;
+}
+
+.cardTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #253c30;
+  line-height: 1.5;
+}
+
+.cardArea {
+  margin-top: 6px;
+  font-size: 1.3rem;
+  color: #94b3ba;
+}
+
+.more {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.bottomText {
+  text-align: center;
+  margin-top: 80px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 60px;
+  opacity: 0;
+  transition: top 1s, opacity 1s;
+}
+
+.bottomText.visible {
+  top: 0;
+  opacity: 1;
+}
+
+.bottomText p {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: #253c30;
+}
+
+.bottomBtn {
+  margin-top: 24px;
+}
+
+@media (max-width: 767px) {
+  .property {
+    padding: 156px 0 168px;
+  }
+
+  .inner {
+    padding: 0 24px;
+  }
+
+  .list {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .bottomText {
+    margin-top: 48px;
+  }
+}

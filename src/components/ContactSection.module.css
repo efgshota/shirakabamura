@@ -1,0 +1,162 @@
+.contact {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(180deg, #d4d4e6 0%, #e0dfe9 40%, #eae9ef 100%);
+  padding: 236px 0 168px;
+}
+
+/* Bird decoration */
+.birdWrap {
+  text-align: center;
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+
+.birdWrap.birdVisible {
+  opacity: 1;
+}
+
+.bird {
+  transform: rotate(-15deg);
+}
+
+.inner {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.titleWrap {
+  text-align: center;
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.titleIcon {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translate(-50%, 0%) scale(0.3);
+  transition: transform 1s;
+  z-index: 2;
+  width: 134px;
+}
+
+.titleWrap.visible .titleIcon {
+  transform: translate(-50%, 0%) scale(1);
+}
+
+.title {
+  writing-mode: vertical-rl;
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: #253c30;
+  margin: 0 auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  height: 76px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 0 24px;
+  font-size: 1.4rem;
+  font-family: "kinto-sans", sans-serif;
+  color: #253c30;
+  text-align: center;
+  outline: none;
+}
+
+.input::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.textarea {
+  width: 100%;
+  height: 287px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 20px;
+  font-size: 1.4rem;
+  font-family: "kinto-sans", sans-serif;
+  color: #253c30;
+  outline: none;
+  resize: vertical;
+}
+
+.textarea::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.checkField {
+  text-align: center;
+  margin: 12px 0;
+}
+
+.checkLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.3rem;
+  color: #253c30;
+  cursor: pointer;
+}
+
+.checkLabel input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.error {
+  text-align: center;
+  color: #ee0101;
+  font-size: 1.3rem;
+}
+
+.submit {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.thanks {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.thanks p {
+  font-size: 1.6rem;
+  line-height: 1.8;
+  color: #253c30;
+}
+
+@media (max-width: 767px) {
+  .contact {
+    padding: 174px 0 120px;
+  }
+
+  .inner {
+    padding: 0 24px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}
