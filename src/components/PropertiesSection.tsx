@@ -3,10 +3,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useScrollTrigger } from "./useScrollTrigger";
-import { properties } from "@/data/properties";
 import styles from "./PropertiesSection.module.css";
 
-export default function PropertiesSection() {
+type PropertyItem = {
+  id: string;
+  title: string;
+  image: string;
+  area: string;
+};
+
+export default function PropertiesSection({
+  properties,
+}: {
+  properties: PropertyItem[];
+}) {
   const { ref: titleRef, visible: titleVisible } = useScrollTrigger();
   const { ref: listRef, visible: listVisible } = useScrollTrigger();
   const { ref: bottomRef, visible: bottomVisible } = useScrollTrigger();
@@ -38,8 +48,8 @@ export default function PropertiesSection() {
         >
           {properties.map((prop) => (
             <Link
-              key={prop.slug}
-              href={`/property/${encodeURIComponent(prop.slug)}/`}
+              key={prop.id}
+              href={`/property/${encodeURIComponent(prop.id)}/`}
               className={styles.card}
             >
               <div className={styles.cardImage}>

@@ -4,24 +4,36 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PropertyGallery from "@/components/PropertyGallery";
-import { properties } from "@/data/properties";
+import { getProperty, getProperties } from "@/lib/microcms";
+import { properties as staticProperties } from "@/data/properties";
 import styles from "./page.module.css";
 
-export function generateStaticParams() {
-  return properties.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  try {
+    const { contents } = await getProperties({ limit: 100 });
+    if (contents.length > 0) {
+      return contents.map((p) => ({ slug: p.id }));
+    }
+  } catch {
+    // fallback to static
+  }
+  return staticProperties.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  return params.then(({ slug }) => {
-    const prop = properties.find(
-      (p) => p.slug === decodeURIComponent(slug)
-    );
-    return { title: prop ? `${prop.title}｜白樺村` : "物件｜白樺村" };
-  });
+  const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
+  try {
+    const prop = await getProperty(decodedSlug);
+    return { title: `${prop.title}｜白樺村` };
+  } catch {
+    const staticProp = staticProperties.find((p) => p.slug === decodedSlug);
+    return { title: staticProp ? `${staticProp.title}｜白樺村` : "物件｜白樺村" };
+  }
 }
 
 export default async function PropertyDetailPage({
@@ -31,11 +43,90 @@ export default async function PropertyDetailPage({
 }) {
   const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
-  const prop = properties.find((p) => p.slug === decodedSlug);
+
+  // 正規化された物件データ型
+  type NormalizedProperty = {
+    id: string;
+    title: string;
+    location: string;
+    type: "sell" | "rent";
+    image: string;
+    images: string[];
+    price: string;
+    floorPlan?: string | null;
+    floorArea?: string | null;
+    specs?: string;
+    detailsHtml?: string;
+    details?: { label: string; value: string }[];
+    comment?: string;
+    description?: string;
+  };
+
+  // MicroCMS データを正規化
+  function normalizeCms(p: Awaited<ReturnType<typeof getProperty>>): NormalizedProperty {
+    const allImages = [...(p.image ?? []), ...(p.images ?? [])];
+    return {
+      id: p.id,
+      title: p.title,
+      location: p.location,
+      type: (p.type?.[0] ?? "sell") as "sell" | "rent",
+      image: allImages[0]?.url ?? "",
+      images: allImages.map((img) => img.url),
+      price: p.price,
+      floorPlan: p.floorPlan,
+      floorArea: p.floorArea,
+      specs: p.specs,
+      detailsHtml: p.details ?? undefined,
+      comment: p.comment,
+      description: p.description?.replace(/<[^>]*>/g, ""),
+    };
+  }
+
+  // 静的データを正規化
+  function normalizeStatic(p: (typeof staticProperties)[number]): NormalizedProperty {
+    return {
+      id: p.slug,
+      title: p.title,
+      location: p.location,
+      type: p.type,
+      image: p.image,
+      images: p.images,
+      price: p.price,
+      floorPlan: p.floorPlan,
+      floorArea: p.floorArea,
+      specs: p.specs,
+      details: p.details,
+      comment: p.comment,
+      description: p.description,
+    };
+  }
+
+  // MicroCMS から取得を試み、失敗したら静的データにフォールバック
+  let prop: NormalizedProperty | null = null;
+
+  try {
+    const cmsProp = await getProperty(decodedSlug);
+    prop = normalizeCms(cmsProp);
+  } catch {
+    const staticProp = staticProperties.find((p) => p.slug === decodedSlug);
+    if (staticProp) prop = normalizeStatic(staticProp);
+  }
 
   if (!prop) notFound();
 
-  const related = properties.filter((p) => p.slug !== decodedSlug);
+  // おすすめ物件を取得
+  let related: NormalizedProperty[] = [];
+  try {
+    const { contents } = await getProperties({ limit: 4 });
+    related = contents
+      .filter((p) => p.id !== prop!.id)
+      .slice(0, 4)
+      .map(normalizeCms);
+  } catch {
+    related = staticProperties
+      .filter((p) => p.slug !== prop!.id)
+      .map(normalizeStatic);
+  }
 
   return (
     <div className={styles.page}>
@@ -99,23 +190,27 @@ export default async function PropertyDetailPage({
                   <p className={styles.specLabel}>延床面積</p>
                   <p className={styles.specValue}>{prop.floorArea}</p>
                 </div>
-                <div className={styles.specItem}>
-                  <p className={styles.specLabel}>土地面積</p>
-                  <p className={styles.specValue}>{prop.landArea}</p>
-                </div>
+                {/* 土地面積は details HTML 内に含まれる */}
               </div>
 
               <div className={styles.specsDetail}>
-                <table className={styles.detailTable}>
-                  <tbody>
-                    {prop.details.map((d, i) => (
-                      <tr key={i}>
-                        <th>{d.label}</th>
-                        <td>{d.value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                {prop.detailsHtml ? (
+                  <div
+                    className={styles.detailTable}
+                    dangerouslySetInnerHTML={{ __html: prop.detailsHtml }}
+                  />
+                ) : prop.details ? (
+                  <table className={styles.detailTable}>
+                    <tbody>
+                      {prop.details.map((d, i) => (
+                        <tr key={i}>
+                          <th>{d.label}</th>
+                          <td>{d.value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : null}
               </div>
             </div>
           </div>
@@ -157,10 +252,10 @@ export default async function PropertyDetailPage({
               </svg>
             </div>
             <div className={styles.commentBody}>
-              {prop.comment.split("\n").map((line, i) => (
+              {(prop.comment ?? "").split("\n").map((line, i, arr) => (
                 <span key={i}>
                   {line}
-                  {i < prop.comment.split("\n").length - 1 && <br />}
+                  {i < arr.length - 1 && <br />}
                 </span>
               ))}
             </div>
@@ -181,8 +276,8 @@ export default async function PropertyDetailPage({
             <div className={styles.recommendedGrid}>
               {related.map((r) => (
                 <Link
-                  key={r.slug}
-                  href={`/property/${encodeURIComponent(r.slug)}/`}
+                  key={r.id}
+                  href={`/property/${encodeURIComponent(r.id)}/`}
                   className={styles.recCard}
                 >
                   <div className={styles.recCardImage}>

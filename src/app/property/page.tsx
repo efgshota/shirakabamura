@@ -1,26 +1,43 @@
-"use client";
-
 import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { properties } from "@/data/properties";
+import { getProperties } from "@/lib/microcms";
+import { properties as staticProperties } from "@/data/properties";
+import PropertyListClient, { PropertyCardData } from "./PropertyListClient";
 import styles from "./page.module.css";
 
-const filterOptions = [
-  { key: "all", label: "すべて" },
-  { key: "sell", label: "売物件" },
-  { key: "rent", label: "賃貸" },
-];
+export default async function PropertyListPage() {
+  let properties: PropertyCardData[] = [];
 
-export default function PropertyListPage() {
-  const [activeFilter, setActiveFilter] = useState("all");
+  try {
+    const { contents } = await getProperties({ limit: 100 });
+    if (contents.length > 0) {
+      properties = contents.map((p) => ({
+        id: p.id,
+        title: p.title,
+        image: p.image?.[0]?.url ?? "",
+        specs: p.specs,
+        description: p.description?.replace(/<[^>]*>/g, ""),
+        price: p.price,
+        type: (p.type?.[0] ?? "sell") as "sell" | "rent",
+      }));
+    }
+  } catch {
+    // MicroCMS 取得失敗時はフォールバック
+  }
 
-  const filtered =
-    activeFilter === "all"
-      ? properties
-      : properties.filter((p) => p.type === activeFilter);
+  // CMS にデータがない場合は静的データを使用
+  if (properties.length === 0) {
+    properties = staticProperties.map((p) => ({
+      id: p.slug,
+      title: p.title,
+      image: p.image,
+      specs: p.specs,
+      description: p.description,
+      price: p.price,
+      type: p.type,
+    }));
+  }
 
   return (
     <div className={styles.page}>
@@ -43,65 +60,7 @@ export default function PropertyListPage() {
           </div>
         </section>
 
-        <section className={styles.filter}>
-          <div className={styles.inner}>
-            <div className={styles.filterList}>
-              {filterOptions.map((opt) => (
-                <button
-                  key={opt.key}
-                  onClick={() => setActiveFilter(opt.key)}
-                  className={`${styles.filterBtn} ${activeFilter === opt.key ? styles.active : ""} font-tsuku`}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.list}>
-          <div className={styles.inner}>
-            <div className={styles.grid}>
-              {filtered.map((prop) => (
-                <Link
-                  key={prop.slug}
-                  href={`/property/${encodeURIComponent(prop.slug)}/`}
-                  className={styles.card}
-                >
-                  <div className={styles.cardImage}>
-                    <Image
-                      src={prop.image}
-                      alt={prop.title}
-                      width={280}
-                      height={200}
-                      className={styles.cardImg}
-                    />
-                  </div>
-                  <div className={styles.cardBody}>
-                    {prop.specs && (
-                      <p className={styles.cardSpecs}>{prop.specs}</p>
-                    )}
-                    {prop.description && (
-                      <p className={styles.cardDesc}>
-                        {prop.description.split("\n").map((line, i) => (
-                          <span key={i}>
-                            {line}
-                            {i < prop.description!.split("\n").length - 1 && (
-                              <br />
-                            )}
-                          </span>
-                        ))}
-                      </p>
-                    )}
-                    {prop.price && (
-                      <p className={styles.cardPrice}>{prop.price}</p>
-                    )}
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
+        <PropertyListClient properties={properties} />
       </main>
       <Footer />
     </div>
