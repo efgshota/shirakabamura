@@ -14,23 +14,23 @@
 
 .decoTop {
   position: absolute;
-  top: -418px;
-  left: 0;
-  width: 100%;
+  top: -273px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1280px;
   height: 420px;
-  background: url("/images/top/deco_01.png") no-repeat center bottom;
-  background-size: 100% auto;
+  background: url("/images/top/deco_01.png") center center / cover no-repeat;
   pointer-events: none;
 }
 
 .decoBottom {
   position: absolute;
-  bottom: -414px;
-  left: 0;
-  width: 100%;
+  bottom: -261px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1277px;
   height: 416px;
-  background: url("/images/top/deco_02.png") no-repeat center top;
-  background-size: 100% auto;
+  background: url("/images/top/deco_02.png") center center / cover no-repeat;
   pointer-events: none;
 }
 
@@ -144,13 +144,15 @@
   }
 
   .decoTop {
-    top: -238px;
-    height: 240px;
+    width: 375px;
+    height: 123px;
+    top: -82px;
   }
 
   .decoBottom {
-    bottom: -238px;
-    height: 240px;
+    width: 375px;
+    height: 122px;
+    bottom: -77px;
   }
 
   .inner {
