@@ -125,6 +125,7 @@ export async function getBusinesses(queries?: MicroCMSQueries) {
 
 // お知らせ一覧取得
 export async function getNews(queries?: MicroCMSQueries) {
+  if (!client) throw new Error("MicroCMS client is not configured");
   return client.getList<News>({
     endpoint: "news",
     queries,
