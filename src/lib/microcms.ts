@@ -5,11 +5,14 @@ import type {
   MicroCMSListContent,
 } from "microcms-js-sdk";
 
-// MicroCMS クライアント
-export const client = createClient({
-  serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN!,
-  apiKey: process.env.MICROCMS_API_KEY!,
-});
+// MicroCMS クライアント（環境変数が未設定の場合は null）
+const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
+const apiKey = process.env.MICROCMS_API_KEY;
+
+export const client =
+  serviceDomain && apiKey
+    ? createClient({ serviceDomain, apiKey })
+    : null;
 
 // ===== 型定義 =====
 
@@ -55,6 +58,7 @@ export type Business = {
 
 // 物件一覧取得
 export async function getProperties(queries?: MicroCMSQueries) {
+  if (!client) throw new Error("MicroCMS client is not configured");
   return client.getList<Property>({
     endpoint: "property",
     queries,
@@ -66,6 +70,7 @@ export async function getProperty(
   contentId: string,
   queries?: MicroCMSQueries
 ) {
+  if (!client) throw new Error("MicroCMS client is not configured");
   return client.getListDetail<Property>({
     endpoint: "property",
     contentId,
@@ -75,6 +80,7 @@ export async function getProperty(
 
 // お役立ち帳一覧取得
 export async function getUsefulInfos(queries?: MicroCMSQueries) {
+  if (!client) throw new Error("MicroCMS client is not configured");
   return client.getList<UsefulInfo>({
     endpoint: "useful-infos",
     queries,
@@ -83,6 +89,7 @@ export async function getUsefulInfos(queries?: MicroCMSQueries) {
 
 // 事業者一覧取得
 export async function getBusinesses(queries?: MicroCMSQueries) {
+  if (!client) throw new Error("MicroCMS client is not configured");
   return client.getList<Business>({
     endpoint: "businesses",
     queries,
