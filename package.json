@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "jiti": "^2.6.1",
     "microcms-js-sdk": "^3.1.2",
     "next": "^15.1.0",
     "react": "^19.0.0",
