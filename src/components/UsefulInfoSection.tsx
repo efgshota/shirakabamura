@@ -13,7 +13,7 @@ export default function UsefulInfoSection() {
   const homeInfos = usefulInfos.slice(0, 6);
 
   return (
-    <section className={styles.useful}>
+    <section id="useful" className={styles.useful}>
       <div className={styles.decoTop} />
       <div className={styles.inner}>
         <div
@@ -58,6 +58,7 @@ export default function UsefulInfoSection() {
                       width={44}
                       height={44}
                     />
+                    <span className={styles.iconLabel}>Web</span>
                   </a>
                 )}
                 {info.phone && (
@@ -68,6 +69,7 @@ export default function UsefulInfoSection() {
                       width={44}
                       height={44}
                     />
+                    <span className={styles.iconLabel}>電話</span>
                   </a>
                 )}
               </div>

@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PropertyGallery from "@/components/PropertyGallery";
-import { getProperty, getProperties } from "@/lib/microcms";
+import PropertyImagePlaceholder from "@/components/PropertyImagePlaceholder";
+import { getProperty, getProperties, getAllImageUrls, getFirstImageUrl } from "@/lib/microcms";
 import { properties as staticProperties } from "@/data/properties";
 import styles from "./page.module.css";
 
@@ -64,14 +65,16 @@ export default async function PropertyDetailPage({
 
   // MicroCMS データを正規化
   function normalizeCms(p: Awaited<ReturnType<typeof getProperty>>): NormalizedProperty {
-    const allImages = [...(p.image ?? []), ...(p.images ?? [])];
+    const imageUrls = getAllImageUrls(p.image);
+    const galleryUrls = getAllImageUrls(p.images);
+    const allImages = [...imageUrls, ...galleryUrls];
     return {
       id: p.id,
       title: p.title,
       location: p.location,
       type: (p.type?.[0] ?? "sell") as "sell" | "rent",
-      image: allImages[0]?.url ?? "",
-      images: allImages.map((img) => img.url),
+      image: getFirstImageUrl(p.image),
+      images: allImages,
       price: p.price,
       floorPlan: p.floorPlan,
       floorArea: p.floorArea,
@@ -281,13 +284,17 @@ export default async function PropertyDetailPage({
                   className={styles.recCard}
                 >
                   <div className={styles.recCardImage}>
-                    <Image
-                      src={r.image}
-                      alt={r.title}
-                      width={200}
-                      height={150}
-                      className={styles.recCardImg}
-                    />
+                    {r.image ? (
+                      <Image
+                        src={r.image}
+                        alt={r.title}
+                        width={200}
+                        height={150}
+                        className={styles.recCardImg}
+                      />
+                    ) : (
+                      <PropertyImagePlaceholder className={styles.recCardImg} />
+                    )}
                   </div>
                   <div className={styles.recCardBody}>
                     {r.specs && (

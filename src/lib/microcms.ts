@@ -17,12 +17,13 @@ export const client =
 // ===== 型定義 =====
 
 // 物件情報（MicroCMS実スキーマ準拠）
+// image は単体・配列どちらの設定でも動作するよう両方を許容する
 export type Property = {
   title: string;
   location: string;
-  type: string[];           // セレクト複数: ["sell"] or ["rent"]
-  image: MicroCMSImage[];   // 複数画像
-  images: MicroCMSImage[];  // ギャラリー用複数画像
+  type: string[];
+  image: MicroCMSImage | MicroCMSImage[];   // 単体または複数画像
+  images?: MicroCMSImage | MicroCMSImage[]; // ギャラリー用
   price: string;
   floorPlan?: string | null;
   floorArea?: string | null;
@@ -31,8 +32,26 @@ export type Property = {
   comment?: string;
   description?: string;     // リッチエディタ（HTML）
   address?: string;
-  access?: string;          // テキスト（改行区切り）
+  access?: string;
 } & MicroCMSListContent;
+
+// MicroCMS imageフィールドから最初のURLを安全に取得するヘルパー
+export function getFirstImageUrl(
+  image: MicroCMSImage | MicroCMSImage[] | null | undefined
+): string {
+  if (!image) return "";
+  if (Array.isArray(image)) return image[0]?.url ?? "";
+  return image.url ?? "";
+}
+
+// MicroCMS imageフィールドから全URLを配列で取得するヘルパー
+export function getAllImageUrls(
+  image: MicroCMSImage | MicroCMSImage[] | null | undefined
+): string[] {
+  if (!image) return [];
+  if (Array.isArray(image)) return image.map((img) => img.url);
+  return [image.url];
+}
 
 // お役立ち帳（生活情報）
 export type UsefulInfo = {
@@ -51,6 +70,14 @@ export type Business = {
   description: string;
   image: MicroCMSImage;
   url?: string;
+  category?: string;
+} & MicroCMSListContent;
+
+// お知らせ
+export type News = {
+  title: string;
+  date: string;
+  content?: string;
   category?: string;
 } & MicroCMSListContent;
 
@@ -92,6 +119,14 @@ export async function getBusinesses(queries?: MicroCMSQueries) {
   if (!client) throw new Error("MicroCMS client is not configured");
   return client.getList<Business>({
     endpoint: "businesses",
+    queries,
+  });
+}
+
+// お知らせ一覧取得
+export async function getNews(queries?: MicroCMSQueries) {
+  return client.getList<News>({
+    endpoint: "news",
     queries,
   });
 }

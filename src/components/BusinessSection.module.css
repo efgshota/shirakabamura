@@ -59,9 +59,19 @@
   margin: 0 auto;
 }
 
+.description {
+  margin-top: 20px;
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: #253c30;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
   position: relative;
   top: 60px;
@@ -94,11 +104,20 @@
   display: block;
 }
 
+.cardMeta {
+  margin-bottom: 12px;
+}
+
 .cardName {
   font-size: 1.8rem;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
+}
+
+.cardType {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .cardBtn {
@@ -108,7 +127,7 @@
 .bottomText {
   text-align: center;
   margin-top: 60px;
-  max-width: 327px;
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -127,7 +146,7 @@
 
 @media (max-width: 767px) {
   .business {
-    margin-top: 480px;
+    margin-top: 0;
   }
 
   .clipTop,

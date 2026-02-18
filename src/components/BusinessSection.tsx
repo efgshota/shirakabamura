@@ -27,7 +27,10 @@ export default function BusinessSection() {
                 height={100}
               />
             </div>
-            <h2 className={`${styles.title} font-tsuku`}>事業者の方々へ</h2>
+            <h2 className={`${styles.title} font-tsuku`}>物件事例</h2>
+            <p className={styles.description}>
+              白樺湖周辺で物件を取得して別荘や店舗として利用している方々にご協力いただき、生の声をインタビューさせていただきました。
+            </p>
           </div>
 
           <div
@@ -49,7 +52,12 @@ export default function BusinessSection() {
                     className={styles.cardImg}
                   />
                 </div>
-                <h3 className={`${styles.cardName} font-kinto`}>{biz.name}</h3>
+                <div className={styles.cardMeta}>
+                  <h3 className={`${styles.cardName} font-kinto`}>{biz.name}</h3>
+                  {biz.businessType && (
+                    <span className={styles.cardType}>{biz.businessType}</span>
+                  )}
+                </div>
                 <span className={`${styles.cardBtn} c-moreBtn`}>事例を見る</span>
               </Link>
             ))}
@@ -57,10 +65,7 @@ export default function BusinessSection() {
 
           <div className={styles.bottomText}>
             <p className="font-kinto">
-              白樺村は、その美しい自然環境と気候、地元の温かさが一体となり、絶えず新たな可能性を生み出しています。
-            </p>
-            <p className="font-kinto" style={{ marginTop: 24 }}>
-              詳しいご説明など行いますので、お気軽にお問い合わせください。
+              白樺湖周辺で開業をお考えの方や、物件の活用についてお悩みの方は、ぜひお気軽にご相談ください。
             </p>
           </div>
 

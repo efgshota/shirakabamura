@@ -46,11 +46,53 @@
   font-size: 1.4rem;
   color: #253c30;
   opacity: 0.7;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
 }
 
+/* Filter tabs */
+.filterTabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.filterTab {
+  padding: 8px 20px;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: transparent;
+  font-size: 1.3rem;
+  font-family: "kinto-sans", sans-serif;
+  font-weight: 600;
+  color: #253c30;
+  cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 0.03em;
+}
+
+.filterTab:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.filterTabActive {
+  background: #253c30;
+  color: #fff;
+  border-color: #253c30;
+}
+
+.filterTabActive:hover {
+  background: #253c30;
+  opacity: 0.8;
+}
+
+/* Property cards */
 .list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 19px;
   position: relative;
   top: 60px;
@@ -66,28 +108,41 @@
 .card {
   background: #fff;
   border-radius: 20px;
-  padding: 24px;
-  display: flex;
-  gap: 16px;
-  align-items: center;
+  overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
 }
 
 .cardImage {
-  width: 41.58%;
-  flex-shrink: 0;
-  border-radius: 12px;
+  width: 100%;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
 }
 
 .cardImg {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
 .cardBody {
+  padding: 16px 20px 12px;
   flex: 1;
+}
+
+.cardPrice {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #253c30;
+  margin-bottom: 4px;
+}
+
+.cardSpecs {
+  font-size: 1.2rem;
+  color: #94b3ba;
+  margin-bottom: 8px;
 }
 
 .cardTitle {
@@ -95,12 +150,24 @@
   font-weight: 600;
   color: #253c30;
   line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.cardHighlight {
+  font-size: 1.3rem;
+  color: #2ca4a8;
+  line-height: 1.5;
+  margin-bottom: 4px;
 }
 
 .cardArea {
-  margin-top: 6px;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #94b3ba;
+}
+
+.cardBtn {
+  margin: 0 20px 16px;
+  font-size: 1.2rem;
 }
 
 .more {
@@ -111,7 +178,7 @@
 .bottomText {
   text-align: center;
   margin-top: 80px;
-  max-width: 480px;
+  max-width: 520px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
@@ -126,7 +193,7 @@
 }
 
 .bottomText p {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   line-height: 1.8;
   color: #253c30;
 }
@@ -150,6 +217,16 @@
 
   .title {
     font-size: 2.5rem;
+  }
+
+  .filterTabs {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .filterTab {
+    padding: 6px 14px;
+    font-size: 1.2rem;
   }
 
   .bottomText {

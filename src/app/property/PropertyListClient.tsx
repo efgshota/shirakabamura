@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import PropertyImagePlaceholder from "@/components/PropertyImagePlaceholder";
 import styles from "./page.module.css";
 
 export type PropertyCardData = {
@@ -61,13 +62,17 @@ export default function PropertyListClient({
                 className={styles.card}
               >
                 <div className={styles.cardImage}>
-                  <Image
-                    src={prop.image}
-                    alt={prop.title}
-                    width={280}
-                    height={200}
-                    className={styles.cardImg}
-                  />
+                  {prop.image ? (
+                    <Image
+                      src={prop.image}
+                      alt={prop.title}
+                      width={280}
+                      height={200}
+                      className={styles.cardImg}
+                    />
+                  ) : (
+                    <PropertyImagePlaceholder className={styles.cardImg} />
+                  )}
                 </div>
                 <div className={styles.cardBody}>
                   {prop.specs && (
