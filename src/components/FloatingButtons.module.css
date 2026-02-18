@@ -1,0 +1,83 @@
+.wrap {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.lineBtn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #06C755;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+.lineBtn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.lineBtnLabel {
+  font-size: 1.0rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+.contactBtn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #253c30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+.contactBtn:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+.contactBtnText {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+  font-family: "fot-tsukuardgothic-std", sans-serif;
+}
+
+@media (max-width: 767px) {
+  .wrap {
+    bottom: 16px;
+    right: 16px;
+    gap: 10px;
+  }
+
+  .lineBtn,
+  .contactBtn {
+    width: 56px;
+    height: 56px;
+  }
+
+  .lineBtnLabel,
+  .contactBtnText {
+    font-size: 0.95rem;
+  }
+}

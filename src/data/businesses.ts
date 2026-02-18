@@ -131,4 +131,13 @@ export const businesses: BusinessData[] = [
       },
     ],
   },
+  {
+    slug: "おやまのおうち",
+    name: "おやまのおうち",
+    operator: "",
+    businessType: "別荘",
+    previousJob: "",
+    image: "/images/business/oyamano-ouchi.jpg",
+    qa: [],
+  },
 ];

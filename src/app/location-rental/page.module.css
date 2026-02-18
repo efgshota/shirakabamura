@@ -1,0 +1,594 @@
+.page {
+  position: relative;
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+}
+
+/* ══ Hero ══ */
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 500px;
+  max-height: 900px;
+  overflow: hidden;
+}
+
+.heroContent {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 80px;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.15) 50%,
+    transparent 100%
+  );
+}
+
+.heroEn {
+  font-size: 1.2rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 12px;
+  font-family: "futura-pt", "Hiragino Sans", sans-serif;
+}
+
+.heroTitle {
+  font-size: 6rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  line-height: 1;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.heroSub {
+  font-size: 1.5rem;
+  letter-spacing: 0.15em;
+  opacity: 0.85;
+}
+
+/* ══ Common Section ══ */
+.section {
+  background: #f5f4f0;
+  padding: 100px 0 120px;
+}
+
+.sectionAlt {
+  background: #fff;
+}
+
+.inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.sectionHead {
+  margin-bottom: 48px;
+}
+
+.sectionEn {
+  display: block;
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #94b3ba;
+  margin-bottom: 8px;
+  font-family: "futura-pt", sans-serif;
+}
+
+.sectionTitle {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #253c30;
+  letter-spacing: 0.15em;
+  line-height: 1.2;
+}
+
+/* ══ Nakanojima section ══ */
+.catchCopy {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #253c30;
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.catchSub {
+  font-size: 1.5rem;
+  line-height: 1.9;
+  color: rgba(37, 60, 48, 0.7);
+  margin-bottom: 40px;
+}
+
+.bodyText {
+  font-size: 1.5rem;
+  line-height: 2;
+  color: #253c30;
+  margin-bottom: 48px;
+  letter-spacing: 0.03em;
+}
+
+/* Info table */
+.infoTable {
+  border-top: 1px solid rgba(37, 60, 48, 0.12);
+  margin-top: 40px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: baseline;
+  gap: 32px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(37, 60, 48, 0.12);
+}
+
+.infoLabel {
+  flex-shrink: 0;
+  width: 160px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #94b3ba;
+  letter-spacing: 0.05em;
+}
+
+.infoValue {
+  font-size: 1.5rem;
+  color: #253c30;
+  line-height: 1.6;
+}
+
+/* ══ Access ══ */
+.mapWrap {
+  width: 100%;
+  height: 360px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.mapIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.accessGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.accessBlock {
+  padding: 28px;
+  background: #f5f4f0;
+  border-radius: 16px;
+}
+
+.accessHead {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #253c30;
+  margin-bottom: 12px;
+  letter-spacing: 0.03em;
+}
+
+.accessText {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: rgba(37, 60, 48, 0.8);
+}
+
+/* ══ Banner ══ */
+.banner {
+  position: relative;
+  width: 100%;
+  height: 56vw;
+  max-height: 640px;
+  min-height: 320px;
+  overflow: hidden;
+}
+
+.bannerImg {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ══ Scenes ══ */
+.sceneGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.sceneItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sceneImgWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.sceneImg {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+
+.sceneImgWrap:hover .sceneImg {
+  transform: scale(1.04);
+}
+
+.sceneLabel {
+  font-size: 1.3rem;
+  color: rgba(37, 60, 48, 0.7);
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+/* ══ Service ══ */
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.serviceCard {
+  background: #f5f4f0;
+  border-radius: 20px;
+  padding: 40px;
+}
+
+.serviceIcon {
+  margin-bottom: 20px;
+}
+
+.serviceTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #253c30;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+.serviceText {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: rgba(37, 60, 48, 0.8);
+}
+
+.serviceNote {
+  font-size: 1.2rem;
+  color: #94b3ba;
+  margin-top: 12px;
+}
+
+/* ══ Rules ══ */
+.rulesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.ruleItem {
+  border-left: 3px solid #94b3ba;
+  padding-left: 20px;
+}
+
+.ruleTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #253c30;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+
+.ruleText {
+  font-size: 1.4rem;
+  line-height: 1.9;
+  color: rgba(37, 60, 48, 0.75);
+}
+
+/* ══ Price ══ */
+.priceBlock {
+  margin-bottom: 56px;
+}
+
+.priceBlockTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #253c30;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(37, 60, 48, 0.1);
+}
+
+.priceTableWrap {
+  overflow-x: auto;
+}
+
+.priceTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.4rem;
+  min-width: 500px;
+}
+
+.priceTable th {
+  background: #253c30;
+  color: #fff;
+  padding: 12px 20px;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.priceTable td {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(37, 60, 48, 0.1);
+  color: #253c30;
+  line-height: 1.6;
+  vertical-align: middle;
+}
+
+.priceTable tr:nth-child(even) td {
+  background: rgba(148, 179, 186, 0.07);
+}
+
+.priceNote {
+  font-size: 1.2rem;
+  color: #94b3ba;
+  display: block;
+  margin-top: 2px;
+}
+
+.priceRemark {
+  margin-top: 12px;
+  font-size: 1.3rem;
+  color: #94b3ba;
+}
+
+/* ══ Payment ══ */
+.paymentBlock {
+  margin-top: 16px;
+}
+
+.paymentNote {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: #253c30;
+  background: rgba(148, 179, 186, 0.12);
+  padding: 20px 24px;
+  border-radius: 12px;
+  margin-bottom: 28px;
+}
+
+.paymentGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.paymentMethod {
+  background: #f5f4f0;
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.paymentMethodTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #253c30;
+  margin-bottom: 12px;
+}
+
+.paymentList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.paymentList li {
+  font-size: 1.4rem;
+  color: rgba(37, 60, 48, 0.8);
+  line-height: 1.6;
+  padding-left: 16px;
+  position: relative;
+}
+
+.paymentList li::before {
+  content: "·";
+  position: absolute;
+  left: 4px;
+  color: #94b3ba;
+}
+
+/* ══ Cancel ══ */
+.cancelTableWrap {
+  overflow-x: auto;
+  margin: 32px 0;
+}
+
+.cancelTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.4rem;
+  min-width: 400px;
+}
+
+.cancelTable td {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(37, 60, 48, 0.1);
+  color: #253c30;
+}
+
+.cancelTable tr:first-child td {
+  border-top: 1px solid rgba(37, 60, 48, 0.1);
+}
+
+.cancelRate {
+  font-weight: 700;
+  color: #253c30;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.cancelNotes {
+  font-size: 1.3rem;
+  line-height: 2;
+  color: rgba(37, 60, 48, 0.7);
+  background: rgba(37, 60, 48, 0.04);
+  padding: 24px;
+  border-radius: 12px;
+}
+
+/* ══ Apply section ══ */
+.applySection {
+  background: #253c30;
+  padding: 120px 0 140px;
+}
+
+.sectionEnLight {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.sectionTitleLight {
+  color: #fff !important;
+}
+
+.applyText {
+  font-size: 1.6rem;
+  line-height: 2;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 48px;
+}
+
+.applyBtns {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.applyBtnPrimary {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.applyBtnPrimary:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.applyBtnLine {
+  background: #06c755 !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 1023px) {
+  .accessGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .sceneGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    max-height: 700px;
+  }
+
+  .heroTitle {
+    font-size: 4rem;
+  }
+
+  .heroSub {
+    font-size: 1.3rem;
+  }
+
+  .section {
+    padding: 64px 0 80px;
+  }
+
+  .inner {
+    padding: 0 24px;
+  }
+
+  .sectionTitle {
+    font-size: 2.4rem;
+  }
+
+  .catchCopy {
+    font-size: 1.5rem;
+  }
+
+  .infoRow {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .infoLabel {
+    width: auto;
+    font-size: 1.2rem;
+  }
+
+  .infoValue {
+    font-size: 1.4rem;
+  }
+
+  .mapWrap {
+    height: 240px;
+  }
+
+  .serviceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .rulesGrid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .paymentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .applyBtns {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .applySection {
+    padding: 80px 0 100px;
+  }
+}

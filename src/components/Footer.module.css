@@ -1,71 +1,136 @@
 .footer {
   position: relative;
   z-index: 1;
-  background: #a1d1db;
-  padding: 65px 0 150px;
+  background: #253c30;
+  color: #fff;
+  padding: 72px 0 40px;
 }
 
 .inner {
   max-width: 1060px;
   margin: 0 auto;
-  padding: 0 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  padding: 0 40px;
 }
 
-.navSide {
-  flex: 1;
+/* 上段レイアウト */
+.top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ブランドエリア */
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.brandLogo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brandLogo img {
+  filter: invert(1);
+}
+
+.brandName {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.2em;
+}
+
+.brandDesc {
+  font-size: 1.3rem;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.03em;
+}
+
+.tel {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+/* ナビゲーション */
+.nav,
+.external {
+  display: flex;
+  flex-direction: column;
+}
+
+.navLabel {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
 }
 
 .navList {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .navList li a {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 600;
   line-height: 2.2;
-  color: #253c30;
+  color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.03em;
+  transition: color 0.2s;
 }
 
-.related {
-  margin-top: 24px;
+.navList li a:hover {
+  color: #fff;
+  opacity: 1;
 }
 
-.relatedLabel {
-  font-size: 1.3rem;
-  color: #253c30;
-  opacity: 0.6;
-  margin-bottom: 4px;
+/* 下段 */
+.bottom {
+  padding-top: 28px;
+  text-align: center;
 }
 
-.logoSide {
-  flex-shrink: 0;
+.copyright {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.05em;
 }
 
-.logoText {
-  writing-mode: vertical-rl;
-  font-size: 5rem;
-  font-weight: 700;
-  color: #253c30;
-  letter-spacing: 0.2em;
-  line-height: 1;
-}
-
+/* Mobile */
 @media (max-width: 767px) {
   .footer {
-    padding: 60px 0 120px;
+    padding: 56px 0 32px;
   }
 
   .inner {
     padding: 0 24px;
   }
 
-  .logoText {
-    font-size: 4rem;
+  .top {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-bottom: 36px;
+  }
+
+  .brandName {
+    font-size: 2rem;
+  }
+
+  .tel {
+    font-size: 1.5rem;
   }
 }

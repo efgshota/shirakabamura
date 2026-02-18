@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { getProperties } from "@/lib/microcms";
+import { getProperties, getFirstImageUrl } from "@/lib/microcms";
 import { properties as staticProperties } from "@/data/properties";
 import PropertyListClient, { PropertyCardData } from "./PropertyListClient";
 import styles from "./page.module.css";
@@ -15,7 +15,7 @@ export default async function PropertyListPage() {
       properties = contents.map((p) => ({
         id: p.id,
         title: p.title,
-        image: p.image?.[0]?.url ?? "",
+        image: getFirstImageUrl(p.image),
         specs: p.specs,
         description: p.description?.replace(/<[^>]*>/g, ""),
         price: p.price,

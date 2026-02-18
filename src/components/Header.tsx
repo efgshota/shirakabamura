@@ -9,7 +9,8 @@ const navItems = [
   { href: "/#intro", label: "はじめに" },
   { href: "/property/", label: "白樺村の物件" },
   { href: "/useful/", label: "お役立ち帳" },
-  { href: "/#business", label: "事業者の方々へ" },
+  { href: "/location-rental/", label: "ロケーションレンタル" },
+  { href: "/#business", label: "物件事例" },
   { href: "/#contact", label: "お問い合わせ" },
 ];
 
@@ -38,6 +39,15 @@ export default function Header() {
           priority
         />
       </Link>
+
+      {/* PC横並びナビ */}
+      <nav className={`${styles.pcNav} ${scrolled ? styles.pcNavScrolled : ""}`}>
+        {navItems.map((item) => (
+          <Link key={item.href} href={item.href} className={`${styles.pcNavLink} font-tsuku`}>
+            {item.label}
+          </Link>
+        ))}
+      </nav>
 
       <button
         className={`${styles.hamburger} ${isOpen ? styles.active : ""}`}
@@ -73,6 +83,17 @@ export default function Header() {
               白樺湖のこと
             </a>
             <p>白樺湖のさまざまな場所を、一人ひとりの言葉でご紹介。</p>
+          </div>
+          <div className={styles.navExternal}>
+            <a
+              href="https://www.shirakabaresort.jp/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-tsuku"
+            >
+              レイクリゾート
+            </a>
+            <p>白樺湖周辺のリゾート情報。</p>
           </div>
         </div>
       </nav>

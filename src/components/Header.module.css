@@ -17,6 +17,33 @@
   width: 22px;
 }
 
+/* PC横並びナビ */
+.pcNav {
+  position: fixed;
+  top: 0;
+  right: 90px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 100px;
+  z-index: 100;
+  pointer-events: auto;
+}
+
+.pcNavLink {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+  transition: opacity 0.3s;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.pcNavScrolled .pcNavLink {
+  color: #253c30;
+  text-shadow: none;
+}
+
 .hamburger {
   position: absolute;
   top: 40px;
@@ -128,6 +155,13 @@
   font-size: 1.2rem;
   color: #253c30;
   opacity: 0.6;
+}
+
+/* Tablet: hide PC nav */
+@media (max-width: 1024px) {
+  .pcNav {
+    display: none;
+  }
 }
 
 /* Mobile */

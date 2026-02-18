@@ -23,6 +23,19 @@ export default function RootLayout({
         <Script id="typekit-load" strategy="beforeInteractive">
           {`try{Typekit.load({async:true});}catch(e){}`}
         </Script>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8SE19JC0CG"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8SE19JC0CG');
+          `}
+        </Script>
       </head>
       <body>{children}</body>
     </html>
