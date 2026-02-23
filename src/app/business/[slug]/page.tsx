@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
 import { businesses } from "@/data/businesses";
 import styles from "./page.module.css";
 
@@ -16,10 +17,17 @@ export function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   return params.then(({ slug }) => {
-    const biz = businesses.find(
-      (b) => b.slug === decodeURIComponent(slug)
-    );
-    return { title: biz ? `${biz.name}｜白樺村` : "事業者｜白樺村" };
+    const biz = businesses.find((b) => b.slug === decodeURIComponent(slug));
+    if (!biz) return { title: "事業者" };
+    return {
+      title: biz.name,
+      description: `${biz.name}（${biz.businessType}）の開業ストーリー。${biz.operator}さんが白樺湖で開業した経緯や、現地での暮らしについてご紹介します。`,
+      openGraph: {
+        title: `${biz.name}｜白樺村`,
+        description: `${biz.name}（${biz.businessType}）の開業ストーリー。${biz.operator}さんが白樺湖で開業した経緯や、現地での暮らしについてご紹介します。`,
+        images: [{ url: biz.image, alt: biz.name }],
+      },
+    };
   });
 }
 
@@ -36,8 +44,24 @@ export default async function BusinessDetailPage({
 
   const related = businesses.filter((b) => b.slug !== decodedSlug);
 
+  const faqSchema = biz.qa.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: biz.qa.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
+
   return (
     <div className={styles.page}>
+      {faqSchema && <JsonLd data={faqSchema} />}
       <Header />
       <main className={styles.main}>
         <section className={styles.mv}>

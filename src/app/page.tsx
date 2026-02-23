@@ -10,10 +10,42 @@ import BusinessSection from "@/components/BusinessSection";
 import NewsSection from "@/components/NewsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
 import { getProperties, getNews, getFirstImageUrl } from "@/lib/microcms";
 import { properties as staticProperties } from "@/data/properties";
 import { news as staticNews } from "@/data/news";
 import styles from "./page.module.css";
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "白樺村",
+  alternateName: "株式会社白樺村",
+  description:
+    "「50年先も続くレイクリゾート」をめざして設立。白樺湖周辺での移住・開業支援、不動産物件紹介、ロケーションレンタル（中之島）など、地域での新たなくらしを幅広くサポートします。",
+  url: "https://shirakabamura.com",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "茅野市",
+    addressRegion: "長野県",
+    postalCode: "391-0301",
+    addressCountry: "JP",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 36.07,
+    longitude: 138.2,
+  },
+  areaServed: "白樺湖周辺（長野県茅野市・立科町）",
+  serviceType: ["移住支援", "開業支援", "不動産物件紹介", "ロケーションレンタル"],
+  knowsAbout: [
+    "白樺湖への移住",
+    "長野県茅野市での開業",
+    "別荘・民宿・カフェ等の物件取得",
+    "中之島ロケーションレンタル",
+  ],
+  slogan: "50年先も続くレイクリゾート",
+};
 
 export default async function Home() {
   // 物件データを取得（MicroCMS → 静的データフォールバック）
@@ -95,6 +127,7 @@ export default async function Home() {
 
   return (
     <div className={styles.page}>
+      <JsonLd data={localBusinessSchema} />
       <Header />
       <HeroSection />
       <HeroLogo />
