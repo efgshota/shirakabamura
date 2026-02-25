@@ -42,9 +42,13 @@
   z-index: 1;
 }
 
+/* ─────────────────────────────────────────
+   湖マップ + アイコン
+───────────────────────────────────────── */
 .figure {
   position: relative;
   margin-bottom: 60px;
+  z-index: 2; /* decoTopより前面 */
 }
 
 .figureMap {
@@ -58,6 +62,7 @@
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 10; /* 最前面 */
 }
 
 .article {
@@ -67,17 +72,26 @@
   height: auto;
 }
 
+@keyframes float {
+  0%   { transform: translate(0, 30px); opacity: 0; }
+  70%  { transform: translate(0, 0px);  opacity: 1; }
+  100% { transform: translate(0, 0);    opacity: 1; }
+}
+
 .figure.visible .article {
   animation: float 1s ease-in-out forwards;
 }
 
-.article1 { top: 5%; left: 10%; }
-.article2 { top: 0%; right: 5%; }
-.article3 { top: 30%; left: 0%; }
-.article4 { top: 35%; right: 0%; }
-.article5 { bottom: 15%; left: 5%; }
-.article6 { bottom: 10%; right: 10%; }
+.article1 { top: 3%;    left: 5%;   }  /* 山（左上） */
+.article2 { top: -4%;   left: 42%;  }  /* トンボ（上中央） */
+.article3 { top: 28%;   left: -3%;  }  /* カタツムリ（左） */
+.article4 { top: 32%;   right: -2%; }  /* たんぽぽ（右） */
+.article5 { bottom: 20%; left: 10%; }  /* ひまわり（左下） */
+.article6 { bottom: 15%; left: 44%; }  /* 肉球（下中央） */
 
+/* ─────────────────────────────────────────
+   テキスト
+───────────────────────────────────────── */
 .text {
   max-width: 480px;
   margin: 0 auto;
@@ -102,123 +116,191 @@
   margin-bottom: 24px;
 }
 
-/* Links area */
-.linksArea {
-  margin-top: 48px;
+/* ─────────────────────────────────────────
+   3カードエリア
+───────────────────────────────────────── */
+.infoCards {
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   position: relative;
   top: 60px;
   opacity: 0;
   transition: top 1s, opacity 1s;
 }
 
-.linksArea.visible {
+.infoCards.visible {
   top: 0;
   opacity: 1;
 }
 
-.linkBlocks {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 32px;
-}
-
-.linkBlock {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.5);
+/* 個別カード */
+.infoCard {
+  position: relative;
   border-radius: 24px;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #253c30;
-  letter-spacing: 0.03em;
-  transition: background 0.3s;
-}
-
-.linkBlock:hover {
-  background: rgba(255, 255, 255, 0.8);
-  opacity: 1;
-}
-
-.linkIcon {
+  overflow: hidden;
+  padding: 28px 32px 32px;
+  min-height: 280px;
   display: flex;
-  align-items: center;
-  width: 20px;
-  height: 20px;
+  flex-direction: column;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.1);
+  transition: opacity 0.2s;
 }
 
-.linkIcon img {
-  width: 100%;
+a.infoCard:hover {
+  opacity: 0.82;
+}
+
+/* ─── blobデコレーション ─── */
+.cardBlobs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.blobImg {
+  position: absolute;
   height: auto;
 }
 
-.linkLabel {
-  white-space: nowrap;
+/* Card 1: 有機形状 blob (パス225, 227, 228) */
+.blobC1a {
+  width: 42%;
+  left: 29%;
+  top: 14%;
 }
 
-.socialIcons {
+.blobC1b {
+  width: 48%;
+  left: -6%;
+  top: 12%;
+  transform: rotate(-37deg);
+  transform-origin: center;
+}
+
+.blobC1c {
+  width: 48%;
+  right: -6%;
+  top: 12%;
+  transform: rotate(-37deg);
+  transform-origin: center;
+}
+
+/* Card 2: ハート形 blob (パス290, 291) */
+.blobC2a {
+  width: 55%;
+  left: 2%;
+  top: 8%;
+}
+
+.blobC2b {
+  width: 55%;
+  right: 2%;
+  top: 8%;
+}
+
+/* ラベル行（アイコン + カテゴリーテキスト） */
+.cardLabel {
   display: flex;
-  justify-content: center;
-  gap: 16px;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
 }
 
-.socialIcon {
+.cardIconWrap {
+  width: 47px;
+  height: 47px;
+  background: transparent;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  transition: background 0.3s;
+  flex-shrink: 0;
 }
 
-.socialIcon:hover {
-  background: rgba(255, 255, 255, 0.8);
-  opacity: 1;
+.cardCategory {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #253c30;
+  letter-spacing: 0.04em;
 }
 
-/* Sub-sections: 白樺湖のこと & すずらんの湯 */
-.subSections {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* カード本体コンテンツ（タイトル + 説明） */
+.cardContent {
+  display: flex;
+  align-items: flex-start;
   gap: 24px;
-  margin-top: 60px;
   position: relative;
-  top: 60px;
-  opacity: 0;
-  transition: top 1s, opacity 1s;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: 12px;
 }
 
-.subSections.visible {
-  top: 0;
-  opacity: 1;
-}
-
-.subSection {
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
-  padding: 32px 24px;
-  text-align: center;
-}
-
-.subTitle {
-  font-size: 2.5rem;
+.cardTitle {
+  font-size: 2.6rem;
   font-weight: 700;
   color: #2ca4a8;
-  margin-bottom: 16px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  line-height: 1.3;
 }
 
-.subText {
+.extIcon {
+  display: inline-flex;
+  align-items: center;
+  color: #2ca4a8;
+  vertical-align: middle;
+}
+
+.cardDesc {
   font-size: 1.4rem;
-  line-height: 1.8;
+  line-height: 1.85;
   color: #253c30;
-  margin-bottom: 20px;
+  padding-top: 4px;
+  font-family: "kinto-sans", sans-serif;
 }
 
+/* Card 3: SNSリンク */
+.cardSocials {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+  padding-top: 4px;
+  margin-top: auto;
+}
+
+.socialLink {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #2ca4a8;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: 0.03em;
+  transition: opacity 0.2s;
+}
+
+.socialLink:hover {
+  opacity: 0.7;
+}
+
+/* ─────────────────────────────────────────
+   Mobile
+───────────────────────────────────────── */
 @media (max-width: 767px) {
   .intro {
     top: 240px;
@@ -249,23 +331,38 @@
     line-height: 1.9;
   }
 
-  .linksArea {
-    margin-top: 32px;
-  }
-
-  .linkBlocks {
-    flex-direction: column;
-    align-items: center;
+  .infoCards {
+    margin-top: 40px;
     gap: 12px;
   }
 
-  .subSections {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 40px;
+  .infoCard {
+    padding: 22px 22px 28px;
+    min-height: 240px;
+    border-radius: 20px;
   }
 
-  .subTitle {
-    font-size: 2rem;
+  .blobC1a { width: 50%; left: 25%; }
+  .blobC1b { width: 56%; left: -8%; }
+  .blobC1c { width: 56%; right: -8%; }
+  .blobC2a { width: 62%; left: 0%; }
+  .blobC2b { width: 62%; right: 0%; }
+
+  .cardContent {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cardTitle {
+    font-size: 2.2rem;
+    white-space: normal;
+  }
+
+  .cardSocials {
+    gap: 20px;
+  }
+
+  .socialLink {
+    font-size: 1.9rem;
   }
 }

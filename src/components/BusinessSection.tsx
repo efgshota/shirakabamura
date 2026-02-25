@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useScrollTrigger } from "./useScrollTrigger";
-import { businesses } from "@/data/businesses";
+import type { BusinessItem } from "@/lib/microcms";
 import styles from "./BusinessSection.module.css";
 
-export default function BusinessSection() {
+export default function BusinessSection({ businesses }: { businesses: BusinessItem[] }) {
   const { ref: titleRef, visible: titleVisible } = useScrollTrigger();
   const { ref: listRef, visible: listVisible } = useScrollTrigger();
 
@@ -39,18 +39,20 @@ export default function BusinessSection() {
           >
             {businesses.map((biz) => (
               <Link
-                key={biz.slug}
-                href={`/business/${encodeURIComponent(biz.slug)}/`}
+                key={biz.id}
+                href={`/business/${encodeURIComponent(biz.id)}/`}
                 className={styles.card}
               >
                 <div className={styles.cardImage}>
-                  <Image
-                    src={biz.image}
-                    alt={biz.name}
-                    width={450}
-                    height={390}
-                    className={styles.cardImg}
-                  />
+                  {biz.image && (
+                    <Image
+                      src={biz.image}
+                      alt={biz.name}
+                      width={450}
+                      height={390}
+                      className={styles.cardImg}
+                    />
+                  )}
                 </div>
                 <div className={styles.cardMeta}>
                   <h3 className={`${styles.cardName} font-kinto`}>{biz.name}</h3>

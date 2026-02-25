@@ -5,12 +5,44 @@ import { useEffect, useState } from "react";
 import { useScrollTrigger } from "./useScrollTrigger";
 import styles from "./IntroSection.module.css";
 
+/** 外部リンクアイコン */
+const ExtIcon = () => (
+  <span className={styles.extIcon} aria-hidden="true">
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+      <path d="M8.5 2.5H12.5V6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M12.5 2.5L6 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M6.5 5H2.5V12.5H10V8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  </span>
+);
+
+/** Card 1: 有機形状 blob */
+const Card1Blobs = () => (
+  <div className={styles.cardBlobs} aria-hidden="true">
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img src="/images/top/cards/blob_c1_c.svg" className={`${styles.blobImg} ${styles.blobC1c}`} alt="" />
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img src="/images/top/cards/blob_c1_b.svg" className={`${styles.blobImg} ${styles.blobC1b}`} alt="" />
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img src="/images/top/cards/blob_c1_a.svg" className={`${styles.blobImg} ${styles.blobC1a}`} alt="" />
+  </div>
+);
+
+/** Card 2: ハート形 blob */
+const Card2Blobs = () => (
+  <div className={styles.cardBlobs} aria-hidden="true">
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img src="/images/top/cards/blob_c2_a.svg" className={`${styles.blobImg} ${styles.blobC2a}`} alt="" />
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img src="/images/top/cards/blob_c2_b.svg" className={`${styles.blobImg} ${styles.blobC2b}`} alt="" />
+  </div>
+);
+
 export default function IntroSection() {
   const [active, setActive] = useState(false);
-  const { ref: figureRef, visible: figureVisible } = useScrollTrigger(0.3);
+  const { ref: figureRef, visible: figureVisible } = useScrollTrigger(0.05);
   const { ref: textRef, visible: textVisible } = useScrollTrigger();
-  const { ref: linksRef, visible: linksVisible } = useScrollTrigger();
-  const { ref: subRef, visible: subVisible } = useScrollTrigger();
+  const { ref: cardsRef, visible: cardsVisible } = useScrollTrigger();
 
   useEffect(() => {
     const timer = setTimeout(() => setActive(true), 1000);
@@ -24,6 +56,8 @@ export default function IntroSection() {
     >
       <div className={styles.decoTop} />
       <div className={styles.inner}>
+
+        {/* 湖マップ + アイコン */}
         <div
           ref={figureRef}
           className={`${styles.figure} ${figureVisible ? styles.visible : ""}`}
@@ -50,6 +84,7 @@ export default function IntroSection() {
           </div>
         </div>
 
+        {/* テキスト */}
         <div
           ref={textRef}
           className={`${styles.text} ${textVisible ? styles.visible : ""}`}
@@ -65,128 +100,114 @@ export default function IntroSection() {
           </p>
         </div>
 
+        {/* ─── 3カードエリア ─── */}
         <div
-          ref={linksRef}
-          className={`${styles.linksArea} ${linksVisible ? styles.visible : ""}`}
+          ref={cardsRef}
+          className={`${styles.infoCards} ${cardsVisible ? styles.visible : ""}`}
         >
-          <div className={styles.linkBlocks}>
-            <a
-              href="https://www.shirakabako.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.linkBlock}
-            >
-              <span className={styles.linkIcon}>
-                <Image
-                  src="/images/common/icon_web.svg"
-                  alt=""
-                  width={24}
-                  height={24}
-                />
+
+          {/* Card 1: 観光案内サイト / 白樺湖のこと */}
+          <a
+            href="https://www.shirakabako.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.infoCard}
+          >
+            <Card1Blobs />
+            <div className={styles.cardLabel}>
+              <span className={styles.cardIconWrap}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/top/cards/icon_card1.svg" width="47" height="47" alt="" />
               </span>
-              <span className={styles.linkLabel}>観光案内サイト</span>
-            </a>
-            <a
-              href="/#nakanojima"
-              className={styles.linkBlock}
-            >
-              <span className={styles.linkIcon}>
-                <Image
-                  src="/images/common/icon_web.svg"
-                  alt=""
-                  width={24}
-                  height={24}
-                />
+              <span className={`${styles.cardCategory} font-tsuku`}>観光案内サイト</span>
+            </div>
+            <div className={styles.cardContent}>
+              <p className={`${styles.cardTitle} font-tsuku`}>
+                白樺湖のこと<ExtIcon />
+              </p>
+              <p className={styles.cardDesc}>
+                白樺湖のさまざまな場所を、<br />
+                一人ひとりの言葉でご覧いただけます。<br />
+                自然スポットのご紹介も
+              </p>
+            </div>
+          </a>
+
+          {/* Card 2: 進行中プロジェクト / すずらんの湯 */}
+          <a
+            href="/#contact"
+            className={styles.infoCard}
+          >
+            <Card2Blobs />
+            <div className={styles.cardLabel}>
+              <span className={styles.cardIconWrap}>
+                {/* onsen person icon */}
+                <svg width="47" height="47" viewBox="0 0 47 47" fill="none" aria-hidden="true">
+                  <circle cx="23.5" cy="23.5" r="23.5" fill="#CCEFE7"/>
+                  <circle cx="23.5" cy="14" r="4" fill="#2ca4a8"/>
+                  <path d="M16 22C16 27 18.5 30 23.5 30C28.5 30 31 27 31 22" stroke="#2ca4a8" strokeWidth="2" strokeLinecap="round" fill="none"/>
+                  <path d="M12 34Q17 30 23.5 34Q30 38 35 34" stroke="#2ca4a8" strokeWidth="2" strokeLinecap="round" fill="none"/>
+                  <path d="M19 18Q23.5 15 28 18" stroke="#2ca4a8" strokeWidth="2" strokeLinecap="round" fill="none"/>
+                  <path d="M20 13Q21.5 10 23 13" stroke="#2ca4a8" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+                  <path d="M23.5 13Q25 10 26.5 13" stroke="#2ca4a8" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+                </svg>
               </span>
-              <span className={styles.linkLabel}>進行中プロジェクト</span>
-            </a>
-            <a
-              href="/#news"
-              className={styles.linkBlock}
-            >
-              <span className={styles.linkIcon}>
-                <Image
-                  src="/images/common/icon_web.svg"
-                  alt=""
-                  width={24}
-                  height={24}
-                />
+              <span className={`${styles.cardCategory} font-tsuku`}>進行中プロジェクト</span>
+            </div>
+            <div className={styles.cardContent}>
+              <p className={`${styles.cardTitle} font-tsuku`}>
+                すずらんの湯<ExtIcon />
+              </p>
+              <p className={styles.cardDesc}>
+                白樺湖の中心、みんなの憩いのお風呂<br />
+                「白樺湖温泉　すずらんの湯」<br />
+                復活プロジェクト
+              </p>
+            </div>
+          </a>
+
+          {/* Card 3: 最新情報はこちら / SNS */}
+          <div className={styles.infoCard}>
+            <div className={styles.cardLabel}>
+              <span className={styles.cardIconWrap}>
+                {/* RSS / feed icon */}
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                  <rect width="22" height="22" rx="6" fill="#5B8BF5"/>
+                  <circle cx="6" cy="16" r="2" fill="white"/>
+                  <path d="M5.5 11.5C8.5 11.5 10.5 13.5 10.5 16.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+                  <path d="M5.5 6.5C12 6.5 15.5 10 15.5 16.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+                </svg>
               </span>
-              <span className={styles.linkLabel}>最新情報はこちら</span>
-            </a>
+              <span className={`${styles.cardCategory} font-tsuku`}>最新情報はこちら</span>
+            </div>
+            <div className={styles.cardSocials}>
+              <a
+                href="https://note.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.socialLink} font-tsuku`}
+              >
+                note<ExtIcon />
+              </a>
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.socialLink} font-tsuku`}
+              >
+                Instagram<ExtIcon />
+              </a>
+              <a
+                href="https://x.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.socialLink} font-tsuku`}
+              >
+                X (Twitter)<ExtIcon />
+              </a>
+            </div>
           </div>
 
-          <div className={styles.socialIcons}>
-            <a
-              href="https://note.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialIcon}
-              aria-label="note"
-            >
-              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="18" cy="18" r="17" stroke="#253c30" strokeWidth="1.5"/>
-                <text x="18" y="22" textAnchor="middle" fill="#253c30" fontSize="11" fontWeight="bold">n</text>
-              </svg>
-            </a>
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialIcon}
-              aria-label="Instagram"
-            >
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="2" width="20" height="20" rx="5" stroke="#253c30" strokeWidth="1.5"/>
-                <circle cx="12" cy="12" r="5" stroke="#253c30" strokeWidth="1.5"/>
-                <circle cx="17.5" cy="6.5" r="1.5" fill="#253c30"/>
-              </svg>
-            </a>
-            <a
-              href="https://x.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialIcon}
-              aria-label="X"
-            >
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="11" stroke="#253c30" strokeWidth="1.5"/>
-                <path d="M7 7L11.5 12.5L7 17H8.5L12.25 13.5L15.5 17H17L12.5 11.5L17 7H15.5L11.75 10.5L8.5 7H7Z" fill="#253c30"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <div
-          ref={subRef}
-          className={`${styles.subSections} ${subVisible ? styles.visible : ""}`}
-        >
-          <div className={styles.subSection}>
-            <h3 className={`${styles.subTitle} font-tsuku`}>白樺湖のこと</h3>
-            <p className={styles.subText}>
-              白樺湖のさまざまな場所を、一人ひとりの言葉でご覧いただけます。自然スポットのご紹介も
-            </p>
-            <a
-              href="https://www.shirakabako.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="c-moreBtn"
-            >
-              詳しく見る
-            </a>
-          </div>
-          <div className={styles.subSection}>
-            <h3 className={`${styles.subTitle} font-tsuku`}>すずらんの湯</h3>
-            <p className={styles.subText}>
-              白樺湖の中心、みんなの憩いのお風呂「白樺湖温泉　すずらんの湯」復活プロジェクト
-            </p>
-            <a
-              href="/#contact"
-              className="c-moreBtn"
-            >
-              詳しく見る
-            </a>
-          </div>
         </div>
       </div>
       <div className={styles.decoBottom} />

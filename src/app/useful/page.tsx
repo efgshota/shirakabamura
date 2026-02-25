@@ -1,19 +1,42 @@
-"use client";
-
-import Image from "next/image";
-import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { usefulInfos, usefulCategories } from "@/data/useful-infos";
+import UsefulListClient from "./UsefulListClient";
+import { getUsefulInfos, type UsefulInfoItem } from "@/lib/microcms";
+import { usefulInfos as staticUsefulInfos, usefulCategories as staticCategories } from "@/data/useful-infos";
 import styles from "./page.module.css";
 
-export default function UsefulListPage() {
-  const [activeCategory, setActiveCategory] = useState("すべて");
+export default async function UsefulListPage() {
+  let infos: UsefulInfoItem[] = [];
+  let categories: string[] = ["すべて"];
 
-  const filtered =
-    activeCategory === "すべて"
-      ? usefulInfos
-      : usefulInfos.filter((info) => info.category === activeCategory);
+  try {
+    const { contents } = await getUsefulInfos({ limit: 100 });
+    if (contents.length > 0) {
+      infos = contents.map((u) => ({
+        id: u.id,
+        title: u.title,
+        category: u.category,
+        phone: u.phone,
+        url: u.url,
+      }));
+      // カテゴリを重複なしで抽出
+      const cats = Array.from(new Set(contents.map((u) => u.category)));
+      categories = ["すべて", ...cats];
+    }
+  } catch {
+    // fallback
+  }
+
+  if (infos.length === 0) {
+    infos = staticUsefulInfos.map((u) => ({
+      id: u.slug,
+      title: u.name,
+      category: u.category,
+      phone: u.phone,
+      url: u.website,
+    }));
+    categories = staticCategories;
+  }
 
   return (
     <div className={styles.page}>
@@ -28,68 +51,7 @@ export default function UsefulListPage() {
           </div>
         </section>
 
-        <section className={styles.filter}>
-          <div className={styles.inner}>
-            <div className={styles.cateList}>
-              {usefulCategories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`${styles.cateBtn} ${activeCategory === cat ? styles.active : ""} font-tsuku`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.list}>
-          <div className={styles.inner}>
-            <div className={styles.grid}>
-              {filtered.map((info) => (
-                <div key={info.slug} className={styles.card}>
-                  <div className={styles.cardText}>
-                    <span className={styles.cardCategory}>
-                      {info.category}
-                    </span>
-                    <h3 className={styles.cardName}>{info.name}</h3>
-                  </div>
-                  <div className={styles.cardIcons}>
-                    {info.website && (
-                      <a
-                        href={info.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.iconLink}
-                      >
-                        <Image
-                          src="/images/common/icon_web.svg"
-                          alt="Web"
-                          width={44}
-                          height={44}
-                        />
-                      </a>
-                    )}
-                    {info.phone && (
-                      <a
-                        href={`tel:${info.phone}`}
-                        className={styles.iconLink}
-                      >
-                        <Image
-                          src="/images/common/icon_tel.svg"
-                          alt="電話"
-                          width={44}
-                          height={44}
-                        />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <UsefulListClient infos={infos} categories={categories} />
       </main>
       <Footer />
     </div>

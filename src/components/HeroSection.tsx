@@ -25,6 +25,18 @@ export default function HeroSection() {
           sizes="100vw"
         />
       </div>
+
+      {/* ロゴ：ヒーローと一緒にスクロールで隠れる */}
+      <div className={styles.logoArea} aria-hidden="true">
+        <Image
+          src="/images/common/logo.svg"
+          alt="白樺村"
+          width={60}
+          height={200}
+          className={styles.logoImage}
+          priority
+        />
+      </div>
     </section>
   );
 }
