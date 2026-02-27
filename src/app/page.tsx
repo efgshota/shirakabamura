@@ -170,9 +170,9 @@ export default async function Home() {
     if (contents.length > 0) {
       businessItems = contents.map((b) => ({
         id: b.id,
-        name: b.name,
+        name: b.title,
         image: getFirstImageUrl(b.image),
-        businessType: b.businessType ?? b.category,
+        businessType: b.businessType,
       }));
     }
   } catch {

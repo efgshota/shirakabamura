@@ -63,8 +63,8 @@ export async function generateMetadata({
 
   try {
     const biz = await getBusiness(decoded);
-    name = biz.name;
-    businessType = biz.businessType ?? biz.category ?? "";
+    name = biz.title;
+    businessType = biz.businessType ?? "";
     operator = biz.operator ?? "";
     image = getFirstImageUrl(biz.image);
   } catch {
@@ -109,10 +109,10 @@ export default async function BusinessDetailPage({
     ]);
     biz = {
       id: detail.id,
-      name: detail.name,
+      name: detail.title,
       image: getFirstImageUrl(detail.image),
       operator: detail.operator,
-      businessType: detail.businessType ?? detail.category,
+      businessType: detail.businessType,
       previousJob: detail.previousJob,
       phone: detail.phone,
       website: detail.website,
@@ -125,7 +125,7 @@ export default async function BusinessDetailPage({
       .filter((b) => b.id !== decoded)
       .map((b) => ({
         id: b.id,
-        name: b.name,
+        name: b.title,
         image: getFirstImageUrl(b.image),
       }));
   } catch {
