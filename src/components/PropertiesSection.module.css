@@ -9,6 +9,8 @@
   max-width: 733px;
   margin: 0 auto;
   padding: 0 30px;
+  position: relative;
+  z-index: 1;
 }
 
 .titleWrap {
