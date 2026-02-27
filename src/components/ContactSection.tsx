@@ -5,6 +5,9 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 
 const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), { ssr: false });
+
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
+
 import { useScrollTrigger } from "./useScrollTrigger";
 import styles from "./ContactSection.module.css";
 
@@ -70,7 +73,7 @@ export default function ContactSection() {
     const errs = validate();
     setErrors(errs);
     setAgreeError(!agreed);
-    const sitekeySet = !!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    const sitekeySet = !!RECAPTCHA_SITE_KEY;
     const recaptchaFailed = sitekeySet && !recaptchaToken;
     setRecaptchaError(recaptchaFailed);
     if (Object.keys(errs).length > 0 || !agreed || recaptchaFailed) return;
@@ -258,11 +261,11 @@ export default function ContactSection() {
                 <p className={styles.errorMsg}>プライバシーポリシーに同意してください</p>
               )}
             </div>
-            {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+            {RECAPTCHA_SITE_KEY && (
               <div className={styles.recaptchaWrap}>
                 <ReCAPTCHA
                   key={recaptchaKey}
-                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                  sitekey={RECAPTCHA_SITE_KEY}
                   onChange={(token) => {
                     setRecaptchaToken(token);
                     if (token) setRecaptchaError(false);

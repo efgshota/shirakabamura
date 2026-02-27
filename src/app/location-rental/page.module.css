@@ -9,54 +9,51 @@
 
 /* ══ Hero ══ */
 .hero {
-  position: relative;
-  height: 100svh;
-  min-height: 500px;
-  max-height: 900px;
-  overflow: hidden;
+  background: #fff;
 }
 
-.heroContent {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
+/* 上部装飾エリア */
+.heroTop {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  padding-bottom: 80px;
-  text-align: center;
-  color: #fff;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.15) 50%,
-    transparent 100%
-  );
+  padding: 56px 40px 52px;
 }
 
-.heroEn {
-  font-size: 1.2rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  opacity: 0.7;
-  margin-bottom: 12px;
-  font-family: "futura-pt", "Hiragino Sans", sans-serif;
+/* blob + 縦書きタイトルのユニット */
+.heroDecorUnit {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 36px;
 }
 
-.heroTitle {
-  font-size: 6rem;
+/* Figma: 162×205px, rotate 17° */
+.heroBlob {
+  width: 90px;
+  height: 114px;
+  transform: rotate(17deg);
+  flex-shrink: 0;
+}
+
+/* 縦書きタイトル h1 */
+.heroVTitle {
+  writing-mode: vertical-rl;
+  font-size: 1.8rem;
   font-weight: 700;
-  letter-spacing: 0.3em;
-  line-height: 1;
-  margin-bottom: 16px;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  color: #253c30;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
 }
 
-.heroSub {
+/* 説明文 */
+.heroDesc {
+  font-family: "kinto-sans", sans-serif;
   font-size: 1.5rem;
-  letter-spacing: 0.15em;
-  opacity: 0.85;
+  color: #253c30;
+  letter-spacing: 0.04em;
+  text-align: center;
+  line-height: 1.85;
 }
 
 /* ══ Common Section ══ */
@@ -524,16 +521,21 @@
 }
 
 @media (max-width: 767px) {
-  .hero {
-    max-height: 700px;
+  .heroTop {
+    padding: 40px 24px 36px;
   }
 
-  .heroTitle {
-    font-size: 4rem;
+  .heroBlob {
+    width: 64px;
+    height: 81px;
   }
 
-  .heroSub {
-    font-size: 1.3rem;
+  .heroVTitle {
+    font-size: 1.5rem;
+  }
+
+  .heroDesc {
+    font-size: 1.4rem;
   }
 
   .section {

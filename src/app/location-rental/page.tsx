@@ -67,12 +67,30 @@ export default function LocationRentalPage() {
       <main className={styles.main}>
         {/* ══ Hero ══ */}
         <section className={styles.hero}>
-          <HeroCarousel />
-          <div className={styles.heroContent}>
-            <p className={styles.heroEn}>Location Rental</p>
-            <h1 className={`${styles.heroTitle} font-tsuku`}>中之島</h1>
-            <p className={styles.heroSub}>白樺湖 ロケーションレンタル</p>
+          {/* 上部装飾エリア: blobデコ + 縦書きタイトル + 説明文 */}
+          <div className={styles.heroTop}>
+            <div className={styles.heroDecorUnit}>
+              {/* teal blob: Figma グループ87 (162×205px, rotate17°) を近似 */}
+              <svg
+                className={styles.heroBlob}
+                viewBox="0 0 162 205"
+                fill="none"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M81 14 C118 10 152 32 158 72 C164 112 146 160 118 180 C90 200 50 196 28 172 C6 148 4 108 10 72 C16 36 44 18 81 14Z"
+                  fill="#2CA4A8"
+                />
+              </svg>
+              <h1 className={`${styles.heroVTitle} font-tsuku`}>ロケーションレンタル</h1>
+            </div>
+            <p className={styles.heroDesc}>
+              白樺湖に浮かぶ約2,000平方メートルの中之島（なかのしま）をお貸しします
+            </p>
           </div>
+          {/* 写真ストリップ */}
+          <HeroCarousel />
         </section>
 
         {/* ══ Section: 中之島とは ══ */}
@@ -507,7 +525,7 @@ export default function LocationRentalPage() {
                 お問い合わせフォーム
               </Link>
               <a
-                href="https://lin.ee/shirakabamura"
+                href="https://lin.ee/TUOS7vg"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`c-moreBtn ${styles.applyBtnLine}`}

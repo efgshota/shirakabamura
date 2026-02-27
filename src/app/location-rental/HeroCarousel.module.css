@@ -1,21 +1,39 @@
-.carousel {
+.stripWrap {
   position: relative;
-  width: 100%;
-  height: 100%;
+}
+
+/* --slide-w / --slide-gap: CSS変数でブレークポイントごとに上書き */
+.strip {
   overflow: hidden;
+  --slide-w: 59.3vw;
+  --slide-gap: 2.34vw;
+}
+
+@media (max-width: 767px) {
+  .strip {
+    --slide-w: 85vw;
+    --slide-gap: 4vw;
+  }
 }
 
 .track {
   display: flex;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s cubic-bezier(0.45, 0, 0.15, 1);
+  gap: var(--slide-gap);
+  transition: transform 0.75s cubic-bezier(0.45, 0, 0.15, 1);
 }
 
 .slide {
   position: relative;
-  min-width: 100%;
-  height: 100%;
+  flex-shrink: 0;
+  width: var(--slide-w);
+  /* Figma: 474/1280 ≈ 37vw */
+  height: 37vw;
+}
+
+@media (max-width: 767px) {
+  .slide {
+    height: 56vw;
+  }
 }
 
 .img {
@@ -23,66 +41,43 @@
   object-position: center;
 }
 
-/* Dots */
-.dots {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
+/* 矢印ボタン - 右寄せ, Figma: x≈1180-1245 / 1280px */
+.arrows {
   display: flex;
-  gap: 10px;
-  z-index: 10;
+  gap: 4px;
+  justify-content: flex-end;
+  padding-top: 20px;
+  padding-right: 35px;
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
+@media (max-width: 767px) {
+  .arrows {
+    padding-right: 16px;
+    padding-top: 14px;
+  }
+}
+
+.arrowBtn {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.3s;
-}
-
-.dotActive {
-  background: #fff;
-  transform: scale(1.25);
-}
-
-/* Arrows */
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.3);
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  border: 1.5px solid #253c30;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s;
+  color: #253c30;
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
 }
 
-.arrow:hover {
-  background: rgba(0, 0, 0, 0.5);
+.arrowBtn:hover:not(:disabled) {
+  background: #253c30;
+  color: #fff;
 }
 
-.arrowPrev {
-  left: 16px;
-}
-
-.arrowNext {
-  right: 16px;
-}
-
-@media (max-width: 767px) {
-  .arrow {
-    width: 36px;
-    height: 36px;
-  }
+.arrowBtn:disabled {
+  opacity: 0.3;
+  cursor: default;
 }

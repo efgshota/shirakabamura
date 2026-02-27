@@ -7,7 +7,7 @@ export default function FloatingButtons() {
   return (
     <div className={styles.wrap}>
       <a
-        href="https://lin.ee/shirakabamura"
+        href="https://lin.ee/TUOS7vg"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.lineBtn}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import FloatingButtons from "@/components/FloatingButtons";
 import "./globals.css";
 
 const siteUrl = "https://shirakabamura.com";
@@ -74,7 +75,10 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        {children}
+        <FloatingButtons />
+      </body>
     </html>
   );
 }

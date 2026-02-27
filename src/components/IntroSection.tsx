@@ -169,13 +169,8 @@ export default function IntroSection() {
           <div className={styles.infoCard}>
             <div className={styles.cardLabel}>
               <span className={styles.cardIconWrap}>
-                {/* RSS / feed icon */}
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-                  <rect width="22" height="22" rx="6" fill="#5B8BF5"/>
-                  <circle cx="6" cy="16" r="2" fill="white"/>
-                  <path d="M5.5 11.5C8.5 11.5 10.5 13.5 10.5 16.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
-                  <path d="M5.5 6.5C12 6.5 15.5 10 15.5 16.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
-                </svg>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/top/cards/icon_card3.svg" width="47" height="47" alt="" />
               </span>
               <span className={`${styles.cardCategory} font-tsuku`}>最新情報はこちら</span>
             </div>

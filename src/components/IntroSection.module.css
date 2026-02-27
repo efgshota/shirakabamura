@@ -140,6 +140,7 @@
   position: relative;
   border-radius: 24px;
   overflow: hidden;
+  clip-path: inset(0 round 24px);
   padding: 28px 32px 32px;
   min-height: 280px;
   display: flex;
@@ -340,6 +341,7 @@ a.infoCard:hover {
     padding: 22px 22px 28px;
     min-height: 240px;
     border-radius: 20px;
+    clip-path: inset(0 round 20px);
   }
 
   .blobC1a { width: 50%; left: 25%; }
