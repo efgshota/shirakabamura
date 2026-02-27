@@ -20,30 +20,25 @@
   padding: 56px 40px 52px;
 }
 
-/* blob + 縦書きタイトルのユニット */
-.heroDecorUnit {
-  display: flex;
-  align-items: center;
-  gap: 28px;
+/* SVG一体型: blob + 縦書きタイトル */
+.heroDecorSvg {
+  display: block;
+  width: 130px;   /* viewBox 200 × 0.65 */
+  height: 202px;  /* viewBox 310 × 0.65 */
   margin-bottom: 36px;
 }
 
-/* Figma: 162×205px, rotate 17° */
-.heroBlob {
-  width: 90px;
-  height: 114px;
-  transform: rotate(17deg);
-  flex-shrink: 0;
-}
-
-/* 縦書きタイトル h1 */
-.heroVTitle {
-  writing-mode: vertical-rl;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #253c30;
-  letter-spacing: 0.12em;
-  line-height: 1.4;
+/* アクセシビリティ・SEO用 非表示 h1 */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 /* 説明文 */
@@ -525,13 +520,9 @@
     padding: 40px 24px 36px;
   }
 
-  .heroBlob {
-    width: 64px;
-    height: 81px;
-  }
-
-  .heroVTitle {
-    font-size: 1.5rem;
+  .heroDecorSvg {
+    width: 106px;  /* viewBox 200 × 0.53 */
+    height: 164px; /* viewBox 310 × 0.53 */
   }
 
   .heroDesc {
