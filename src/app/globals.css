@@ -115,9 +115,11 @@ a:hover {
   height: 36px;
   border-radius: 36px;
   background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 1.4rem;
   font-family: "fot-tsukuardgothic-std", sans-serif;
   font-weight: 700;
+  color: #253c30;
   letter-spacing: 0.05em;
   transition: opacity 0.3s;
   padding: 0 24px;
@@ -130,4 +132,5 @@ a:hover {
 .c-moreBtn.blue {
   background: #a1d1db;
   color: #fff;
+  border-color: transparent;
 }
