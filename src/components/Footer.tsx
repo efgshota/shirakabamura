@@ -1,49 +1,63 @@
 import Link from "next/link";
-import Image from "next/image";
 import styles from "./Footer.module.css";
+
+const navItems = [
+  { href: "/#intro", label: "はじめに" },
+  { href: "/property/", label: "白樺村の物件" },
+  { href: "/useful/", label: "お役立ち帳" },
+  { href: "/location-rental/", label: "中之島の利用" },
+  { href: "/#business", label: "事業者の方々へ" },
+  { href: "/#contact", label: "お問い合わせ" },
+];
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
-        {/* 上段: ブランド + ナビ + 関連サイト */}
-        <div className={styles.top}>
-          {/* ブランドエリア */}
-          <div className={styles.brand}>
-            <div className={styles.brandLogo}>
-              <Image
-                src="/images/common/logo_blk.svg"
-                alt="白樺村"
-                width={20}
-                height={72}
-              />
-              <span className={`${styles.brandName} font-tsuku`}>白樺村</span>
-            </div>
-            <p className={styles.brandDesc}>
-              「50年先も続くレイクリゾート」をめざして。
-              <br />
-              白樺湖周辺での移住・開業・くらしをサポートします。
-            </p>
-            {/* TODO: 電話番号を設定 */}
-            <p className={styles.tel}>TEL: 0266-XX-XXXX</p>
-          </div>
+        <div className={styles.grid}>
 
-          {/* ナビゲーション */}
+          {/* ── ナビゲーション ── */}
           <nav className={styles.nav}>
-            <p className={styles.navLabel}>サイトマップ</p>
             <ul className={`${styles.navList} font-tsuku`}>
-              <li><Link href="/#intro">はじめに</Link></li>
-              <li><Link href="/property/">白樺村の物件</Link></li>
-              <li><Link href="/useful/">お役立ち帳</Link></li>
-              <li><Link href="/location-rental/">ロケーションレンタル</Link></li>
-              <li><Link href="/#business">物件事例</Link></li>
-              <li><Link href="/#contact">お問い合わせ</Link></li>
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href}>{item.label}</Link>
+                </li>
+              ))}
             </ul>
+            <a href="tel:05017931400" className={`${styles.tel} font-tsuku`}>
+              050-1793-1400
+            </a>
           </nav>
 
-          {/* 関連サイト */}
-          <div className={styles.external}>
-            <p className={styles.navLabel}>関連サイト</p>
+          {/* ── SNS（最新情報）── */}
+          <div className={styles.sns}>
+            <p className={`${styles.sectionLabel} font-tsuku`}>（最新情報）</p>
+            <ul className={`${styles.navList} font-tsuku`}>
+              <li>
+                <a
+                  href="https://lin.ee/shirakabamura"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LINE
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Instagram
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* ── 関連サイト ── */}
+          <div className={styles.related}>
+            <p className={`${styles.sectionLabel} font-tsuku`}>（関連サイト）</p>
             <ul className={`${styles.navList} font-tsuku`}>
               <li>
                 <a
@@ -65,13 +79,19 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+
+          {/* ── ロゴ（縦書き） ── */}
+          <div className={styles.logoWrap} aria-label="白樺村">
+            <span className={`${styles.logo} font-tsuku`}>
+              白<br />樺<br />村
+            </span>
+          </div>
         </div>
 
-        {/* 下段: コピーライト */}
+        {/* ── 下部 ── */}
         <div className={styles.bottom}>
-          <p className={styles.copyright}>
-            © {new Date().getFullYear()} 株式会社白樺村
-          </p>
+          <div className={styles.divider} />
+          <p className={styles.copyright}>© Shirakabamura</p>
         </div>
       </div>
     </footer>

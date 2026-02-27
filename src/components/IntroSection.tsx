@@ -134,14 +134,13 @@ export default function IntroSection() {
           </a>
 
           {/* Card 2: 進行中プロジェクト / すずらんの湯 */}
-          <a
+          {/* <a
             href="/#contact"
             className={styles.infoCard}
           >
             <Card2Blobs />
             <div className={styles.cardLabel}>
               <span className={styles.cardIconWrap}>
-                {/* onsen person icon */}
                 <svg width="47" height="47" viewBox="0 0 47 47" fill="none" aria-hidden="true">
                   <circle cx="23.5" cy="23.5" r="23.5" fill="#CCEFE7"/>
                   <circle cx="23.5" cy="14" r="4" fill="#2ca4a8"/>
@@ -164,7 +163,7 @@ export default function IntroSection() {
                 復活プロジェクト
               </p>
             </div>
-          </a>
+          </a> */}
 
           {/* Card 3: 最新情報はこちら / SNS */}
           <div className={styles.infoCard}>

@@ -1,7 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useState } from "react";
+
+const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), { ssr: false });
 import { useScrollTrigger } from "./useScrollTrigger";
 import styles from "./ContactSection.module.css";
 
@@ -43,6 +46,9 @@ export default function ContactSection() {
   const [step, setStep] = useState<Step>("input");
   const [errors, setErrors] = useState<FormErrors>({});
   const [agreeError, setAgreeError] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [recaptchaError, setRecaptchaError] = useState(false);
+  const [recaptchaKey, setRecaptchaKey] = useState(0);
 
   const validate = (): FormErrors => {
     const e: FormErrors = {};
@@ -64,7 +70,10 @@ export default function ContactSection() {
     const errs = validate();
     setErrors(errs);
     setAgreeError(!agreed);
-    if (Object.keys(errs).length > 0 || !agreed) return;
+    const sitekeySet = !!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    const recaptchaFailed = sitekeySet && !recaptchaToken;
+    setRecaptchaError(recaptchaFailed);
+    if (Object.keys(errs).length > 0 || !agreed || recaptchaFailed) return;
     setStep("confirm");
     scrollToContact();
   };
@@ -96,6 +105,9 @@ export default function ContactSection() {
     setAgreed(false);
     setErrors({});
     setAgreeError(false);
+    setRecaptchaToken(null);
+    setRecaptchaError(false);
+    setRecaptchaKey((k) => k + 1);
     scrollToContact();
   };
 
@@ -246,6 +258,22 @@ export default function ContactSection() {
                 <p className={styles.errorMsg}>プライバシーポリシーに同意してください</p>
               )}
             </div>
+            {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+              <div className={styles.recaptchaWrap}>
+                <ReCAPTCHA
+                  key={recaptchaKey}
+                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                  onChange={(token) => {
+                    setRecaptchaToken(token);
+                    if (token) setRecaptchaError(false);
+                  }}
+                  onExpired={() => setRecaptchaToken(null)}
+                />
+                {recaptchaError && (
+                  <p className={styles.errorMsg}>reCAPTCHA を完了してください</p>
+                )}
+              </div>
+            )}
             <div className={styles.submit}>
               <button type="submit" className={`c-moreBtn ${styles.submitBtn}`}>
                 確認画面へ
@@ -257,6 +285,9 @@ export default function ContactSection() {
         {/* ══ STEP 2: 確認画面 ══ */}
         {(step === "confirm" || step === "sending") && (
           <div className={styles.confirmWrap}>
+            <p className={styles.confirmWarning}>
+              まだお問い合わせは完了していません。以下の内容でお間違いなければ送信するを押してください。
+            </p>
             <p className={styles.confirmNote}>
               以下の内容でお間違いなければ「送信する」を押してください。
             </p>
@@ -338,6 +369,11 @@ export default function ContactSection() {
               内容を確認の上、担当者より折り返しご連絡いたします。
               <br />
               しばらくお待ちください。
+            </p>
+            <p className={styles.completeNote}>
+              この後 shirakabamura@cfquod.jp からご連絡します。
+              <br />
+              cfquod.jp ドメインのメールが迷惑メールフォルダに振り分けられる可能性がありますので、受信設定や迷惑メールフォルダのご確認をお願いします。
             </p>
             <button
               onClick={handleReset}
