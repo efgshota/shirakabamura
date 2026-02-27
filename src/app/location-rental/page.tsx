@@ -69,22 +69,45 @@ export default function LocationRentalPage() {
         <section className={styles.hero}>
           {/* 上部装飾エリア: blobデコ + 縦書きタイトル + 説明文 */}
           <div className={styles.heroTop}>
-            <div className={styles.heroDecorUnit}>
-              {/* teal blob: Figma グループ87 (162×205px, rotate17°) を近似 */}
-              <svg
-                className={styles.heroBlob}
-                viewBox="0 0 162 205"
-                fill="none"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+            {/* blob + 縦書きタイトルを一体SVGで構成 */}
+            {/* 列順: ロケーション（左）→ レンタル（右）= vertical-lr */}
+            <svg
+              className={styles.heroDecorSvg}
+              viewBox="0 0 200 310"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="ロケーションレンタル"
+            >
+              {/* teal blob: 上左→下右方向, rotate(50) */}
+              <g transform="translate(100, 170) rotate(50)">
                 <path
-                  d="M81 14 C118 10 152 32 158 72 C164 112 146 160 118 180 C90 200 50 196 28 172 C6 148 4 108 10 72 C16 36 44 18 81 14Z"
+                  d="M-90 0 C-80 -23, -45 -30, 0 -30 C45 -30, 80 -23, 90 0 C80 23, 45 30, 0 30 C-45 30, -80 23, -90 0Z"
                   fill="#2CA4A8"
                 />
-              </svg>
-              <h1 className={`${styles.heroVTitle} font-tsuku`}>ロケーションレンタル</h1>
-            </div>
+              </g>
+              {/* 左列: ロケーション (上から) */}
+              <text
+                writingMode="vertical-rl"
+                fontFamily="fot-tsukuardgothic-std, sans-serif"
+                fontSize="27"
+                fontWeight="700"
+                fill="#253c30"
+                x="84"
+                y="38"
+              >ロケーション</text>
+              {/* 右列: レンタル (下から) */}
+              <text
+                writingMode="vertical-rl"
+                fontFamily="fot-tsukuardgothic-std, sans-serif"
+                fontSize="27"
+                fontWeight="700"
+                fill="#253c30"
+                x="154"
+                y="175"
+              >レンタル</text>
+            </svg>
+            {/* SEO/アクセシビリティ用 hidden h1 */}
+            <h1 className={styles.srOnly}>ロケーションレンタル</h1>
             <p className={styles.heroDesc}>
               白樺湖に浮かぶ約2,000平方メートルの中之島（なかのしま）をお貸しします
             </p>
