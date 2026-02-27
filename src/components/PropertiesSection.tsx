@@ -84,13 +84,17 @@ export default function PropertiesSection({
               className={styles.card}
             >
               <div className={styles.cardImage}>
-                <Image
-                  src={prop.image}
-                  alt={prop.title}
-                  width={300}
-                  height={200}
-                  className={styles.cardImg}
-                />
+                {prop.image ? (
+                  <Image
+                    src={prop.image}
+                    alt={prop.title}
+                    width={300}
+                    height={200}
+                    className={styles.cardImg}
+                  />
+                ) : (
+                  <div className={styles.cardImgPlaceholder} />
+                )}
               </div>
               <div className={styles.cardBody}>
                 {prop.price && (
