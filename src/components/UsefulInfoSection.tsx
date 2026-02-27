@@ -3,14 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useScrollTrigger } from "./useScrollTrigger";
-import { usefulInfos } from "@/data/useful-infos";
+import type { UsefulInfoItem } from "@/lib/microcms";
 import styles from "./UsefulInfoSection.module.css";
 
-export default function UsefulInfoSection() {
+export default function UsefulInfoSection({ infos }: { infos: UsefulInfoItem[] }) {
   const { ref: titleRef, visible: titleVisible } = useScrollTrigger();
   const { ref: listRef, visible: listVisible } = useScrollTrigger();
 
-  const homeInfos = usefulInfos.slice(0, 6);
+  const homeInfos = infos.slice(0, 6);
 
   return (
     <section id="useful" className={styles.useful}>
@@ -39,15 +39,15 @@ export default function UsefulInfoSection() {
           className={`${styles.list} ${listVisible ? styles.visible : ""}`}
         >
           {homeInfos.map((info, i) => (
-            <div key={info.slug} className={`${styles.card} ${i >= 5 ? styles.hideMobile : ""}`}>
+            <div key={info.id} className={`${styles.card} ${i >= 5 ? styles.hideMobile : ""}`}>
               <div className={styles.cardText}>
                 <span className={styles.cardCategory}>{info.category}</span>
-                <h3 className={styles.cardName}>{info.name}</h3>
+                <h3 className={styles.cardName}>{info.title}</h3>
               </div>
               <div className={styles.cardIcons}>
-                {info.website && (
+                {info.url && (
                   <a
-                    href={info.website}
+                    href={info.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.iconLink}

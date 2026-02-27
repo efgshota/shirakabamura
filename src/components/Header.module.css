@@ -1,3 +1,6 @@
+/* ─────────────────────────────────────────
+   Header wrapper
+───────────────────────────────────────── */
 .header {
   position: fixed;
   top: 0;
@@ -7,36 +10,48 @@
   pointer-events: none;
 }
 
+/* ─────────────────────────────────────────
+   Logo (縦書き・左上)
+───────────────────────────────────────── */
 .logo {
-  position: absolute;
+  position: fixed;
   top: 40px;
   left: 40px;
-  z-index: 100;
+  z-index: 101;
   pointer-events: auto;
   display: block;
   width: 22px;
 }
 
-/* PC横並びナビ */
+/* ─────────────────────────────────────────
+   PC縦並び右側ナビ（Figma グループ126）
+───────────────────────────────────────── */
 .pcNav {
   position: fixed;
-  top: 0;
-  right: 90px;
+  top: 90px;
+  right: 36px;
   display: flex;
-  align-items: center;
-  gap: 28px;
-  height: 100px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
   z-index: 100;
   pointer-events: auto;
+  transition: opacity 0.3s;
 }
 
 .pcNavLink {
-  font-size: 1.25rem;
+  display: block;
+  font-size: 15px;
   font-weight: 700;
   color: #fff;
   letter-spacing: 0.05em;
-  transition: opacity 0.3s;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  text-align: right;
+  line-height: 1.6;
+  transition: opacity 0.2s;
+}
+
+.pcNavLink:hover {
+  opacity: 0.6;
 }
 
 .pcNavScrolled .pcNavLink {
@@ -44,127 +59,219 @@
   text-shadow: none;
 }
 
+/* メニューオープン中はPCナビ非表示 */
+.menuOpen .pcNav {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────
+   ハンバーガー / クローズボタン
+───────────────────────────────────────── */
 .hamburger {
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  z-index: 100;
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 101;
   pointer-events: auto;
-  width: 30px;
-  height: 20px;
-  background: none;
+  width: 52px;
+  height: 52px;
+  background: transparent;
   border: none;
+  border-radius: 14px;
   cursor: pointer;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s;
 }
 
-.hamburger span {
+.hamburger:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* スクロール後: スタイル変更なし（ボーダーなし） */
+
+/* 三本線 */
+.hamburger span:not(.closeIcon) {
   display: block;
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 2px;
+  width: 22px;
+  height: 2.5px;
   background-color: #fff;
-  transition: transform 0.3s, background-color 0.3s, top 0.3s;
+  border-radius: 2px;
+  transition: background-color 0.3s;
+  flex-shrink: 0;
 }
 
-.hamburger span:first-child {
-  top: 4px;
+.header.scrolled .hamburger span:not(.closeIcon) {
+  background-color: #253c30;
 }
 
-.hamburger span:last-child {
-  top: 14px;
+/* × クローズアイコン（メニューオープン時） */
+.hamburgerOpen {
+  background: rgba(37, 60, 48, 0.06);
 }
 
-.header.scrolled .hamburger span,
-.hamburger.active span {
-  background-color: #000;
+.hamburgerOpen:hover {
+  background: rgba(37, 60, 48, 0.12);
 }
 
-.hamburger.active span:first-child {
-  top: 9px;
-  transform: rotate(-35deg);
+.closeIcon {
+  font-size: 2.2rem;
+  line-height: 1;
+  color: #253c30;
+  font-weight: 300;
+  font-family: sans-serif;
 }
 
-.hamburger.active span:last-child {
-  top: 9px;
-  transform: rotate(35deg);
-}
-
-/* Navigation Overlay */
+/* ─────────────────────────────────────────
+   フルスクリーン ナビ オーバーレイ
+───────────────────────────────────────── */
 .gnav {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition: opacity 0.35s ease, visibility 0.35s;
   z-index: 98;
   pointer-events: none;
   background: linear-gradient(180deg, #b8ced3 0%, #bed9d2 50%, #c3e2d1 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow-y: auto;
 }
 
-.gnav.active {
+.gnavOpen {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
 
-.gnavInner {
-  text-align: center;
+/* ─────────────────────────────────────────
+   白樺湖シルエット（背景装飾）
+───────────────────────────────────────── */
+.lakeBg {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  width: 55%;
+  max-width: 600px;
+  opacity: 0.22;
+  pointer-events: none;
 }
 
+.lakeBgImg {
+  width: 100% !important;
+  height: auto !important;
+  position: relative !important;
+}
+
+/* ─────────────────────────────────────────
+   ナビ内コンテンツ（左揃え）
+───────────────────────────────────────── */
+.gnavInner {
+  position: relative;
+  z-index: 1;
+  padding: 140px 0 80px 120px;
+}
+
+/* ─────────────────────────────────────────
+   ナビリスト
+───────────────────────────────────────── */
 .navList {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.navList li {
-  margin-bottom: 8px;
+.navItem {
+  margin-bottom: 2px;
 }
 
-.navList li a {
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 2.07;
-  color: #253c30;
-  letter-spacing: 0.05em;
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 0;
+  text-decoration: none;
+  transition: opacity 0.2s;
 }
 
-.navExternal {
-  margin-top: 40px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.navExternal a {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #253c30;
-  letter-spacing: 0.05em;
-}
-
-.navExternal p {
-  margin-top: 8px;
-  font-size: 1.2rem;
-  color: #253c30;
+.navLink:hover {
   opacity: 0.6;
 }
 
-/* Tablet: hide PC nav */
+.navIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  flex-shrink: 0;
+}
+
+.navIcon img {
+  width: 44px !important;
+  height: 44px !important;
+  object-fit: contain;
+  position: relative !important;
+}
+
+.navLabel {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #253c30;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────
+   関連サイト
+───────────────────────────────────────── */
+.navRelated {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(37, 60, 48, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.navRelatedTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #253c30;
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.navRelatedLink {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #253c30;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.navRelatedLink:hover {
+  opacity: 0.6;
+}
+
+/* ─────────────────────────────────────────
+   Tablet: PCナビ非表示
+───────────────────────────────────────── */
 @media (max-width: 1024px) {
   .pcNav {
     display: none;
   }
 }
 
-/* Mobile */
+/* ─────────────────────────────────────────
+   Mobile
+───────────────────────────────────────── */
 @media (max-width: 767px) {
   .logo {
     top: 20px;
@@ -172,14 +279,37 @@
   }
 
   .hamburger {
-    top: 20px;
-    right: 20px;
+    top: 18px;
+    right: 18px;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    gap: 7px;
   }
 
-  .gnav {
-    padding: 170px 40px 120px;
-    overflow: scroll;
-    align-items: flex-start;
-    justify-content: flex-start;
+  .hamburger span:not(.closeIcon) {
+    width: 18px;
+  }
+
+  .gnavInner {
+    padding: 120px 0 60px 40px;
+  }
+
+  .lakeBg {
+    width: 75%;
+    right: -5%;
+  }
+
+  .navLabel {
+    font-size: 1.35rem;
+  }
+
+  .navIcon {
+    width: 36px;
+  }
+
+  .navIcon img {
+    width: 36px !important;
+    height: 36px !important;
   }
 }

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -5,6 +6,17 @@ import { getProperties, getFirstImageUrl } from "@/lib/microcms";
 import { properties as staticProperties } from "@/data/properties";
 import PropertyListClient, { PropertyCardData } from "./PropertyListClient";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = {
+  title: "白樺村の物件",
+  description:
+    "湖のほとり、森の中、山の景色——白樺湖周辺の自然ゆたかな物件をご案内します。売物件・賃貸・土地など、移住・開業・別荘利用に向けた物件情報を掲載中。",
+  openGraph: {
+    title: "白樺村の物件｜白樺村",
+    description:
+      "湖のほとり、森の中、山の景色——白樺湖周辺の自然ゆたかな物件をご案内します。売物件・賃貸・土地など、移住・開業・別荘利用に向けた物件情報を掲載中。",
+  },
+};
 
 export default async function PropertyListPage() {
   let properties: PropertyCardData[] = [];
@@ -55,7 +67,7 @@ export default async function PropertyListPage() {
             </div>
             <h1 className={`${styles.title} font-tsuku`}>白樺村の物件</h1>
             <p className={styles.subtitle}>
-              美しい白樺湖周辺の物件をご紹介します
+              湖のほとり、森の中、山の景色、自然ゆたかで穏やかな環境の物件をご案内します
             </p>
           </div>
         </section>

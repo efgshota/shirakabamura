@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PropertyGallery from "@/components/PropertyGallery";
 import PropertyImagePlaceholder from "@/components/PropertyImagePlaceholder";
+import JsonLd from "@/components/JsonLd";
 import { getProperty, getProperties, getAllImageUrls, getFirstImageUrl } from "@/lib/microcms";
 import { properties as staticProperties } from "@/data/properties";
 import styles from "./page.module.css";
@@ -30,10 +31,25 @@ export async function generateMetadata({
   const decodedSlug = decodeURIComponent(slug);
   try {
     const prop = await getProperty(decodedSlug);
-    return { title: `${prop.title}｜白樺村` };
+    const description =
+      prop.description?.replace(/<[^>]*>/g, "").slice(0, 120) ||
+      `${prop.location}の${prop.type?.[0] === "rent" ? "賃貸" : "売"}物件。${prop.specs ?? ""} ${prop.price ?? ""}`.trim();
+    const imageUrl = getFirstImageUrl(prop.image);
+    return {
+      title: prop.title,
+      description,
+      openGraph: {
+        title: `${prop.title}｜白樺村`,
+        description,
+        ...(imageUrl && { images: [{ url: imageUrl, alt: prop.title }] }),
+      },
+    };
   } catch {
     const staticProp = staticProperties.find((p) => p.slug === decodedSlug);
-    return { title: staticProp ? `${staticProp.title}｜白樺村` : "物件｜白樺村" };
+    return {
+      title: staticProp?.title ?? "物件",
+      description: staticProp?.description?.slice(0, 120) ?? "白樺湖周辺の自然ゆたかな物件情報。",
+    };
   }
 }
 
@@ -131,8 +147,34 @@ export default async function PropertyDetailPage({
       .map(normalizeStatic);
   }
 
+  const realEstateSchema = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    name: prop.title,
+    description: prop.description?.replace(/<[^>]*>/g, "") ?? prop.comment ?? "",
+    url: `https://shirakabamura.com/property/${encodeURIComponent(prop.id)}/`,
+    ...(prop.image && { image: prop.image }),
+    offers: {
+      "@type": "Offer",
+      price: prop.price,
+      priceCurrency: "JPY",
+      availability: "https://schema.org/InStock",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: prop.location,
+      addressRegion: "長野県",
+      addressCountry: "JP",
+    },
+    floorSize: prop.floorArea
+      ? { "@type": "QuantitativeValue", value: prop.floorArea }
+      : undefined,
+    numberOfRooms: prop.floorPlan ?? undefined,
+  };
+
   return (
     <div className={styles.page}>
+      <JsonLd data={realEstateSchema} />
       <Header />
       <main className={styles.main}>
         {/* Breadcrumb */}

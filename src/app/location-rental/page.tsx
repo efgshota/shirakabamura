@@ -5,17 +5,62 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroCarousel from "./HeroCarousel";
 import StickyNav from "./StickyNav";
+import JsonLd from "@/components/JsonLd";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "ロケーションレンタル（中之島）｜白樺村",
+  title: "ロケーションレンタル（中之島）",
   description:
-    "白樺湖に浮かぶ中之島をレンタルでご利用いただけます。イベント・ロケ地・スチール・ムービー撮影・ウェディングフォトなど、湖に浮かんでいるような幻想的な景色と空間をご提供します。",
+    "白樺湖に浮かぶ中之島をレンタルでご利用いただけます。ウェディングフォト・映像CM撮影・ブランドイベント・アウトドアイベントなど。ボート送迎付き、面積約2,000㎡、最大20名。",
+  openGraph: {
+    title: "ロケーションレンタル（中之島）｜白樺村",
+    description:
+      "白樺湖に浮かぶ中之島をレンタルでご利用いただけます。ウェディングフォト・映像CM撮影・ブランドイベント・アウトドアイベントなど。ボート送迎付き、面積約2,000㎡、最大20名。",
+    images: [
+      {
+        url: "/images/location-rental/hero-01.png",
+        alt: "白樺湖 中之島 ロケーションレンタル",
+      },
+    ],
+  },
+};
+
+const nakanojimaSchema = {
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  name: "白樺湖 中之島 ロケーションレンタル",
+  description:
+    "白樺湖の中心に浮かぶ美しい小島「中之島」をレンタルでご利用いただけます。ウェディングフォト・映像CM撮影・ブランドイベント・アウトドアイベントなど多彩なシーンに対応。ボート送迎付き。",
+  url: "https://shirakabamura.com/location-rental/",
+  image: "https://shirakabamura.com/images/location-rental/hero-01.png",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "茅野市",
+    addressRegion: "長野県",
+    addressCountry: "JP",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 36.07,
+    longitude: 138.2,
+  },
+  amenityFeature: [
+    { "@type": "LocationFeatureSpecification", name: "ボート送迎", value: true },
+    { "@type": "LocationFeatureSpecification", name: "レンタル備品（電源・テント等）", value: true },
+    { "@type": "LocationFeatureSpecification", name: "貸切利用可", value: true },
+  ],
+  maximumAttendeeCapacity: 20,
+  offers: {
+    "@type": "Offer",
+    priceCurrency: "JPY",
+    description: "時間貸し20,000円/h〜、貸切（午前/午後）150,000円〜",
+  },
 };
 
 export default function LocationRentalPage() {
   return (
     <div className={styles.page}>
+      <JsonLd data={nakanojimaSchema} />
       <Header />
       <StickyNav />
 

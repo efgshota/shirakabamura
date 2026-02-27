@@ -13,6 +13,7 @@ type FormData = {
   message: string;
 };
 
+type FormErrors = Partial<Record<keyof FormData, string>>;
 type Step = "input" | "confirm" | "sending" | "complete" | "error";
 
 const EMPTY_FORM: FormData = {
@@ -23,26 +24,49 @@ const EMPTY_FORM: FormData = {
   message: "",
 };
 
+const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+const isValidPhone = (v: string) => {
+  const digits = v.replace(/[\-\s\(\)\+]/g, "");
+  return /^\d{10,11}$/.test(digits);
+};
+
+const scrollToContact = () => {
+  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
 export default function ContactSection() {
   const { ref: birdRef, visible: birdVisible } = useScrollTrigger(0.3);
   const { ref: titleRef, visible: titleVisible } = useScrollTrigger();
   const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
   const [agreed, setAgreed] = useState(false);
   const [step, setStep] = useState<Step>("input");
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [agreeError, setAgreeError] = useState(false);
+
+  const validate = (): FormErrors => {
+    const e: FormErrors = {};
+    if (!isValidEmail(formData.email)) {
+      e.email = "正しいメールアドレスを入力してください";
+    }
+    if (formData.email !== formData.emailConfirm) {
+      e.emailConfirm = "メールアドレスが一致しません";
+    }
+    if (formData.phone && !isValidPhone(formData.phone)) {
+      e.phone = "電話番号は10〜11桁の数字で入力してください（ハイフン可）";
+    }
+    return e;
+  };
 
   // ── 確認画面へ進む ──────────────────────────────
   const handleToConfirm = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!agreed) {
-      alert("プライバシーポリシーに同意してください");
-      return;
-    }
-    if (formData.email !== formData.emailConfirm) {
-      alert("メールアドレスが一致しません。ご確認ください。");
-      return;
-    }
+    const errs = validate();
+    setErrors(errs);
+    setAgreeError(!agreed);
+    if (Object.keys(errs).length > 0 || !agreed) return;
     setStep("confirm");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToContact();
   };
 
   // ── 送信する ────────────────────────────────────
@@ -62,6 +86,7 @@ export default function ContactSection() {
   // ── 入力に戻る ──────────────────────────────────
   const handleBack = () => {
     setStep("input");
+    scrollToContact();
   };
 
   // ── 最初に戻る ──────────────────────────────────
@@ -69,6 +94,9 @@ export default function ContactSection() {
     setStep("input");
     setFormData(EMPTY_FORM);
     setAgreed(false);
+    setErrors({});
+    setAgreeError(false);
+    scrollToContact();
   };
 
   return (
@@ -116,7 +144,6 @@ export default function ContactSection() {
             />
           </div>
           <h2 className={`${styles.title} font-tsuku`}>お問い合わせ</h2>
-          <p className={styles.contactPerson}>担当: 平大路拓也</p>
         </div>
 
         {/* ── ステップインジケーター ── */}
@@ -158,9 +185,13 @@ export default function ContactSection() {
                 placeholder="メールアドレス *"
                 required
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className={styles.input}
+                onChange={(e) => {
+                  setFormData({ ...formData, email: e.target.value });
+                  if (errors.email) setErrors({ ...errors, email: undefined });
+                }}
+                className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
               />
+              {errors.email && <p className={styles.errorMsg}>{errors.email}</p>}
             </div>
             <div className={styles.field}>
               <input
@@ -168,18 +199,26 @@ export default function ContactSection() {
                 placeholder="メールアドレス（確認用） *"
                 required
                 value={formData.emailConfirm}
-                onChange={(e) => setFormData({ ...formData, emailConfirm: e.target.value })}
-                className={styles.input}
+                onChange={(e) => {
+                  setFormData({ ...formData, emailConfirm: e.target.value });
+                  if (errors.emailConfirm) setErrors({ ...errors, emailConfirm: undefined });
+                }}
+                className={`${styles.input} ${errors.emailConfirm ? styles.inputError : ""}`}
               />
+              {errors.emailConfirm && <p className={styles.errorMsg}>{errors.emailConfirm}</p>}
             </div>
             <div className={styles.field}>
               <input
                 type="tel"
                 placeholder="電話番号"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className={styles.input}
+                onChange={(e) => {
+                  setFormData({ ...formData, phone: e.target.value });
+                  if (errors.phone) setErrors({ ...errors, phone: undefined });
+                }}
+                className={`${styles.input} ${errors.phone ? styles.inputError : ""}`}
               />
+              {errors.phone && <p className={styles.errorMsg}>{errors.phone}</p>}
             </div>
             <div className={styles.field}>
               <textarea
@@ -196,13 +235,19 @@ export default function ContactSection() {
                 <input
                   type="checkbox"
                   checked={agreed}
-                  onChange={(e) => setAgreed(e.target.checked)}
+                  onChange={(e) => {
+                    setAgreed(e.target.checked);
+                    if (agreeError) setAgreeError(false);
+                  }}
                 />
                 <span>プライバシーポリシーに同意する</span>
               </label>
+              {agreeError && (
+                <p className={styles.errorMsg}>プライバシーポリシーに同意してください</p>
+              )}
             </div>
             <div className={styles.submit}>
-              <button type="submit" className="c-moreBtn">
+              <button type="submit" className={`c-moreBtn ${styles.submitBtn}`}>
                 確認画面へ
               </button>
             </div>
@@ -304,7 +349,7 @@ export default function ContactSection() {
           </div>
         )}
 
-        {/* エラー（確認画面以外で出た場合のフォールバック） */}
+        {/* エラー */}
         {step === "error" && (
           <div className={styles.errorWrap}>
             <p className={styles.error}>
