@@ -1,7 +1,7 @@
 .business {
   position: relative;
   z-index: 1;
-  margin-top: -56px;
+  margin-top: -57px;
 }
 
 .clipTop {
@@ -93,12 +93,13 @@
 
 .cardImage {
   width: 100%;
+  aspect-ratio: 300 / 261;
   margin-bottom: 20px;
 }
 
 .cardSvg {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
 }
 
