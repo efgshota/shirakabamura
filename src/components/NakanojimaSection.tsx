@@ -11,6 +11,15 @@ export default function NakanojimaSection() {
 
   return (
     <section id="location-rental" className={styles.nakanojima}>
+      <div className={styles.decoBlobs} aria-hidden="true">
+        <Image
+          src="/images/top/deco_nakanojima.svg"
+          alt=""
+          width={715}
+          height={359}
+          className={styles.decoBlobsImg}
+        />
+      </div>
       <div className={styles.inner}>
         <div
           ref={titleRef}
@@ -18,13 +27,13 @@ export default function NakanojimaSection() {
         >
           <div className={styles.titleIcon}>
             <Image
-              src="/images/common/icon_business.svg"
+              src="/images/nakanoshima.svg"
               alt=""
-              width={100}
-              height={100}
+              width={155}
+              height={146}
             />
           </div>
-          <h2 className={`${styles.title} font-tsuku`}>ロケーションレンタル</h2>
+          <h2 className={`${styles.title} font-tsuku`}>ロケーション<br />レンタル</h2>
           <p className={styles.description}>
             白樺湖に浮かぶ中之島をはじめ、湖畔や森のロケーションをレンタルでご利用いただけます。撮影、ロケ地、イベントなどのご利用に対応しています。
           </p>
@@ -35,7 +44,7 @@ export default function NakanojimaSection() {
           className={`${styles.photo} ${photoVisible ? styles.visible : ""}`}
         >
           <Image
-            src="/images/top/mv.jpg"
+            src="/images/top/23Y06812.png"
             alt="白樺湖のロケーション"
             width={1280}
             height={800}
