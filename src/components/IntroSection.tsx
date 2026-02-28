@@ -20,23 +20,10 @@ const ExtIcon = () => (
 const Card1Blobs = () => (
   <div className={styles.cardBlobs} aria-hidden="true">
     {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img src="/images/top/cards/blob_c1_c.svg" className={`${styles.blobImg} ${styles.blobC1c}`} alt="" />
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img src="/images/top/cards/blob_c1_b.svg" className={`${styles.blobImg} ${styles.blobC1b}`} alt="" />
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img src="/images/top/cards/blob_c1_a.svg" className={`${styles.blobImg} ${styles.blobC1a}`} alt="" />
+    <img src="/images/top/cards/blob_card1_bg.svg" className={styles.blobCard1Bg} alt="" />
   </div>
 );
 
-/** Card 2: ハート形 blob */
-const Card2Blobs = () => (
-  <div className={styles.cardBlobs} aria-hidden="true">
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img src="/images/top/cards/blob_c2_a.svg" className={`${styles.blobImg} ${styles.blobC2a}`} alt="" />
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img src="/images/top/cards/blob_c2_b.svg" className={`${styles.blobImg} ${styles.blobC2b}`} alt="" />
-  </div>
-);
 
 export default function IntroSection() {
   const [active, setActive] = useState(false);
@@ -119,10 +106,10 @@ export default function IntroSection() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/top/cards/icon_card1.svg" width="47" height="47" alt="" />
               </span>
-              <span className={`${styles.cardCategory} font-tsuku`}>観光案内サイト</span>
+              <span className={styles.cardCategory}>観光案内サイト</span>
             </div>
             <div className={styles.cardContent}>
-              <p className={`${styles.cardTitle} font-tsuku`}>
+              <p className={styles.cardTitle}>
                 白樺湖のこと<ExtIcon />
               </p>
               <p className={styles.cardDesc}>
@@ -133,53 +120,21 @@ export default function IntroSection() {
             </div>
           </a>
 
-          {/* Card 2: 進行中プロジェクト / すずらんの湯 */}
-          {/* <a
-            href="/#contact"
-            className={styles.infoCard}
-          >
-            <Card2Blobs />
-            <div className={styles.cardLabel}>
-              <span className={styles.cardIconWrap}>
-                <svg width="47" height="47" viewBox="0 0 47 47" fill="none" aria-hidden="true">
-                  <circle cx="23.5" cy="23.5" r="23.5" fill="#CCEFE7"/>
-                  <circle cx="23.5" cy="14" r="4" fill="#2ca4a8"/>
-                  <path d="M16 22C16 27 18.5 30 23.5 30C28.5 30 31 27 31 22" stroke="#2ca4a8" strokeWidth="2" strokeLinecap="round" fill="none"/>
-                  <path d="M12 34Q17 30 23.5 34Q30 38 35 34" stroke="#2ca4a8" strokeWidth="2" strokeLinecap="round" fill="none"/>
-                  <path d="M19 18Q23.5 15 28 18" stroke="#2ca4a8" strokeWidth="2" strokeLinecap="round" fill="none"/>
-                  <path d="M20 13Q21.5 10 23 13" stroke="#2ca4a8" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-                  <path d="M23.5 13Q25 10 26.5 13" stroke="#2ca4a8" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-                </svg>
-              </span>
-              <span className={`${styles.cardCategory} font-tsuku`}>進行中プロジェクト</span>
-            </div>
-            <div className={styles.cardContent}>
-              <p className={`${styles.cardTitle} font-tsuku`}>
-                すずらんの湯<ExtIcon />
-              </p>
-              <p className={styles.cardDesc}>
-                白樺湖の中心、みんなの憩いのお風呂<br />
-                「白樺湖温泉　すずらんの湯」<br />
-                復活プロジェクト
-              </p>
-            </div>
-          </a> */}
-
-          {/* Card 3: 最新情報はこちら / SNS */}
+          {/* Card 2: 最新情報はこちら / SNS */}
           <div className={styles.infoCard}>
             <div className={styles.cardLabel}>
               <span className={styles.cardIconWrap}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/top/cards/icon_card3.svg" width="47" height="47" alt="" />
+                <img src="/images/top/cards/icon_card_sns.png" width="47" height="47" alt="" />
               </span>
-              <span className={`${styles.cardCategory} font-tsuku`}>最新情報はこちら</span>
+              <span className={styles.cardCategory}>最新情報はこちら</span>
             </div>
             <div className={styles.cardSocials}>
               <a
                 href="https://note.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${styles.socialLink} font-tsuku`}
+                className={styles.socialLink}
               >
                 note<ExtIcon />
               </a>
@@ -187,7 +142,7 @@ export default function IntroSection() {
                 href="https://www.instagram.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${styles.socialLink} font-tsuku`}
+                className={styles.socialLink}
               >
                 Instagram<ExtIcon />
               </a>
@@ -195,7 +150,7 @@ export default function IntroSection() {
                 href="https://x.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${styles.socialLink} font-tsuku`}
+                className={styles.socialLink}
               >
                 X (Twitter)<ExtIcon />
               </a>

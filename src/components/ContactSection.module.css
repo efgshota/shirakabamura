@@ -36,7 +36,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 48px;
 }
 
 .titleIcon {
@@ -71,7 +71,7 @@
   align-items: center;
   justify-content: center;
   gap: 0;
-  margin-bottom: 40px;
+  margin-bottom: 48px;
 }
 
 .step {
@@ -148,7 +148,7 @@
   background: #fff;
   padding: 24px 24px 24px 50px;
   font-size: 1.4rem;
-  font-family: "kinto-sans", sans-serif;
+  font-family: var(--font-zen-kaku), sans-serif;
   color: #253c30;
   text-align: left;
   outline: none;
@@ -188,7 +188,7 @@
   background: #fff;
   padding: 24px 24px 24px 50px;
   font-size: 1.4rem;
-  font-family: "kinto-sans", sans-serif;
+  font-family: var(--font-zen-kaku), sans-serif;
   color: #253c30;
   outline: none;
   resize: none;

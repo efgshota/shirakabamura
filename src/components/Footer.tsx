@@ -18,22 +18,22 @@ export default function Footer() {
 
           {/* ── ナビゲーション ── */}
           <nav className={styles.nav}>
-            <ul className={`${styles.navList} font-tsuku`}>
+            <ul className={styles.navList}>
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href}>{item.label}</Link>
                 </li>
               ))}
             </ul>
-            <a href="tel:05017931400" className={`${styles.tel} font-tsuku`}>
+            <a href="tel:05017931400" className={styles.tel}>
               050-1793-1400
             </a>
           </nav>
 
           {/* ── SNS（最新情報）── */}
           <div className={styles.sns}>
-            <p className={`${styles.sectionLabel} font-tsuku`}>（最新情報）</p>
-            <ul className={`${styles.navList} font-tsuku`}>
+            <p className={styles.sectionLabel}>（最新情報）</p>
+            <ul className={styles.navList}>
               <li>
                 <a
                   href="https://lin.ee/shirakabamura"
@@ -57,8 +57,8 @@ export default function Footer() {
 
           {/* ── 関連サイト ── */}
           <div className={styles.related}>
-            <p className={`${styles.sectionLabel} font-tsuku`}>（関連サイト）</p>
-            <ul className={`${styles.navList} font-tsuku`}>
+            <p className={styles.sectionLabel}>（関連サイト）</p>
+            <ul className={styles.navList}>
               <li>
                 <a
                   href="https://www.shirakabako.com/"

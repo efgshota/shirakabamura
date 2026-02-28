@@ -1,7 +1,7 @@
 .property {
   position: relative;
   z-index: 1;
-  background: #f8f8f5;
+  background: #a1d1db;
   padding: 378px 0 318px;
 }
 
@@ -13,6 +13,7 @@
   z-index: 1;
 }
 
+/* ── タイトル ── */
 .titleWrap {
   text-align: center;
   margin-bottom: 48px;
@@ -47,78 +48,96 @@
   margin-top: 16px;
   font-size: 1.4rem;
   color: #253c30;
-  opacity: 0.7;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
   line-height: 1.8;
+  text-align: center;
 }
 
-/* Filter tabs */
-.filterTabs {
+/* ── フィルタータイルカード ── */
+.filterTiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.filterTile {
   display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 32px;
-}
-
-.filterTab {
-  padding: 8px 20px;
-  border-radius: 24px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  background: transparent;
-  font-size: 1.3rem;
-  font-family: "kinto-sans", sans-serif;
-  font-weight: 600;
-  color: #253c30;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  background: #fff;
+  border: 2px solid transparent;
+  border-radius: 16px;
   cursor: pointer;
   transition: all 0.3s;
-  letter-spacing: 0.03em;
+  text-align: left;
 }
 
-.filterTab:hover {
-  background: rgba(0, 0, 0, 0.05);
+.filterTile:hover {
+  opacity: 0.85;
 }
 
-.filterTabActive {
-  background: #253c30;
-  color: #fff;
+.filterTileActive {
   border-color: #253c30;
 }
 
-.filterTabActive:hover {
-  background: #253c30;
-  opacity: 0.8;
+.filterTileIcon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
 }
 
-/* Property cards */
+.filterTileLabel {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #253c30;
+  letter-spacing: 0.03em;
+}
+
+/* ── 説明テキスト ── */
+.noteText {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.noteText p {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: #253c30;
+}
+
+/* ── 区切り線 ── */
+.divider {
+  height: 1px;
+  background: rgba(37, 60, 48, 0.15);
+  margin-bottom: 48px;
+}
+
+/* ── 横型物件カード ── */
 .list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 19px;
-  position: relative;
-  top: 60px;
-  opacity: 0;
-  transition: top 1s, opacity 1s;
-}
-
-.list.visible {
-  top: 0;
-  opacity: 1;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .card {
   background: #fff;
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.card:hover {
+  opacity: 0.85;
 }
 
 .cardImage {
-  width: 100%;
-  aspect-ratio: 3 / 2;
+  width: 140px;
+  min-height: 120px;
+  flex-shrink: 0;
   overflow: hidden;
 }
 
@@ -136,57 +155,45 @@
 }
 
 .cardBody {
-  padding: 16px 20px 12px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   flex: 1;
-}
-
-.cardPrice {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #253c30;
-  margin-bottom: 4px;
+  min-width: 0;
 }
 
 .cardSpecs {
-  font-size: 1.2rem;
-  color: #94b3ba;
-  margin-bottom: 8px;
-}
-
-.cardTitle {
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: #253c30;
-  line-height: 1.5;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .cardHighlight {
   font-size: 1.3rem;
-  color: #2ca4a8;
+  color: #253c30;
   line-height: 1.5;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
-.cardArea {
-  font-size: 1.2rem;
-  color: #94b3ba;
+.cardPrice {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #253c30;
 }
 
-.cardBtn {
-  margin: 0 20px 16px;
-  font-size: 1.2rem;
-}
-
+/* ── もっと見る ── */
 .more {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 48px;
 }
 
+/* ── ボトムテキスト ── */
 .bottomText {
   text-align: center;
-  margin-top: 80px;
-  max-width: 520px;
+  margin-top: 60px;
+  max-width: 560px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
@@ -206,10 +213,7 @@
   color: #253c30;
 }
 
-.bottomBtn {
-  margin-top: 24px;
-}
-
+/* ── Mobile ── */
 @media (max-width: 767px) {
   .property {
     padding: 156px 0 168px;
@@ -219,22 +223,25 @@
     padding: 0 24px;
   }
 
-  .list {
-    grid-template-columns: 1fr;
-  }
-
   .title {
     font-size: 2.5rem;
   }
 
-  .filterTabs {
-    flex-wrap: wrap;
-    gap: 6px;
+  .filterTiles {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
-  .filterTab {
-    padding: 6px 14px;
-    font-size: 1.2rem;
+  .filterTile {
+    padding: 16px 20px;
+  }
+
+  .list {
+    grid-template-columns: 1fr;
+  }
+
+  .cardImage {
+    width: 120px;
   }
 
   .bottomText {

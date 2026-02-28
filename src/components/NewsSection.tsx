@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useScrollTrigger } from "./useScrollTrigger";
 import styles from "./NewsSection.module.css";
 
@@ -40,9 +41,6 @@ export default function NewsSection({
             />
           </div>
           <h2 className={`${styles.title} font-tsuku`}>お知らせ</h2>
-          <p className={styles.subtitle}>
-            白樺村で起きていることをお知らせ
-          </p>
         </div>
 
         <div
@@ -51,15 +49,16 @@ export default function NewsSection({
         >
           {newsItems.map((item) => (
             <div key={item.id} className={styles.item}>
-              <div className={styles.itemMeta}>
-                <time className={styles.itemDate}>{formatDate(item.date)}</time>
-                {item.category && (
-                  <span className={styles.itemCategory}>{item.category}</span>
-                )}
-              </div>
+              <time className={styles.itemDate}>{formatDate(item.date)}</time>
               <p className={styles.itemTitle}>{item.title}</p>
             </div>
           ))}
+        </div>
+
+        <div className={styles.more}>
+          <Link href="/#news" className="c-moreBtn">
+            もっと見る
+          </Link>
         </div>
       </div>
     </section>

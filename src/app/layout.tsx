@@ -1,7 +1,21 @@
 import type { Metadata } from "next";
+import { Zen_Kaku_Gothic_Antique, Inter } from "next/font/google";
 import Script from "next/script";
 import FloatingButtons from "@/components/FloatingButtons";
 import "./globals.css";
+
+const zenKaku = Zen_Kaku_Gothic_Antique({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-zen-kaku",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 const siteUrl = "https://shirakabamura.com";
 
@@ -52,7 +66,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" suppressHydrationWarning>
+    <html lang="ja" className={`${zenKaku.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         <Script
           src="https://use.typekit.net/bvi2lkh.js"

@@ -1,6 +1,5 @@
 .useful {
   position: relative;
-  z-index: 1;
   background: #f8f8f5;
   padding: 420px 0 160px;
 }
@@ -20,6 +19,8 @@
   max-width: 733px;
   margin: 0 auto;
   padding: 0 30px;
+  position: relative;
+  z-index: 2;
 }
 
 .titleWrap {
@@ -127,7 +128,7 @@
 
 .more {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 48px;
 }
 
 @media (max-width: 767px) {

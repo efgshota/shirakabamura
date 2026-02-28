@@ -35,7 +35,7 @@
 }
 
 .inner {
-  max-width: 660px;
+  max-width: 780px;
   margin: 0 auto;
   padding: 200px 30px 160px;
   position: relative;
@@ -108,11 +108,12 @@
 }
 
 .text p {
-  font-family: "kinto-sans", sans-serif;
-  font-size: 1.8rem;
-  line-height: 2;
+  font-family: var(--font-zen-kaku), sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 2.3;
   color: #253c30;
-  letter-spacing: 0.03em;
+  letter-spacing: 0;
   margin-bottom: 24px;
 }
 
@@ -123,7 +124,7 @@
   margin-top: 56px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 40px;
   position: relative;
   top: 60px;
   opacity: 0;
@@ -138,15 +139,11 @@
 /* 個別カード */
 .infoCard {
   position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  clip-path: inset(0 round 24px);
   padding: 28px 32px 32px;
-  min-height: 280px;
+  min-height: 360px;
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  background: rgba(255, 255, 255, 0.1);
   transition: opacity 0.2s;
 }
 
@@ -160,7 +157,6 @@ a.infoCard:hover {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  overflow: hidden;
 }
 
 .blobImg {
@@ -168,41 +164,16 @@ a.infoCard:hover {
   height: auto;
 }
 
-/* Card 1: 有機形状 blob (パス225, 227, 228) */
-.blobC1a {
-  width: 42%;
-  left: 29%;
-  top: 14%;
+/* Card 1: 背景blob一体型 */
+.blobCard1Bg {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.blobC1b {
-  width: 48%;
-  left: -6%;
-  top: 12%;
-  transform: rotate(-37deg);
-  transform-origin: center;
-}
-
-.blobC1c {
-  width: 48%;
-  right: -6%;
-  top: 12%;
-  transform: rotate(-37deg);
-  transform-origin: center;
-}
-
-/* Card 2: ハート形 blob (パス290, 291) */
-.blobC2a {
-  width: 55%;
-  left: 2%;
-  top: 8%;
-}
-
-.blobC2b {
-  width: 55%;
-  right: 2%;
-  top: 8%;
-}
 
 /* ラベル行（アイコン + カテゴリーテキスト） */
 .cardLabel {
@@ -235,16 +206,16 @@ a.infoCard:hover {
 /* カード本体コンテンツ（タイトル + 説明） */
 .cardContent {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 24px;
   position: relative;
   z-index: 1;
   margin-top: auto;
-  padding-top: 12px;
+  margin-bottom: auto;
 }
 
 .cardTitle {
-  font-size: 2.6rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: #2ca4a8;
   letter-spacing: 0.03em;
@@ -264,14 +235,18 @@ a.infoCard:hover {
 }
 
 .cardDesc {
-  font-size: 1.4rem;
-  line-height: 1.85;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.8;
   color: #253c30;
-  padding-top: 4px;
-  font-family: "kinto-sans", sans-serif;
+  font-family: var(--font-zen-kaku), sans-serif;
 }
 
 /* Card 3: SNSリンク */
+.infoCard:last-child {
+  min-height: 180px;
+}
+
 .cardSocials {
   display: flex;
   align-items: center;
@@ -279,12 +254,13 @@ a.infoCard:hover {
   flex-wrap: wrap;
   position: relative;
   z-index: 1;
-  padding-top: 4px;
   margin-top: auto;
+  margin-bottom: auto;
 }
 
 .socialLink {
-  font-size: 2.4rem;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 2.8rem;
   font-weight: 700;
   color: #2ca4a8;
   text-decoration: none;
@@ -334,21 +310,13 @@ a.infoCard:hover {
 
   .infoCards {
     margin-top: 40px;
-    gap: 12px;
+    gap: 24px;
   }
 
   .infoCard {
     padding: 22px 22px 28px;
     min-height: 240px;
-    border-radius: 20px;
-    clip-path: inset(0 round 20px);
   }
-
-  .blobC1a { width: 50%; left: 25%; }
-  .blobC1b { width: 56%; left: -8%; }
-  .blobC1c { width: 56%; right: -8%; }
-  .blobC2a { width: 62%; left: 0%; }
-  .blobC2b { width: 62%; right: 0%; }
 
   .cardContent {
     flex-direction: column;
@@ -365,6 +333,6 @@ a.infoCard:hover {
   }
 
   .socialLink {
-    font-size: 1.9rem;
+    font-size: 2.2rem;
   }
 }

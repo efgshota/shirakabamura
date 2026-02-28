@@ -43,7 +43,7 @@ export default function PropertyListClient({
               <button
                 key={opt.key}
                 onClick={() => setActiveFilter(opt.key)}
-                className={`${styles.filterBtn} ${activeFilter === opt.key ? styles.active : ""} font-tsuku`}
+                className={`${styles.filterBtn} ${activeFilter === opt.key ? styles.active : ""}`}
               >
                 {opt.label}
               </button>
