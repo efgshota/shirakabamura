@@ -14,9 +14,11 @@ html {
 }
 
 body {
-  font-family: "kinto-sans", "Yu Gothic", YuGothic, "Hiragino Sans",
+  font-family: var(--font-zen-kaku), "Yu Gothic", YuGothic, "Hiragino Sans",
     "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.8;
   color: #253c30;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -74,7 +76,7 @@ a:hover {
 }
 
 .font-kinto {
-  font-family: "kinto-sans", sans-serif;
+  font-family: var(--font-zen-kaku), sans-serif;
 }
 
 /* ===== Animations ===== */
@@ -117,7 +119,6 @@ a:hover {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 1.4rem;
-  font-family: "fot-tsukuardgothic-std", sans-serif;
   font-weight: 700;
   color: #253c30;
   letter-spacing: 0.05em;

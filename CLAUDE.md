@@ -19,10 +19,10 @@
 
 ## Figmaデザインファイル
 
-- **URL**: https://www.figma.com/design/W7W8k7bFCnThDiMv7ZAU12/%E7%99%BD%E6%A8%BA%E6%9D%91
-- **fileKey**: `W7W8k7bFCnThDiMv7ZAU12`
-- **主要フレーム**: `0:3`（2.0-Top 1 / トップページ全体）
-- デザイン指摘が来たら必ず `mcp__claude_ai_Figma__get_design_context` で参照する
+- **URL**: https://www.figma.com/design/kx1j1c74EfvSgU3v63gkLu/Shirakabamura
+- **fileKey**: `kx1j1c74EfvSgU3v63gkLu`
+- **主要フレーム**: `24-174`（Top / トップページ全体）
+- デザイン指摘が来たら Figma REST API (`X-Figma-Token`) で参照する
 - コードは React + Tailwind CSS に適応させる（そのまま使わない）
 
 ---

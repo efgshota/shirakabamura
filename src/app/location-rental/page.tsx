@@ -98,7 +98,7 @@ export default function LocationRentalPage() {
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
               <span className={styles.sectionEn}>About Nakanojima</span>
-              <h2 className={`${styles.sectionTitle} font-tsuku`}>中之島とは</h2>
+              <h2 className={`${styles.sectionTitle}`}>中之島とは</h2>
             </div>
 
             <p className={styles.catchCopy}>
@@ -140,7 +140,7 @@ export default function LocationRentalPage() {
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
               <span className={styles.sectionEn}>Access</span>
-              <h2 className={`${styles.sectionTitle} font-tsuku`}>アクセス</h2>
+              <h2 className={`${styles.sectionTitle}`}>アクセス</h2>
             </div>
 
             {/* Map placeholder */}
@@ -198,7 +198,7 @@ export default function LocationRentalPage() {
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
               <span className={styles.sectionEn}>Scenes</span>
-              <h2 className={`${styles.sectionTitle} font-tsuku`}>利用シーンについて</h2>
+              <h2 className={`${styles.sectionTitle}`}>利用シーンについて</h2>
             </div>
             <p className={styles.bodyText}>
               中之島は、その特異な立地から唯一無二の撮影環境を提供します。湖面に反射する光、白樺の木立、四季の表情——
@@ -238,7 +238,7 @@ export default function LocationRentalPage() {
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
               <span className={styles.sectionEn}>Service</span>
-              <h2 className={`${styles.sectionTitle} font-tsuku`}>サービス</h2>
+              <h2 className={`${styles.sectionTitle}`}>サービス</h2>
             </div>
 
             <div className={styles.serviceGrid}>
@@ -251,7 +251,7 @@ export default function LocationRentalPage() {
                     <circle cx="24" cy="16" r="3" fill="#253c30"/>
                   </svg>
                 </div>
-                <h3 className={`${styles.serviceTitle} font-tsuku`}>移動ボート（送迎付き）</h3>
+                <h3 className={`${styles.serviceTitle}`}>移動ボート（送迎付き）</h3>
                 <p className={styles.serviceText}>
                   中之島へのアクセスにはボートになります。エンジン付きの4人定員のボートで、利用中は送迎スタッフがつきいつでも行き来が可能です。
                 </p>
@@ -266,7 +266,7 @@ export default function LocationRentalPage() {
                     <line x1="8" y1="30" x2="40" y2="30" stroke="#94b3ba" strokeWidth="1.5"/>
                   </svg>
                 </div>
-                <h3 className={`${styles.serviceTitle} font-tsuku`}>レンタル備品</h3>
+                <h3 className={`${styles.serviceTitle}`}>レンタル備品</h3>
                 <p className={styles.serviceText}>
                   電源（ジェネレータ） / ライト / キャンプファイヤグッズ / 焚き火グッズ / 椅子 / テント
                   など、詳しくはお問合せください。
@@ -284,7 +284,7 @@ export default function LocationRentalPage() {
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
               <span className={styles.sectionEn}>Rules</span>
-              <h2 className={`${styles.sectionTitle} font-tsuku`}>無人島での過ごし方 / ルール</h2>
+              <h2 className={`${styles.sectionTitle}`}>無人島での過ごし方 / ルール</h2>
             </div>
 
             <div className={styles.rulesGrid}>
@@ -338,12 +338,12 @@ export default function LocationRentalPage() {
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
               <span className={styles.sectionEn}>Price</span>
-              <h2 className={`${styles.sectionTitle} font-tsuku`}>利用料金</h2>
+              <h2 className={`${styles.sectionTitle}`}>利用料金</h2>
             </div>
 
             {/* 通常利用料 */}
             <div className={styles.priceBlock}>
-              <h3 className={`${styles.priceBlockTitle} font-tsuku`}>通常利用料</h3>
+              <h3 className={`${styles.priceBlockTitle}`}>通常利用料</h3>
               <div className={styles.priceTableWrap}>
                 <table className={styles.priceTable}>
                   <thead>
@@ -374,7 +374,7 @@ export default function LocationRentalPage() {
 
             {/* 貸切利用料 */}
             <div className={styles.priceBlock}>
-              <h3 className={`${styles.priceBlockTitle} font-tsuku`}>貸切利用料</h3>
+              <h3 className={`${styles.priceBlockTitle}`}>貸切利用料</h3>
               <div className={styles.priceTableWrap}>
                 <table className={styles.priceTable}>
                   <thead>
@@ -417,7 +417,7 @@ export default function LocationRentalPage() {
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
               <span className={styles.sectionEn}>Payment</span>
-              <h2 className={`${styles.sectionTitle} font-tsuku`}>支払い方法</h2>
+              <h2 className={`${styles.sectionTitle}`}>支払い方法</h2>
             </div>
 
             <div className={styles.paymentBlock}>
@@ -453,7 +453,7 @@ export default function LocationRentalPage() {
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
               <span className={styles.sectionEn}>Cancellation Policy</span>
-              <h2 className={`${styles.sectionTitle} font-tsuku`}>キャンセルポリシー</h2>
+              <h2 className={`${styles.sectionTitle}`}>キャンセルポリシー</h2>
             </div>
 
             <p className={styles.bodyText}>
@@ -512,7 +512,7 @@ export default function LocationRentalPage() {
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
               <span className={`${styles.sectionEn} ${styles.sectionEnLight}`}>Apply / Contact</span>
-              <h2 className={`${styles.sectionTitle} ${styles.sectionTitleLight} font-tsuku`}>
+              <h2 className={`${styles.sectionTitle} ${styles.sectionTitleLight}`}>
                 お申し込み / お問い合わせ
               </h2>
             </div>

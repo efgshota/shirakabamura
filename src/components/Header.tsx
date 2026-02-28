@@ -64,7 +64,7 @@ export default function Header() {
       {/* PC縦並び右側ナビ */}
       <nav className={`${styles.pcNav} ${scrolled ? styles.pcNavScrolled : ""}`}>
         {pcNavItems.map((item) => (
-          <Link key={item.href} href={item.href} className={`${styles.pcNavLink} font-tsuku`}>
+          <Link key={item.href} href={item.href} className={styles.pcNavLink}>
             {item.label}
           </Link>
         ))}
@@ -115,19 +115,19 @@ export default function Header() {
                   <span className={styles.navIcon}>
                     <Image src={item.icon} alt="" width={44} height={44} />
                   </span>
-                  <span className={`${styles.navLabel} font-tsuku`}>{item.label}</span>
+                  <span className={styles.navLabel}>{item.label}</span>
                 </Link>
               </li>
             ))}
           </ul>
 
           <div className={styles.navRelated}>
-            <p className={`${styles.navRelatedTitle} font-tsuku`}>（関連サイト）</p>
+            <p className={styles.navRelatedTitle}>（関連サイト）</p>
             <a
               href="https://www.shirakabako.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className={`${styles.navRelatedLink} font-tsuku`}
+              className={styles.navRelatedLink}
             >
               白樺湖のこと
             </a>
@@ -135,7 +135,7 @@ export default function Header() {
               href="https://www.shirakabaresort.jp/"
               target="_blank"
               rel="noopener noreferrer"
-              className={`${styles.navRelatedLink} font-tsuku`}
+              className={styles.navRelatedLink}
             >
               レイクリゾート
             </a>

@@ -44,7 +44,7 @@ export default async function UsefulListPage() {
       <main className={styles.main}>
         <section className={styles.hero}>
           <div className={styles.inner}>
-            <h1 className={`${styles.title} font-tsuku`}>お役立ち帳</h1>
+            <h1 className={styles.title}>お役立ち帳</h1>
             <p className={styles.subtitle}>
               暮らしに関わる便利な連絡先集めてます
             </p>

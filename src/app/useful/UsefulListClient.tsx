@@ -28,7 +28,7 @@ export default function UsefulListClient({
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`${styles.cateBtn} ${activeCategory === cat ? styles.active : ""} font-tsuku`}
+                className={`${styles.cateBtn} ${activeCategory === cat ? styles.active : ""}`}
               >
                 {cat}
               </button>

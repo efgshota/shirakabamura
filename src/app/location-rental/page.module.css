@@ -48,7 +48,7 @@
 
 /* 説明文 */
 .heroDesc {
-  font-family: "kinto-sans", sans-serif;
+  font-family: var(--font-zen-kaku), sans-serif;
   font-size: 1.5rem;
   color: #253c30;
   letter-spacing: 0.04em;
