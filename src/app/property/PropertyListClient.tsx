@@ -40,6 +40,7 @@ export default function PropertyListClient({
   const [typeFilter, setTypeFilter] = useState("all");
   const [usageFilter, setUsageFilter] = useState("all");
   const [areaFilter, setAreaFilter] = useState("all");
+  const [hoveredArea, setHoveredArea] = useState<string | null>(null);
 
   const locations = useMemo(() => {
     const set = new Set(properties.map((p) => p.location).filter(Boolean));
@@ -125,6 +126,8 @@ export default function PropertyListClient({
                   fill={area.fillColor}
                   className={`${styles.mapAreaPath} ${areaFilter === area.name ? styles.mapAreaPathActive : ""}`}
                   onClick={() => setAreaFilter(areaFilter === area.name ? "all" : area.name)}
+                  onMouseEnter={() => setHoveredArea(area.name)}
+                  onMouseLeave={() => setHoveredArea(null)}
                   role="button"
                   aria-label={`${area.name}で絞り込み`}
                   tabIndex={0}
@@ -141,7 +144,7 @@ export default function PropertyListClient({
             {MAP_AREAS.map((area) => (
               <button
                 key={`label-${area.name}`}
-                className={`${styles.mapLabel} ${areaFilter === area.name ? styles.mapLabelActive : ""}`}
+                className={`${styles.mapLabel} ${areaFilter === area.name ? styles.mapLabelActive : ""} ${hoveredArea === area.name ? styles.mapLabelHovered : ""}`}
                 style={{
                   left: `${area.labelX}%`,
                   top: `${area.labelY}%`,
