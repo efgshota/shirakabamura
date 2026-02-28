@@ -5,10 +5,27 @@
   padding: 160px 0;
 }
 
+.decoBlobs {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 715px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoBlobsImg {
+  width: 100%;
+  height: auto;
+}
+
 .inner {
   max-width: 733px;
   margin: 0 auto;
   padding: 0 30px;
+  position: relative;
+  z-index: 1;
 }
 
 .titleWrap {
@@ -89,6 +106,10 @@
 
   .title {
     font-size: 2rem;
+  }
+
+  .decoBlobs {
+    width: 360px;
   }
 
   .description {
