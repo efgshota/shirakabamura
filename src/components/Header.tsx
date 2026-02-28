@@ -18,11 +18,12 @@ const pcNavItems = [
 
 // ハンバーガーメニュー（アイコン付き）
 const menuItems = [
-  { href: "/#intro",    label: "はじめに",       icon: "/images/common/icon_nav_intro.svg" },
-  { href: "/property/", label: "白樺村の物件",   icon: "/images/common/icon_nav_property.svg" },
-  { href: "/useful/",   label: "お役立ち帳",     icon: "/images/common/icon_nav_useful.svg" },
-  { href: "/#business", label: "事業者の方々へ", icon: "/images/common/icon_nav_business.svg" },
-  { href: "/#contact",  label: "お問い合わせ",   icon: "/images/common/icon_nav_contact.svg" },
+  { href: "/#intro",           label: "はじめに",           icon: "/images/common/icon_nav_intro.svg" },
+  { href: "/property/",        label: "白樺村の物件",       icon: "/images/common/icon_nav_property.svg" },
+  { href: "/useful/",          label: "お役立ち帳",         icon: "/images/common/icon_nav_useful.svg" },
+  { href: "/location-rental/", label: "ロケーションレンタル", icon: "/images/common/icon_nav_location.svg" },
+  { href: "/#business",        label: "事業者の方々へ",     icon: "/images/common/icon_nav_business.svg" },
+  { href: "/#contact",         label: "お問い合わせ",       icon: "/images/common/icon_nav_contact.svg" },
 ];
 
 export default function Header() {
