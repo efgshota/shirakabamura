@@ -67,9 +67,13 @@ export default async function PropertyListPage() {
                 height={100}
               />
             </div>
-            <h1 className={`${styles.title} font-tsuku`}>白樺村の物件</h1>
+            <h1 className={`${styles.title} font-tsuku`}>白樺村の<br />物件</h1>
             <p className={styles.subtitle}>
-              美しい白樺湖周辺の物件をご紹介します
+              湖のほとり、森の中、山の景色、
+              <br />
+              自然ゆたかで穏やかな環境の物件を
+              <br />
+              ご案内します。
             </p>
           </div>
         </section>
