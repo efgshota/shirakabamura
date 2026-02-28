@@ -40,7 +40,7 @@ export default function NewsSection({
               height={126}
             />
           </div>
-          <h2 className={`${styles.title} font-tsuku`}>お知らせ</h2>
+          <h2 className={styles.title}>お知らせ</h2>
         </div>
 
         <div

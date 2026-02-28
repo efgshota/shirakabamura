@@ -1,13 +1,30 @@
 .business {
   position: relative;
   z-index: 3;
-  margin-top: -400px;
-  background: url("/images/top/Rectangle.svg") no-repeat center center;
-  background-size: 100% 100%;
+  margin-top: -140px;
+  margin-bottom: 640px;
+}
+
+.business::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #B8B9D3;
+  clip-path: polygon(
+    0 40px,
+    50% 0,
+    100% 40px,
+    100% calc(100% - 40px),
+    50% 100%,
+    0 calc(100% - 40px)
+  );
+  pointer-events: none;
 }
 
 .content {
-  padding: 642px 0 300px;
+  position: relative;
+  z-index: 1;
+  padding: 160px 0 160px;
 }
 
 .inner {
@@ -120,7 +137,7 @@
 
 .bottomText p {
   font-size: 1.4rem;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.8;
   color: #253c30;
 }

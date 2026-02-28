@@ -196,6 +196,7 @@
 .checkLabel input[type="checkbox"] {
   width: 18px;
   height: 18px;
+  accent-color: #2CA4A8;
 }
 
 .submit {

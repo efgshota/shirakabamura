@@ -18,28 +18,40 @@ const pcNavItems = [
 
 // ハンバーガーメニュー（アイコン付き）
 const menuItems = [
-  { href: "/#intro",           label: "はじめに",           icon: "/images/common/icon_nav_intro.svg" },
-  { href: "/property/",        label: "白樺村の物件",       icon: "/images/common/icon_nav_property.svg" },
-  { href: "/useful/",          label: "お役立ち帳",         icon: "/images/common/icon_nav_useful.svg" },
-  { href: "/location-rental/", label: "ロケーションレンタル", icon: "/images/common/icon_nav_location.svg" },
-  { href: "/#business",        label: "事業者の方々へ",     icon: "/images/common/icon_nav_business.svg" },
-  { href: "/#contact",         label: "お問い合わせ",       icon: "/images/common/icon_nav_contact.svg" },
+  { href: "/#intro",           label: "はじめに",           icon: "/images/common/icon_nav_intro.svg",    size: 44 },
+  { href: "/property/",        label: "白樺村の物件",       icon: "/images/common/icon_nav_property.svg", size: 44 },
+  { href: "/useful/",          label: "お役立ち帳",         icon: "/images/common/icon_nav_useful.svg",   size: 44 },
+  { href: "/location-rental/", label: "ロケーションレンタル", icon: "/images/common/icon_nav_location.svg", size: 64 },
+  { href: "/#business",        label: "事業者の方々へ",     icon: "/images/common/icon_nav_business.svg", size: 44 },
+  { href: "/#contact",         label: "お問い合わせ",       icon: "/images/common/icon_nav_contact.svg",  size: 44 },
 ];
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
+    const introEl = document.getElementById("intro");
+    if (!introEl) {
+      setScrolled(true);
+      return;
+    }
     const handleScroll = () => {
-      const introEl = document.getElementById("intro");
-      if (introEl) {
-        // #intro の上端がヘッダー（80px）に重なったタイミングで切り替え
-        setScrolled(introEl.getBoundingClientRect().top <= 80);
-      }
+      setScrolled(introEl.getBoundingClientRect().top <= 80);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // StickyNav が表示されたらヘッダーを非表示にする
+  useEffect(() => {
+    const handleStickyNav = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      setHidden(detail.visible);
+    };
+    window.addEventListener("stickynav", handleStickyNav);
+    return () => window.removeEventListener("stickynav", handleStickyNav);
   }, []);
 
   // メニューオープン時はbodyスクロールを止める
@@ -50,7 +62,7 @@ export default function Header() {
 
   return (
     <header
-      className={`${styles.header} ${isOpen ? styles.menuOpen : ""} ${scrolled ? styles.scrolled : ""}`}
+      className={`${styles.header} ${isOpen ? styles.menuOpen : ""} ${scrolled ? styles.scrolled : ""} ${hidden && !isOpen ? styles.hidden : ""}`}
     >
       <Link href="/" className={styles.logo}>
         <Image
@@ -79,7 +91,7 @@ export default function Header() {
         aria-expanded={isOpen}
       >
         {isOpen ? (
-          <span className={styles.closeIcon} aria-hidden="true">×</span>
+          <span className={styles.closeIcon} aria-hidden="true" />
         ) : (
           <Image
             src="/images/menu.svg"
@@ -116,8 +128,8 @@ export default function Header() {
                   onClick={() => setIsOpen(false)}
                   className={styles.navLink}
                 >
-                  <span className={styles.navIcon}>
-                    <Image src={item.icon} alt="" width={44} height={44} />
+                  <span className={`${styles.navIcon} ${item.size > 44 ? styles.navIconLarge : ""}`}>
+                    <Image src={item.icon} alt="" width={item.size} height={item.size} />
                   </span>
                   <span className={styles.navLabel}>{item.label}</span>
                 </Link>

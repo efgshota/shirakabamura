@@ -33,7 +33,7 @@ export default function NakanojimaSection() {
               height={146}
             />
           </div>
-          <h2 className={`${styles.title} font-tsuku`}>ロケーション<br />レンタル</h2>
+          <h2 className={styles.title}>ロケーション<br />レンタル</h2>
           <p className={styles.description}>
             白樺湖に浮かぶ中之島をはじめ、湖畔や森のロケーションをレンタルでご利用いただけます。撮影、ロケ地、イベントなどのご利用に対応しています。
           </p>

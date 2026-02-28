@@ -67,47 +67,16 @@ export default function LocationRentalPage() {
       <main className={styles.main}>
         {/* ══ Hero ══ */}
         <section className={styles.hero}>
-          {/* 上部装飾エリア: blobデコ + 縦書きタイトル + 説明文 */}
           <div className={styles.heroTop}>
-            {/* blob + 縦書きタイトルを一体SVGで構成 */}
-            {/* 列順: ロケーション（左）→ レンタル（右）= vertical-lr */}
-            <svg
-              className={styles.heroDecorSvg}
-              viewBox="0 0 200 310"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="ロケーションレンタル"
-            >
-              {/* teal blob: 上左→下右方向, rotate(50) */}
-              <g transform="translate(100, 170) rotate(50)">
-                <path
-                  d="M-90 0 C-80 -23, -45 -30, 0 -30 C45 -30, 80 -23, 90 0 C80 23, 45 30, 0 30 C-45 30, -80 23, -90 0Z"
-                  fill="#2CA4A8"
-                />
-              </g>
-              {/* 左列: ロケーション (上から) */}
-              <text
-                writingMode="vertical-rl"
-                fontFamily="fot-tsukuardgothic-std, sans-serif"
-                fontSize="27"
-                fontWeight="700"
-                fill="#253c30"
-                x="84"
-                y="38"
-              >ロケーション</text>
-              {/* 右列: レンタル (下から) */}
-              <text
-                writingMode="vertical-rl"
-                fontFamily="fot-tsukuardgothic-std, sans-serif"
-                fontSize="27"
-                fontWeight="700"
-                fill="#253c30"
-                x="154"
-                y="175"
-              >レンタル</text>
-            </svg>
-            {/* SEO/アクセシビリティ用 hidden h1 */}
-            <h1 className={styles.srOnly}>ロケーションレンタル</h1>
+            <div className={styles.heroIcon}>
+              <Image
+                src="/images/nakanoshima.svg"
+                alt=""
+                width={155}
+                height={146}
+              />
+            </div>
+            <h1 className={styles.heroTitle}>ロケーション<br />レンタル</h1>
             <p className={styles.heroDesc}>
               白樺湖に浮かぶ約2,000平方メートルの中之島（なかのしま）をお貸しします
             </p>
@@ -267,12 +236,7 @@ export default function LocationRentalPage() {
             <div className={styles.serviceGrid}>
               <div className={styles.serviceCard}>
                 <div className={styles.serviceIcon}>
-                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                    <path d="M8 32 Q10 28 16 28 L32 28 Q38 28 40 32 L42 36 H6 L8 32Z" fill="#94b3ba" opacity="0.6"/>
-                    <ellipse cx="24" cy="28" rx="10" ry="4" fill="#7bbec8" opacity="0.4"/>
-                    <path d="M20 28 L24 18 L28 28" stroke="#253c30" strokeWidth="1.5"/>
-                    <circle cx="24" cy="16" r="3" fill="#253c30"/>
-                  </svg>
+                  <Image src="/images/location-rental/boat.svg" alt="" width={48} height={48} />
                 </div>
                 <h3 className={`${styles.serviceTitle}`}>移動ボート（送迎付き）</h3>
                 <p className={styles.serviceText}>
@@ -282,12 +246,7 @@ export default function LocationRentalPage() {
 
               <div className={styles.serviceCard}>
                 <div className={styles.serviceIcon}>
-                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                    <rect x="8" y="20" width="32" height="20" rx="2" stroke="#253c30" strokeWidth="1.5"/>
-                    <path d="M16 20 L20 12 L28 12 L32 20" stroke="#253c30" strokeWidth="1.5"/>
-                    <line x1="24" y1="20" x2="24" y2="40" stroke="#94b3ba" strokeWidth="1.5"/>
-                    <line x1="8" y1="30" x2="40" y2="30" stroke="#94b3ba" strokeWidth="1.5"/>
-                  </svg>
+                  <Image src="/images/location-rental/rental.svg" alt="" width={48} height={48} />
                 </div>
                 <h3 className={`${styles.serviceTitle}`}>レンタル備品</h3>
                 <p className={styles.serviceText}>

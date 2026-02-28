@@ -36,7 +36,7 @@ export default function UsefulInfoSection({ infos }: { infos: UsefulInfoItem[] }
               height={100}
             />
           </div>
-          <h2 className={`${styles.title} font-tsuku`}>お役立ち帳</h2>
+          <h2 className={styles.title}>お役立ち帳</h2>
           <p className={styles.subtitle}>
             暮らしに関わる便利な連絡先集めてます
           </p>
