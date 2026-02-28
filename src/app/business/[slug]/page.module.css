@@ -7,12 +7,11 @@
 }
 
 .mv {
-  background: #e5e5e5;
-  min-height: 100vh;
+  background: #f8f8f5;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 30px 60px;
+  padding: 120px 30px 80px;
 }
 
 .mvContent {
@@ -20,16 +19,16 @@
 }
 
 .mvImage {
-  max-width: 500px;
+  position: relative;
+  width: 440px;
+  max-width: 100%;
+  aspect-ratio: 6/7;
   margin: 0 auto;
-  border-radius: 12px;
-  overflow: hidden;
+  clip-path: url(#bizMvMask);
 }
 
 .mvImg {
-  width: 100%;
-  height: auto;
-  display: block;
+  /* Next.js fill modeで自動設定 */
 }
 
 .mvTitle {
@@ -171,16 +170,15 @@
 }
 
 .relatedImage {
+  position: relative;
   width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
+  aspect-ratio: 6/7;
+  clip-path: url(#bizMvMask);
   margin-bottom: 16px;
 }
 
 .relatedImg {
-  width: 100%;
-  height: auto;
-  display: block;
+  /* Next.js fill modeで自動設定 */
 }
 
 .relatedName {

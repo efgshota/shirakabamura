@@ -37,7 +37,7 @@
 .inner {
   max-width: 780px;
   margin: 0 auto;
-  padding: 200px 30px 160px;
+  padding: 30px 30px 160px;
   position: relative;
   z-index: 1;
 }
@@ -47,7 +47,8 @@
 ───────────────────────────────────────── */
 .figure {
   position: relative;
-  margin-bottom: 60px;
+  max-width: 540px;
+  margin: 0 auto 60px;
   z-index: 2; /* decoTopより前面 */
 }
 
@@ -93,7 +94,7 @@
    テキスト
 ───────────────────────────────────────── */
 .text {
-  max-width: 480px;
+  max-width: 540px;
   margin: 0 auto;
   text-align: left;
   position: relative;

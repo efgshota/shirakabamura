@@ -1,12 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import dynamic from "next/dynamic";
-import { useState } from "react";
-
-const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), { ssr: false });
-
-const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
+import { useState, useCallback } from "react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import { useScrollTrigger } from "./useScrollTrigger";
 import styles from "./ContactSection.module.css";
@@ -42,16 +38,13 @@ const scrollToContact = () => {
 };
 
 export default function ContactSection() {
-  const { ref: birdRef, visible: birdVisible } = useScrollTrigger(0.3);
   const { ref: titleRef, visible: titleVisible } = useScrollTrigger();
   const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
   const [agreed, setAgreed] = useState(false);
   const [step, setStep] = useState<Step>("input");
   const [errors, setErrors] = useState<FormErrors>({});
   const [agreeError, setAgreeError] = useState(false);
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const [recaptchaError, setRecaptchaError] = useState(false);
-  const [recaptchaKey, setRecaptchaKey] = useState(0);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const validate = (): FormErrors => {
     const e: FormErrors = {};
@@ -73,27 +66,40 @@ export default function ContactSection() {
     const errs = validate();
     setErrors(errs);
     setAgreeError(!agreed);
-    const sitekeySet = !!RECAPTCHA_SITE_KEY;
-    const recaptchaFailed = sitekeySet && !recaptchaToken;
-    setRecaptchaError(recaptchaFailed);
-    if (Object.keys(errs).length > 0 || !agreed || recaptchaFailed) return;
+    if (Object.keys(errs).length > 0 || !agreed) return;
     setStep("confirm");
     scrollToContact();
   };
 
   // ── 送信する ────────────────────────────────────
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
     setStep("sending");
     try {
-      // TODO: フォーム送信バックエンド接続
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      // reCAPTCHA v3 トークン取得（見えない検証）
+      let recaptchaToken: string | null = null;
+      if (executeRecaptcha) {
+        recaptchaToken = await executeRecaptcha("contact_form");
+      }
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          recaptchaToken,
+        }),
+      });
+      if (!res.ok) throw new Error("Send failed");
       setStep("complete");
       setFormData(EMPTY_FORM);
       setAgreed(false);
     } catch {
       setStep("error");
     }
-  };
+  }, [formData, executeRecaptcha]);
 
   // ── 入力に戻る ──────────────────────────────────
   const handleBack = () => {
@@ -108,42 +114,11 @@ export default function ContactSection() {
     setAgreed(false);
     setErrors({});
     setAgreeError(false);
-    setRecaptchaToken(null);
-    setRecaptchaError(false);
-    setRecaptchaKey((k) => k + 1);
     scrollToContact();
   };
 
   return (
     <section id="contact" className={styles.contact}>
-      {/* Bird decoration */}
-      <div
-        ref={birdRef}
-        className={`${styles.birdWrap} ${birdVisible ? styles.birdVisible : ""}`}
-      >
-        <svg
-          className={styles.bird}
-          width="100"
-          height="60"
-          viewBox="0 0 120 80"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M60 40C40 20 15 15 2 25C15 20 35 22 50 35L45 30C30 18 10 18 2 25"
-            fill="#7BBEC8"
-            opacity="0.9"
-          />
-          <path
-            d="M60 40C80 20 105 15 118 25C105 20 85 22 70 35L75 30C90 18 110 18 118 25"
-            fill="#7BBEC8"
-            opacity="0.9"
-          />
-          <ellipse cx="60" cy="42" rx="8" ry="5" fill="#7BBEC8" />
-          <path d="M52 42L30 55L35 48" fill="#7BBEC8" opacity="0.7" />
-        </svg>
-      </div>
-
       <div className={styles.inner}>
         {/* タイトル */}
         <div
@@ -261,22 +236,6 @@ export default function ContactSection() {
                 <p className={styles.errorMsg}>プライバシーポリシーに同意してください</p>
               )}
             </div>
-            {RECAPTCHA_SITE_KEY && (
-              <div className={styles.recaptchaWrap}>
-                <ReCAPTCHA
-                  key={recaptchaKey}
-                  sitekey={RECAPTCHA_SITE_KEY}
-                  onChange={(token) => {
-                    setRecaptchaToken(token);
-                    if (token) setRecaptchaError(false);
-                  }}
-                  onExpired={() => setRecaptchaToken(null)}
-                />
-                {recaptchaError && (
-                  <p className={styles.errorMsg}>reCAPTCHA を完了してください</p>
-                )}
-              </div>
-            )}
             <div className={styles.submit}>
               <button type="submit" className={`c-moreBtn ${styles.submitBtn}`}>
                 確認画面へ

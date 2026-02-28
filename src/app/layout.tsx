@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Zen_Kaku_Gothic_Antique, Inter } from "next/font/google";
 import Script from "next/script";
 import FloatingButtons from "@/components/FloatingButtons";
+import RecaptchaProvider from "@/components/RecaptchaProvider";
 import "./globals.css";
 
 const zenKaku = Zen_Kaku_Gothic_Antique({
@@ -90,7 +91,9 @@ export default function RootLayout({
         </Script>
       </head>
       <body suppressHydrationWarning>
-        {children}
+        <RecaptchaProvider>
+          {children}
+        </RecaptchaProvider>
         <FloatingButtons />
       </body>
     </html>

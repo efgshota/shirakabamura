@@ -6,6 +6,8 @@ import { useScrollTrigger } from "./useScrollTrigger";
 import type { BusinessItem } from "@/lib/microcms";
 import styles from "./BusinessSection.module.css";
 
+const FIG8_PATH = "M 0.5,0.03 C 0.97,0.03 0.97,0.47 0.5,0.5 C 0.03,0.53 0.03,0.97 0.5,0.97 C 0.97,0.97 0.97,0.53 0.5,0.5 C 0.03,0.47 0.03,0.03 0.5,0.03 Z";
+
 export default function BusinessSection({ businesses }: { businesses: BusinessItem[] }) {
   const { ref: titleRef, visible: titleVisible } = useScrollTrigger();
   const { ref: listRef, visible: listVisible } = useScrollTrigger();
@@ -45,13 +47,23 @@ export default function BusinessSection({ businesses }: { businesses: BusinessIt
               >
                 <div className={styles.cardImage}>
                   {biz.image && (
-                    <Image
-                      src={biz.image}
-                      alt={biz.name}
-                      width={450}
-                      height={390}
-                      className={styles.cardImg}
-                    />
+                    <svg
+                      viewBox="0 0 6 7"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={styles.cardSvg}
+                    >
+                      <defs>
+                        <clipPath id={`bizClip-${biz.id}`} clipPathUnits="objectBoundingBox">
+                          <path d={FIG8_PATH} />
+                        </clipPath>
+                      </defs>
+                      <image
+                        href={biz.image}
+                        x="0" y="0" width="6" height="7"
+                        preserveAspectRatio="xMidYMid slice"
+                        clipPath={`url(#bizClip-${biz.id})`}
+                      />
+                    </svg>
                   )}
                 </div>
                 <div className={styles.cardMeta}>

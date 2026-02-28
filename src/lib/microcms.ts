@@ -45,13 +45,10 @@ export type UsefulInfo = {
   image?: MicroCMSImage;
 } & MicroCMSListContent;
 
-// 事業者紹介
-export type Business = {
-  name: string;
-  description?: string;
+// 物件事例（caseエンドポイント）
+export type Case = {
+  title: string;
   image?: MicroCMSImage;
-  category?: string;
-  // 事業者詳細（MicroCMSスキーマに追加が必要）
   operator?: string;
   businessType?: string;
   previousJob?: string;
@@ -59,6 +56,9 @@ export type Business = {
   website?: string;
   qa?: { fieldId: string; question: string; answer: string }[];
 } & MicroCMSListContent;
+
+// 後方互換エイリアス
+export type Business = Case;
 
 // お知らせ
 export type News = {
@@ -122,15 +122,19 @@ export async function getUsefulInfos(queries?: MicroCMSQueries) {
   return client.getList<UsefulInfo>({ endpoint: "useful-infos", queries });
 }
 
-export async function getBusinesses(queries?: MicroCMSQueries) {
+export async function getCases(queries?: MicroCMSQueries) {
   if (!client) throw new Error("MicroCMS client is not configured");
-  return client.getList<Business>({ endpoint: "businesses", queries });
+  return client.getList<Case>({ endpoint: "case", queries });
 }
 
-export async function getBusiness(contentId: string, queries?: MicroCMSQueries) {
+export async function getCase(contentId: string, queries?: MicroCMSQueries) {
   if (!client) throw new Error("MicroCMS client is not configured");
-  return client.getListDetail<Business>({ endpoint: "businesses", contentId, queries });
+  return client.getListDetail<Case>({ endpoint: "case", contentId, queries });
 }
+
+// 後方互換エイリアス
+export const getBusinesses = getCases;
+export const getBusiness = getCase;
 
 export async function getNews(queries?: MicroCMSQueries) {
   if (!client) throw new Error("MicroCMS client is not configured");

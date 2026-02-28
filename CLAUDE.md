@@ -123,3 +123,27 @@ MICROCMS_API_KEY=...
 | `hotfix/*` | 緊急修正 |
 
 PR は `main` へ。レビュー後マージ。
+
+### Git 安全ルール（必須）
+
+**ブランチを作る前は必ず最新を取得する：**
+
+```bash
+git checkout main
+git pull                 # ← 必須。これがないとリモートの変更を見落とす
+git checkout -b feature/xxx
+```
+
+**作業中に他のPRがマージされたら取り込む：**
+
+```bash
+git fetch
+git rebase origin/main   # 自分の作業を最新 main の上に載せ直す
+```
+
+**禁止事項：**
+- `git push --force` は使わない（相手の変更を消す危険）
+- `main` ブランチで直接編集・コミットしない
+- `git add .` は使わない（`.env` 混入防止。ファイル名を指定する）
+
+> 詳細は `docs/git-workflow.md` を参照

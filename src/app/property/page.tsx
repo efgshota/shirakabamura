@@ -32,6 +32,7 @@ export default async function PropertyListPage() {
         description: p.description?.replace(/<[^>]*>/g, ""),
         price: p.price,
         type: (p.type?.[0] ?? "sell") as "sell" | "rent",
+        location: p.location,
       }));
     }
   } catch {
@@ -48,6 +49,7 @@ export default async function PropertyListPage() {
       description: p.description,
       price: p.price,
       type: p.type,
+      location: p.location,
     }));
   }
 
@@ -67,7 +69,7 @@ export default async function PropertyListPage() {
             </div>
             <h1 className={`${styles.title} font-tsuku`}>白樺村の物件</h1>
             <p className={styles.subtitle}>
-              湖のほとり、森の中、山の景色、自然ゆたかで穏やかな環境の物件をご案内します
+              美しい白樺湖周辺の物件をご紹介します
             </p>
           </div>
         </section>
