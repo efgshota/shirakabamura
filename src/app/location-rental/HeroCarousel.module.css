@@ -1,8 +1,8 @@
 .stripWrap {
   position: relative;
+  overflow: hidden;
 }
 
-/* --slide-w / --slide-gap: CSS変数でブレークポイントごとに上書き */
 .strip {
   overflow: hidden;
   --slide-w: 59.3vw;
@@ -19,15 +19,28 @@
 .track {
   display: flex;
   gap: var(--slide-gap);
-  transition: transform 0.75s cubic-bezier(0.45, 0, 0.15, 1);
+  animation: scroll 40s linear infinite;
+  /* 3枚分の幅 = 3 * (slide-w + gap) */
+  width: calc(6 * (var(--slide-w) + var(--slide-gap)));
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* 前半3枚分スクロールしたら先頭に戻る */
+    transform: translateX(calc(-3 * (var(--slide-w) + var(--slide-gap))));
+  }
 }
 
 .slide {
   position: relative;
   flex-shrink: 0;
   width: var(--slide-w);
-  /* Figma: 474/1280 ≈ 37vw */
   height: 37vw;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 @media (max-width: 767px) {
@@ -39,45 +52,4 @@
 .img {
   object-fit: cover;
   object-position: center;
-}
-
-/* 矢印ボタン - 右寄せ, Figma: x≈1180-1245 / 1280px */
-.arrows {
-  display: flex;
-  gap: 4px;
-  justify-content: flex-end;
-  padding-top: 20px;
-  padding-right: 35px;
-}
-
-@media (max-width: 767px) {
-  .arrows {
-    padding-right: 16px;
-    padding-top: 14px;
-  }
-}
-
-.arrowBtn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1.5px solid #253c30;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #253c30;
-  transition: background 0.2s, color 0.2s;
-  flex-shrink: 0;
-}
-
-.arrowBtn:hover:not(:disabled) {
-  background: #253c30;
-  color: #fff;
-}
-
-.arrowBtn:disabled {
-  opacity: 0.3;
-  cursor: default;
 }

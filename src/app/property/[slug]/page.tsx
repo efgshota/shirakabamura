@@ -264,49 +264,40 @@ export default async function PropertyDetailPage({
         {/* Comment */}
         <section className={styles.commentSection}>
           <div className={styles.inner}>
-            <div className={styles.commentHeader}>
-              <span className={`${styles.commentVertical} font-tsuku`}>
-                担当者
-              </span>
-              <span className={styles.commentLabel}>
-                コメント
-              </span>
-              <svg
-                className={styles.commentBird}
-                width="40"
-                height="28"
-                viewBox="0 0 120 80"
-                fill="none"
-              >
-                <path
-                  d="M60 40C40 20 15 15 2 25C15 20 35 22 50 35L45 30C30 18 10 18 2 25"
-                  fill="#C8A84E"
-                  opacity="0.9"
-                />
-                <path
-                  d="M60 40C80 20 105 15 118 25C105 20 85 22 70 35L75 30C90 18 110 18 118 25"
-                  fill="#C8A84E"
-                  opacity="0.9"
-                />
-                <ellipse cx="60" cy="42" rx="8" ry="5" fill="#C8A84E" />
-                <path
-                  d="M52 42L30 55L35 48"
-                  fill="#C8A84E"
-                  opacity="0.7"
-                />
-              </svg>
-            </div>
-            <div className={styles.commentBody}>
-              {(prop.comment ?? "").split("\n").map((line, i, arr) => (
-                <span key={i}>
-                  {line}
-                  {i < arr.length - 1 && <br />}
+            <div className={styles.commentGrid}>
+              <div className={styles.commentHeader}>
+                <span className={styles.commentVertical}>
+                  担当者
                 </span>
-              ))}
+                <Image
+                  src="/images/property/comment.svg"
+                  alt=""
+                  width={92}
+                  height={99}
+                  className={styles.commentBird}
+                />
+                <span className={styles.commentLabel}>
+                  コメント
+                </span>
+              </div>
+              <div className={styles.commentRight}>
+                <div className={styles.commentBody}>
+                  {(prop.comment && prop.comment.trim() !== "") ? (
+                    prop.comment.split("\n").map((line, i, arr) => (
+                      <span key={i}>
+                        {line}
+                        {i < arr.length - 1 && <br />}
+                      </span>
+                    ))
+                  ) : (
+                    <p>白樺湖の西岸、標高約1,400mに位置する自然豊かなロケーションの物件です。リビングの大きな窓からは四季折々の美しい山並みを望むことができ、特に秋の紅葉シーズンは圧巻の景色が広がります。建物は2018年にフルリノベーション済みで、断熱性能も大幅に向上しています。別荘としてはもちろん、近年はリモートワークの拠点として移住される方も増えています。周辺にはスキー場や温泉施設、地元の農産物直売所もあり、年間を通じて充実した暮らしが楽しめます。車で10分圏内にスーパーや病院もあるので、定住にも安心です。ぜひ一度現地をご覧ください。</p>
+                  )}
+                </div>
+              </div>
             </div>
-            <div className={styles.contactLink}>
-              <Link href="/#contact" className={styles.contactLinkText}>
-                お問い合わせ →
+            <div className={styles.contactBtn}>
+              <Link href="/#contact" className="c-moreBtn">
+                お問い合わせ
               </Link>
             </div>
           </div>

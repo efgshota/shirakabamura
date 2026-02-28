@@ -14,7 +14,6 @@ export default function BusinessSection({ businesses }: { businesses: BusinessIt
 
   return (
     <section id="business" className={styles.business}>
-      <div className={styles.clipTop} />
       <div className={styles.content}>
         <div className={styles.inner}>
           <div
@@ -29,7 +28,7 @@ export default function BusinessSection({ businesses }: { businesses: BusinessIt
                 height={100}
               />
             </div>
-            <h2 className={`${styles.title} font-tsuku`}>物件事例</h2>
+            <h2 className={styles.title}>物件事例</h2>
             <p className={styles.description}>
               白樺湖周辺で物件を取得して別荘や店舗として利用している方々にご協力いただき、生の声をインタビューさせていただきました。
             </p>
@@ -68,9 +67,6 @@ export default function BusinessSection({ businesses }: { businesses: BusinessIt
                 </div>
                 <div className={styles.cardMeta}>
                   <h3 className={`${styles.cardName} font-kinto`}>{biz.name}</h3>
-                  {biz.businessType && (
-                    <span className={styles.cardType}>{biz.businessType}</span>
-                  )}
                 </div>
                 <span className={`${styles.cardBtn} c-moreBtn`}>事例を見る</span>
               </Link>
@@ -84,13 +80,12 @@ export default function BusinessSection({ businesses }: { businesses: BusinessIt
           </div>
 
           <div className={styles.more}>
-            <Link href="/#contact" className="c-moreBtn blue">
+            <Link href="/#contact" className="c-moreBtn">
               お問い合わせ
             </Link>
           </div>
         </div>
       </div>
-      <div className={styles.clipBottom} />
     </section>
   );
 }

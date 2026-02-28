@@ -117,17 +117,18 @@ a:hover {
   border-radius: 25px;
   background: #fff;
   border: none;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   font-size: 1.4rem;
   font-weight: 700;
   color: #253c30;
   letter-spacing: 0.05em;
-  transition: opacity 0.3s;
+  transition: background 0.3s, color 0.3s;
   padding: 12px 20px;
 }
 
 .c-moreBtn:hover {
-  opacity: 0.6;
+  background: #2CA4A8;
+  color: #fff;
 }
 
 .c-moreBtn.blue {

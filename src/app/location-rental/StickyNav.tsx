@@ -18,8 +18,14 @@ export default function StickyNav() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    let prevVisible = false;
     const onScroll = () => {
-      setVisible(window.scrollY > 400);
+      const nowVisible = window.scrollY > 400;
+      setVisible(nowVisible);
+      if (nowVisible !== prevVisible) {
+        prevVisible = nowVisible;
+        window.dispatchEvent(new CustomEvent("stickynav", { detail: { visible: nowVisible } }));
+      }
       const sections = NAV_ITEMS.map((item) =>
         document.querySelector(item.href)
       );

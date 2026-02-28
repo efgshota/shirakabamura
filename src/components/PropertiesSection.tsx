@@ -53,7 +53,7 @@ export default function PropertiesSection({
               height={100}
             />
           </div>
-          <h2 className={`${styles.title} font-tsuku`}>白樺村の<br />物件</h2>
+          <h2 className={styles.title}>白樺村の<br />物件</h2>
           <p className={styles.subtitle}>
             湖のほとり、森の中、山の景色、
             <br />

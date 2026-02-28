@@ -37,7 +37,7 @@
 .inner {
   max-width: 780px;
   margin: 0 auto;
-  padding: 30px 30px 160px;
+  padding: 30px 30px 40px;
   position: relative;
   z-index: 1;
 }
@@ -208,11 +208,14 @@ a.infoCard:hover {
 .cardContent {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 24px;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
   z-index: 1;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .cardTitle {
@@ -251,12 +254,15 @@ a.infoCard:hover {
 .cardSocials {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 36px;
   flex-wrap: wrap;
-  position: relative;
+  position: absolute;
+  top: calc(50% + 48px);
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
   z-index: 1;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .socialLink {

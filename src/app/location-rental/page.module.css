@@ -20,25 +20,21 @@
   padding: 56px 40px 52px;
 }
 
-/* SVG一体型: blob + 縦書きタイトル */
-.heroDecorSvg {
-  display: block;
-  width: 130px;   /* viewBox 200 × 0.65 */
-  height: 202px;  /* viewBox 310 × 0.65 */
-  margin-bottom: 36px;
+/* アイコン */
+.heroIcon {
+  width: 155px;
+  margin-bottom: 24px;
 }
 
-/* アクセシビリティ・SEO用 非表示 h1 */
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+/* 縦書きタイトル */
+.heroTitle {
+  writing-mode: vertical-rl;
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: #253c30;
+  margin-bottom: 36px;
 }
 
 /* 説明文 */
@@ -520,9 +516,12 @@
     padding: 40px 24px 36px;
   }
 
-  .heroDecorSvg {
-    width: 106px;  /* viewBox 200 × 0.53 */
-    height: 164px; /* viewBox 310 × 0.53 */
+  .heroIcon {
+    width: 120px;
+  }
+
+  .heroTitle {
+    font-size: 2rem;
   }
 
   .heroDesc {
