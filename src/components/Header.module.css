@@ -95,19 +95,15 @@
 
 /* スクロール後: スタイル変更なし（ボーダーなし） */
 
-/* 三本線 */
-.hamburger span:not(.closeIcon) {
-  display: block;
-  width: 22px;
-  height: 2.5px;
-  background-color: #fff;
-  border-radius: 2px;
-  transition: background-color 0.3s;
-  flex-shrink: 0;
+/* メニューアイコン（SVG） */
+.menuIcon {
+  width: 14px;
+  height: 14px;
+  transition: filter 0.3s;
 }
 
-.header.scrolled .hamburger span:not(.closeIcon) {
-  background-color: #253c30;
+.header.scrolled .menuIcon {
+  filter: brightness(0);
 }
 
 /* × クローズアイコン（メニューオープン時） */
@@ -286,8 +282,9 @@
     gap: 7px;
   }
 
-  .hamburger span:not(.closeIcon) {
-    width: 18px;
+  .menuIcon {
+    width: 12px;
+    height: 12px;
   }
 
   .gnavInner {

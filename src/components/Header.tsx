@@ -81,10 +81,13 @@ export default function Header() {
         {isOpen ? (
           <span className={styles.closeIcon} aria-hidden="true">×</span>
         ) : (
-          <>
-            <span />
-            <span />
-          </>
+          <Image
+            src="/images/menu.svg"
+            alt=""
+            width={14}
+            height={14}
+            className={styles.menuIcon}
+          />
         )}
       </button>
 
