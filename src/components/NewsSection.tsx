@@ -34,10 +34,10 @@ export default function NewsSection({
         >
           <div className={styles.titleIcon}>
             <Image
-              src="/images/common/icon_comment.svg"
+              src="/images/common/icon_news.svg"
               alt=""
-              width={100}
-              height={100}
+              width={120}
+              height={126}
             />
           </div>
           <h2 className={`${styles.title} font-tsuku`}>お知らせ</h2>
