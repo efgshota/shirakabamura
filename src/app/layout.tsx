@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import FloatingButtons from "@/components/FloatingButtons";
+import RecaptchaProvider from "@/components/RecaptchaProvider";
 import "./globals.css";
 
 const siteUrl = "https://shirakabamura.com";
@@ -76,7 +77,9 @@ export default function RootLayout({
         </Script>
       </head>
       <body suppressHydrationWarning>
-        {children}
+        <RecaptchaProvider>
+          {children}
+        </RecaptchaProvider>
         <FloatingButtons />
       </body>
     </html>

@@ -156,6 +156,13 @@ export default async function BusinessDetailPage({
 
   return (
     <div className={styles.page}>
+      <svg width={0} height={0} style={{ position: "absolute" }} aria-hidden="true">
+        <defs>
+          <clipPath id="bizMvMask" clipPathUnits="objectBoundingBox">
+            <path d="M 0.5,0.03 C 0.97,0.03 0.97,0.47 0.5,0.5 C 0.03,0.53 0.03,0.97 0.5,0.97 C 0.97,0.97 0.97,0.53 0.5,0.5 C 0.03,0.47 0.03,0.03 0.5,0.03 Z" />
+          </clipPath>
+        </defs>
+      </svg>
       {faqSchema && <JsonLd data={faqSchema} />}
       <Header />
       <main className={styles.main}>
@@ -166,9 +173,10 @@ export default async function BusinessDetailPage({
                 <Image
                   src={biz.image}
                   alt={biz.name}
-                  width={600}
-                  height={520}
+                  fill
                   priority
+                  sizes="(max-width: 767px) 80vw, 440px"
+                  style={{ objectFit: "cover" }}
                   className={styles.mvImg}
                 />
               </div>
@@ -271,8 +279,9 @@ export default async function BusinessDetailPage({
                         <Image
                           src={r.image}
                           alt={r.name}
-                          width={450}
-                          height={390}
+                          fill
+                          sizes="(max-width: 767px) 85vw, 280px"
+                          style={{ objectFit: "cover" }}
                           className={styles.relatedImg}
                         />
                       </div>

@@ -12,6 +12,13 @@ export default function BusinessSection({ businesses }: { businesses: BusinessIt
 
   return (
     <section id="business" className={styles.business}>
+      <svg width={0} height={0} style={{ position: "absolute" }} aria-hidden="true">
+        <defs>
+          <clipPath id="bizKvMask" clipPathUnits="objectBoundingBox">
+            <path d="M 0.5,0.03 C 0.97,0.03 0.97,0.47 0.5,0.5 C 0.03,0.53 0.03,0.97 0.5,0.97 C 0.97,0.97 0.97,0.53 0.5,0.5 C 0.03,0.47 0.03,0.03 0.5,0.03 Z" />
+          </clipPath>
+        </defs>
+      </svg>
       <div className={styles.clipTop} />
       <div className={styles.content}>
         <div className={styles.inner}>
@@ -48,8 +55,9 @@ export default function BusinessSection({ businesses }: { businesses: BusinessIt
                     <Image
                       src={biz.image}
                       alt={biz.name}
-                      width={450}
-                      height={390}
+                      fill
+                      sizes="(max-width: 767px) 85vw, 380px"
+                      style={{ objectFit: "cover" }}
                       className={styles.cardImg}
                     />
                   )}

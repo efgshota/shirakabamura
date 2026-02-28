@@ -92,16 +92,15 @@
 }
 
 .cardImage {
+  position: relative;
   width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 16px;
+  aspect-ratio: 6/7;
+  clip-path: url(#bizKvMask);
+  margin-bottom: 20px;
 }
 
 .cardImg {
-  width: 100%;
-  height: auto;
-  display: block;
+  /* Next.js fill modeで自動設定 */
 }
 
 .cardMeta {
