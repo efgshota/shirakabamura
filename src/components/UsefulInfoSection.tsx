@@ -28,15 +28,16 @@ export default function UsefulInfoSection({ infos }: { infos: UsefulInfoItem[] }
           ref={titleRef}
           className={`${styles.titleWrap} ${titleVisible ? styles.visible : ""}`}
         >
-          <div className={styles.titleIcon}>
+          <div className={`${styles.titleIcon} c-iconTitle`}>
+            <h2 className="c-iconTitle__text">お役立ち帳</h2>
             <Image
+              className="c-iconTitle__icon"
               src="/images/common/icon_useful.svg"
               alt=""
               width={100}
               height={100}
             />
           </div>
-          <h2 className={styles.title}>お役立ち帳</h2>
           <p className={styles.subtitle}>
             暮らしに関わる便利な連絡先集めてます
           </p>

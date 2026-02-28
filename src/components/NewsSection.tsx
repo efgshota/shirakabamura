@@ -32,15 +32,16 @@ export default function NewsSection({
           ref={titleRef}
           className={`${styles.titleWrap} ${titleVisible ? styles.visible : ""}`}
         >
-          <div className={styles.titleIcon}>
+          <div className={`${styles.titleIcon} c-iconTitle`}>
+            <h2 className="c-iconTitle__text">お知らせ</h2>
             <Image
+              className="c-iconTitle__icon"
               src="/images/common/icon_news.svg"
               alt=""
               width={120}
               height={126}
             />
           </div>
-          <h2 className={styles.title}>お知らせ</h2>
         </div>
 
         <div

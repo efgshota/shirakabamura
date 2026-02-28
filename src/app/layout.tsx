@@ -69,13 +69,6 @@ export default function RootLayout({
   return (
     <html lang="ja" className={`${zenKaku.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
-        <Script
-          src="https://use.typekit.net/bvi2lkh.js"
-          strategy="beforeInteractive"
-        />
-        <Script id="typekit-load" strategy="beforeInteractive">
-          {`try{Typekit.load({async:true});}catch(e){}`}
-        </Script>
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-8SE19JC0CG"

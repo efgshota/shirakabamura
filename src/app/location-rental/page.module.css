@@ -22,20 +22,10 @@
 
 /* アイコン */
 .heroIcon {
-  width: 155px;
-  margin-bottom: 24px;
+  margin-bottom: 48px;
 }
 
-/* 縦書きタイトル */
-.heroTitle {
-  writing-mode: vertical-rl;
-  display: inline-block;
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: 0.35em;
-  color: #253c30;
-  margin-bottom: 36px;
-}
+/* .heroTitle は globals.css の .c-iconTitle__text に移行 */
 
 /* 説明文 */
 .heroDesc {

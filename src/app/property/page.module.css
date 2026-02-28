@@ -20,18 +20,10 @@
 }
 
 .titleIcon {
-  width: 100px;
-  margin: 0 auto 16px;
+  margin-bottom: 48px;
 }
 
-.title {
-  writing-mode: vertical-rl;
-  display: inline-block;
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: 0.35em;
-  color: #253c30;
-}
+/* .title は globals.css の .c-iconTitle__text に移行 */
 
 .subtitle {
   margin-top: 20px;

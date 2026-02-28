@@ -36,31 +36,18 @@
 }
 
 .titleIcon {
-  position: absolute;
-  top: -60px;
-  left: 50%;
-  transform: translate(-50%, -54%) scale(0.3);
+  transform: scale(0.3);
   transition: transform 1s;
-  z-index: 2;
-  width: 155px;
+  margin-bottom: 48px;
 }
 
 .titleWrap.visible .titleIcon {
-  transform: translate(-50%, -54%) scale(1);
+  transform: scale(1);
 }
 
-.title {
-  writing-mode: vertical-rl;
-  display: inline-block;
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: 0.35em;
-  color: #253c30;
-  margin: 0 auto;
-}
+/* .title は globals.css の .c-iconTitle__text に移行 */
 
 .description {
-  margin-top: 20px;
   font-size: 1.4rem;
   line-height: 1.8;
   color: #253c30;
@@ -110,21 +97,12 @@
     padding: 0 24px;
   }
 
-  .titleWrap {
-    padding-top: 120px;
-  }
-
   .titleIcon {
-    top: 40px;
-    transform: translate(-50%, -40%) scale(0.3);
+    transform: scale(0.3);
   }
 
   .titleWrap.visible .titleIcon {
-    transform: translate(-50%, -40%) scale(1);
-  }
-
-  .title {
-    font-size: 2rem;
+    transform: scale(1);
   }
 
   .decoBlobs {

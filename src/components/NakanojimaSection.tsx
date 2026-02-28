@@ -25,15 +25,16 @@ export default function NakanojimaSection() {
           ref={titleRef}
           className={`${styles.titleWrap} ${titleVisible ? styles.visible : ""}`}
         >
-          <div className={styles.titleIcon}>
+          <div className={`${styles.titleIcon} c-iconTitle`}>
+            <h2 className="c-iconTitle__text">ロケーション<br />レンタル</h2>
             <Image
+              className="c-iconTitle__icon"
               src="/images/nakanoshima.svg"
               alt=""
               width={155}
               height={146}
             />
           </div>
-          <h2 className={styles.title}>ロケーション<br />レンタル</h2>
           <p className={styles.description}>
             白樺湖に浮かぶ中之島をはじめ、湖畔や森のロケーションをレンタルでご利用いただけます。撮影、ロケ地、イベントなどのご利用に対応しています。
           </p>
