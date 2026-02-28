@@ -162,7 +162,7 @@ export default function ContactSection() {
               height={134}
             />
           </div>
-          <h2 className={`${styles.title} font-tsuku`}>お問い合わせ</h2>
+          <h2 className={styles.title}>お問い合わせ</h2>
         </div>
 
         {/* ── ステップインジケーター ── */}
@@ -351,7 +351,7 @@ export default function ContactSection() {
                 />
               </svg>
             </div>
-            <h3 className={`${styles.completeTitle} font-tsuku`}>
+            <h3 className={styles.completeTitle}>
               送信が完了しました
             </h3>
             <p className={styles.completeText}>

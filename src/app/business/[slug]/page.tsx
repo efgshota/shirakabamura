@@ -181,7 +181,7 @@ export default async function BusinessDetailPage({
                 />
               </div>
             )}
-            <h1 className={`${styles.mvTitle} font-tsuku`}>{biz.name}</h1>
+            <h1 className={styles.mvTitle}>{biz.name}</h1>
           </div>
         </section>
 
@@ -220,7 +220,7 @@ export default async function BusinessDetailPage({
               <dl className={styles.qaList}>
                 {biz.qa.map((item, i) => (
                   <div key={i} className={styles.qaItem}>
-                    <dt className={`${styles.question} font-tsuku`}>
+                    <dt className={styles.question}>
                       Q. {item.question}
                     </dt>
                     <dd className={styles.answer}>{item.answer}</dd>
@@ -266,7 +266,7 @@ export default async function BusinessDetailPage({
         {allBizIds.length > 0 && (
           <section className={styles.related}>
             <div className={styles.inner}>
-              <h2 className={`${styles.relatedTitle} font-tsuku`}>他の事例</h2>
+              <h2 className={styles.relatedTitle}>他の事例</h2>
               <div className={styles.relatedGrid}>
                 {allBizIds.map((r) => (
                   <Link

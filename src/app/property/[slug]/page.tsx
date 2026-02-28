@@ -192,7 +192,7 @@ export default async function PropertyDetailPage({
         {/* Title */}
         <section className={styles.titleSection}>
           <div className={styles.inner}>
-            <h1 className={`${styles.title} font-tsuku`}>{prop.title}</h1>
+            <h1 className={styles.title}>{prop.title}</h1>
             <p className={styles.location}>{prop.location}</p>
           </div>
         </section>
@@ -268,7 +268,7 @@ export default async function PropertyDetailPage({
               <span className={`${styles.commentVertical} font-tsuku`}>
                 担当者
               </span>
-              <span className={`${styles.commentLabel} font-tsuku`}>
+              <span className={styles.commentLabel}>
                 コメント
               </span>
               <svg
@@ -315,7 +315,7 @@ export default async function PropertyDetailPage({
         {/* Recommended */}
         <section className={styles.recommended}>
           <div className={styles.inner}>
-            <h2 className={`${styles.recommendedTitle} font-tsuku`}>
+            <h2 className={styles.recommendedTitle}>
               おすすめの物件
             </h2>
             <div className={styles.recommendedGrid}>
