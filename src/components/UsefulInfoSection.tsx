@@ -14,7 +14,15 @@ export default function UsefulInfoSection({ infos }: { infos: UsefulInfoItem[] }
 
   return (
     <section id="useful" className={styles.useful}>
-      <div className={styles.decoTop} />
+      <div className={styles.decoTop}>
+        <Image
+          src="/images/top/Union.svg"
+          alt=""
+          width={1280}
+          height={2858}
+          className={styles.decoTopImg}
+        />
+      </div>
       <div className={styles.inner}>
         <div
           ref={titleRef}
