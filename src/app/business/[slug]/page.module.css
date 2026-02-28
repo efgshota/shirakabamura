@@ -19,16 +19,15 @@
 }
 
 .mvImage {
-  position: relative;
   width: 440px;
   max-width: 100%;
-  aspect-ratio: 6/7;
   margin: 0 auto;
-  clip-path: url(#bizMvMask);
 }
 
-.mvImg {
-  /* Next.js fill modeで自動設定 */
+.mvSvg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .mvTitle {
@@ -170,15 +169,14 @@
 }
 
 .relatedImage {
-  position: relative;
   width: 100%;
-  aspect-ratio: 6/7;
-  clip-path: url(#bizMvMask);
   margin-bottom: 16px;
 }
 
-.relatedImg {
-  /* Next.js fill modeで自動設定 */
+.relatedSvg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .relatedName {

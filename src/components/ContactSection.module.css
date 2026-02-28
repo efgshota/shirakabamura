@@ -127,7 +127,7 @@
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
-  padding: 24px 24px 24px 50px;
+  padding: 24px;
   font-size: 1.4rem;
   font-family: var(--font-zen-kaku), sans-serif;
   color: #253c30;
@@ -167,7 +167,7 @@
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
-  padding: 24px 24px 24px 50px;
+  padding: 24px;
   font-size: 1.4rem;
   font-family: var(--font-zen-kaku), sans-serif;
   color: #253c30;

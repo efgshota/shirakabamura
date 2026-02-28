@@ -1,11 +1,5 @@
 .page {
-  background: linear-gradient(
-    180deg,
-    #b8ced3 0%,
-    #d5e4e4 20%,
-    #eef3f1 40%,
-    #f8f8f5 60%
-  );
+  background: #ffffff;
   min-height: 100vh;
 }
 
@@ -26,7 +20,7 @@
 }
 
 .titleIcon {
-  width: 80px;
+  width: 100px;
   margin: 0 auto 16px;
 }
 
@@ -48,29 +42,20 @@
 
 /* ===== Filter Section ===== */
 .filterSection {
-  background: #ffffff;
-  padding: 48px 0;
-}
-
-.filterBox {
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  padding: 32px;
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
+  background: #f3f3f0;
+  border-radius: 24px;
+  padding: 40px 40px 0;
+  margin: 0 auto;
+  max-width: 1060px;
 }
 
 .filterRow {
-  flex: 1;
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: center;
+  gap: 32px;
 }
 
 .filterItem {
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -81,7 +66,6 @@
   font-weight: 700;
   color: #253c30;
   white-space: nowrap;
-  min-width: 52px;
 }
 
 .selectWrap {
@@ -92,7 +76,7 @@
 .selectWrap::after {
   content: '';
   position: absolute;
-  right: 14px;
+  right: 4px;
   top: 50%;
   transform: translateY(-60%) rotate(45deg);
   width: 6px;
@@ -106,11 +90,12 @@
   width: 100%;
   appearance: none;
   -webkit-appearance: none;
-  background: #f8f8f5;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 10px 36px 10px 14px;
-  font-size: 1.3rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(37, 60, 48, 0.25);
+  border-radius: 0;
+  padding: 8px 24px 8px 0;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #253c30;
   cursor: pointer;
@@ -119,21 +104,82 @@
 }
 
 .mapWrap {
-  flex-shrink: 0;
-  width: 380px;
+  margin-top: 64px;
+  padding-bottom: 80px;
+}
+
+.mapContainer {
+  position: relative;
+  max-width: 580px;
+  margin: 0 auto;
 }
 
 .mapImg {
   width: 100%;
   height: auto;
-  border-radius: 8px;
   display: block;
+}
+
+.mapSvgOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mapAreaPath {
+  opacity: 0.6;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: opacity 0.3s, transform 0.3s;
+  transform-box: fill-box;
+  transform-origin: center center;
+}
+
+.mapAreaPath:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+.mapAreaPathActive {
+  opacity: 0.85;
+}
+
+.mapAreaPathActive:hover {
+  opacity: 0.95;
+}
+
+.mapLabel {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--label-color);
+  white-space: nowrap;
+  transition: opacity 0.25s, transform 0.2s;
+  font-family: inherit;
+  z-index: 2;
+}
+
+.mapLabel:hover {
+  transform: translate(-50%, -50%);
+}
+
+.mapLabelActive {
+  background: var(--label-color);
+  color: #fff;
+  border-radius: 20px;
 }
 
 /* ===== List Section ===== */
 .listSection {
-  background: #ffffff;
-  padding: 0 0 80px;
+  padding: 56px 0 80px;
 }
 
 .empty {
@@ -263,17 +309,18 @@
   }
 
   .filterSection {
-    padding: 32px 0;
+    padding: 24px 20px 0;
+    border-radius: 16px;
+    margin: 0 16px;
   }
 
-  .filterBox {
+  .filterRow {
     flex-direction: column;
-    padding: 20px;
-    gap: 20px;
+    gap: 16px;
   }
 
   .mapWrap {
-    width: 100%;
+    margin-top: 24px;
   }
 
   .grid {

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import UsefulListClient from "./UsefulListClient";
@@ -44,6 +45,14 @@ export default async function UsefulListPage() {
       <main className={styles.main}>
         <section className={styles.hero}>
           <div className={styles.inner}>
+            <div className={styles.titleIcon}>
+              <Image
+                src="/images/common/icon_useful.svg"
+                alt=""
+                width={100}
+                height={100}
+              />
+            </div>
             <h1 className={styles.title}>お役立ち帳</h1>
             <p className={styles.subtitle}>
               暮らしに関わる便利な連絡先集めてます

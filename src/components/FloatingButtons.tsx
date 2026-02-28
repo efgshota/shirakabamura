@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import styles from "./FloatingButtons.module.css";
 
 export default function FloatingButtons() {
@@ -13,8 +12,9 @@ export default function FloatingButtons() {
         className={styles.lineBtn}
         aria-label="LINEでお問い合わせ"
       >
-        <Image
-          src="/images/common/line_btn.png"
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/top/linecontact.svg"
           alt="LINEで簡単お問い合わせ"
           width={120}
           height={120}
