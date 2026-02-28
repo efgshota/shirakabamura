@@ -38,7 +38,6 @@ const scrollToContact = () => {
 };
 
 export default function ContactSection() {
-  const { ref: birdRef, visible: birdVisible } = useScrollTrigger(0.3);
   const { ref: titleRef, visible: titleVisible } = useScrollTrigger();
   const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
   const [agreed, setAgreed] = useState(false);
@@ -120,34 +119,6 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className={styles.contact}>
-      {/* Bird decoration */}
-      <div
-        ref={birdRef}
-        className={`${styles.birdWrap} ${birdVisible ? styles.birdVisible : ""}`}
-      >
-        <svg
-          className={styles.bird}
-          width="100"
-          height="60"
-          viewBox="0 0 120 80"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M60 40C40 20 15 15 2 25C15 20 35 22 50 35L45 30C30 18 10 18 2 25"
-            fill="#7BBEC8"
-            opacity="0.9"
-          />
-          <path
-            d="M60 40C80 20 105 15 118 25C105 20 85 22 70 35L75 30C90 18 110 18 118 25"
-            fill="#7BBEC8"
-            opacity="0.9"
-          />
-          <ellipse cx="60" cy="42" rx="8" ry="5" fill="#7BBEC8" />
-          <path d="M52 42L30 55L35 48" fill="#7BBEC8" opacity="0.7" />
-        </svg>
-      </div>
-
       <div className={styles.inner}>
         {/* タイトル */}
         <div

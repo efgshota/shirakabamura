@@ -92,15 +92,14 @@
 }
 
 .cardImage {
-  position: relative;
   width: 100%;
-  aspect-ratio: 6/7;
-  clip-path: url(#bizKvMask);
   margin-bottom: 20px;
 }
 
-.cardImg {
-  /* Next.js fill modeで自動設定 */
+.cardSvg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .cardMeta {
