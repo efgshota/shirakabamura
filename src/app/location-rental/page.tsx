@@ -199,12 +199,12 @@ export default function LocationRentalPage() {
 
             <div className={styles.sceneGrid}>
               {[
-                { src: "/images/location-rental/scene-01.png", label: "ウェディングフォト" },
-                { src: "/images/location-rental/scene-02.png", label: "映像・CM撮影" },
+                { src: "/images/location-rental/scene-06.png", label: "アウトドアイベント" },
                 { src: "/images/location-rental/scene-03.png", label: "スチール撮影" },
+                { src: "/images/location-rental/scene-02.png", label: "映像・CM撮影" },
                 { src: "/images/location-rental/scene-04.png", label: "ブランドイベント" },
                 { src: "/images/location-rental/scene-05.png", label: "ロケ地利用" },
-                { src: "/images/location-rental/scene-06.png", label: "アウトドアイベント" },
+                { src: "/images/location-rental/scene-01.png", label: "ウェディングフォト" },
                 { src: "/images/location-rental/scene-07.png", label: "自然体験" },
                 { src: "/images/location-rental/scene-08.png", label: "その他" },
               ].map((scene, i) => (
