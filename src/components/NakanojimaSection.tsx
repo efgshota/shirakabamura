@@ -13,7 +13,7 @@ export default function NakanojimaSection() {
     <section id="location-rental" className={styles.nakanojima}>
       <div className={styles.decoBlobs} aria-hidden="true">
         <Image
-          src="/images/top/deco_nakanojima.svg"
+          src="/images/top/cards/blob_card1_bg.svg"
           alt=""
           width={715}
           height={359}
