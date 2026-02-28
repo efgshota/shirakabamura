@@ -103,11 +103,24 @@
 
 @media (max-width: 767px) {
   .nakanojima {
-    padding: 100px 0;
+    padding: 120px 0;
   }
 
   .inner {
     padding: 0 24px;
+  }
+
+  .titleWrap {
+    padding-top: 120px;
+  }
+
+  .titleIcon {
+    top: 40px;
+    transform: translate(-50%, -40%) scale(0.3);
+  }
+
+  .titleWrap.visible .titleIcon {
+    transform: translate(-50%, -40%) scale(1);
   }
 
   .title {
@@ -123,6 +136,6 @@
   }
 
   .photo {
-    margin-top: 32px;
+    display: none;
   }
 }

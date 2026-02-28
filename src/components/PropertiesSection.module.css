@@ -221,11 +221,24 @@
 /* ── Mobile ── */
 @media (max-width: 767px) {
   .property {
-    padding: 156px 0 168px;
+    padding: 120px 0 120px;
   }
 
   .inner {
     padding: 0 24px;
+  }
+
+  .titleWrap {
+    padding-top: 140px;
+  }
+
+  .titleIcon {
+    top: 64px;
+    transform: translate(-50%, -40%) scale(0.3);
+  }
+
+  .titleWrap.visible .titleIcon {
+    transform: translate(-50%, -40%) scale(1);
   }
 
   .title {
@@ -242,8 +255,32 @@
     gap: 20px;
   }
 
+  .card {
+    padding: 14px;
+    gap: 14px;
+    height: auto;
+    min-height: 120px;
+  }
+
   .cardImage {
-    width: 140px;
+    width: 120px;
+  }
+
+  .cardBody {
+    gap: 6px;
+  }
+
+  .cardSpecs {
+    font-size: 1.3rem;
+  }
+
+  .cardHighlight {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+
+  .cardPrice {
+    font-size: 1.3rem;
   }
 
   .bottomText {
