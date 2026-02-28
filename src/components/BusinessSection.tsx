@@ -14,7 +14,6 @@ export default function BusinessSection({ businesses }: { businesses: BusinessIt
 
   return (
     <section id="business" className={styles.business}>
-      <div className={styles.clipTop} />
       <div className={styles.content}>
         <div className={styles.inner}>
           <div
@@ -84,13 +83,12 @@ export default function BusinessSection({ businesses }: { businesses: BusinessIt
           </div>
 
           <div className={styles.more}>
-            <Link href="/#contact" className="c-moreBtn blue">
+            <Link href="/#contact" className="c-moreBtn">
               お問い合わせ
             </Link>
           </div>
         </div>
       </div>
-      <div className={styles.clipBottom} />
     </section>
   );
 }

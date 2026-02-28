@@ -1,26 +1,13 @@
 .business {
   position: relative;
-  z-index: 1;
-  margin-top: -57px;
-}
-
-.clipTop {
-  width: 100%;
-  height: 56px;
-  background: #b8b9d3;
-  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  z-index: 3;
+  margin-top: -400px;
+  background: url("/images/top/Rectangle.svg") no-repeat center center;
+  background-size: 100% 100%;
 }
 
 .content {
-  background: #b8b9d3;
-  padding: 182px 0 102px;
-}
-
-.clipBottom {
-  width: 100%;
-  height: 56px;
-  background: #b8b9d3;
-  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  padding: 642px 0 300px;
 }
 
 .inner {
@@ -132,9 +119,9 @@
 }
 
 .bottomText p {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 500;
-  line-height: 1.67;
+  line-height: 1.8;
   color: #253c30;
 }
 
@@ -144,15 +131,6 @@
 }
 
 @media (max-width: 767px) {
-  .business {
-    margin-top: -66px;
-  }
-
-  .clipTop,
-  .clipBottom {
-    height: 66px;
-  }
-
   .content {
     padding: 82px 0 98px;
   }

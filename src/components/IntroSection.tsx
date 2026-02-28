@@ -152,7 +152,7 @@ export default function IntroSection() {
                 rel="noopener noreferrer"
                 className={styles.socialLink}
               >
-                X (Twitter)<ExtIcon />
+                X<ExtIcon />
               </a>
             </div>
           </div>
