@@ -147,3 +147,20 @@ git rebase origin/main   # 自分の作業を最新 main の上に載せ直す
 - `git add .` は使わない（`.env` 混入防止。ファイル名を指定する）
 
 > 詳細は `docs/git-workflow.md` を参照
+
+### Vercel アカウント確認（デプロイ前必須）
+
+このプロジェクトのVercelアカウントは `efgshota-3561`（`efgshota@gmail.com`）。
+
+```bash
+vercel whoami   # → efgshota-3561 であることを確認
+```
+
+`sfujii-8453`（THE PERSON用）でログインしていた場合は切り替える：
+
+```bash
+vercel logout
+vercel login    # ブラウザで efgshota@gmail.com を選択
+```
+
+> 詳細は `docs/git-workflow.md` の「Vercel アカウント確認」セクションを参照
