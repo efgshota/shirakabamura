@@ -20,15 +20,16 @@ export default function BusinessSection({ businesses }: { businesses: BusinessIt
             ref={titleRef}
             className={`${styles.titleWrap} ${titleVisible ? styles.visible : ""}`}
           >
-            <div className={styles.titleIcon}>
+            <div className={`${styles.titleIcon} c-iconTitle`}>
+              <h2 className="c-iconTitle__text">物件事例</h2>
               <Image
+                className="c-iconTitle__icon"
                 src="/images/common/icon_business.svg"
                 alt=""
                 width={100}
                 height={100}
               />
             </div>
-            <h2 className={styles.title}>物件事例</h2>
             <p className={styles.description}>
               白樺湖周辺で物件を取得して別荘や店舗として利用している方々にご協力いただき、生の声をインタビューさせていただきました。
             </p>

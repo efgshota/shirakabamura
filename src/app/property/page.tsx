@@ -59,15 +59,16 @@ export default async function PropertyListPage() {
       <main className={styles.main}>
         <section className={styles.hero}>
           <div className={styles.inner}>
-            <div className={styles.titleIcon}>
+            <div className={`${styles.titleIcon} c-iconTitle`}>
+              <h1 className="c-iconTitle__text font-tsuku">白樺村の物件</h1>
               <Image
+                className="c-iconTitle__icon"
                 src="/images/common/icon_property.svg"
                 alt=""
                 width={100}
                 height={100}
               />
             </div>
-            <h1 className={`${styles.title} font-tsuku`}>白樺村の<br />物件</h1>
             <p className={styles.subtitle}>
               湖のほとり、森の中、山の景色、
               <br />

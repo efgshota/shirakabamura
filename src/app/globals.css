@@ -73,7 +73,7 @@ a:hover {
 
 /* ===== Font Classes ===== */
 .font-tsuku {
-  font-family: "fot-tsukuardgothic-std", sans-serif;
+  font-family: var(--font-zen-kaku), sans-serif;
 }
 
 .font-kinto {
@@ -107,6 +107,37 @@ a:hover {
 [data-trigger].visible {
   top: 0;
   opacity: 1;
+}
+
+/* ===== Icon Title ===== */
+/* テキストが高さを決め、アイコンをテキスト中央に重ねる構造 */
+/* JSX: <div class="c-iconTitle"><h2 class="c-iconTitle__text">…</h2><Image class="c-iconTitle__icon" /></div> */
+.c-iconTitle {
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.c-iconTitle__text {
+  position: relative;
+  z-index: 1;
+  writing-mode: vertical-rl;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: #253c30;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.c-iconTitle__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  max-width: none; /* override global img { max-width: 100% } */
 }
 
 /* ===== More Button ===== */

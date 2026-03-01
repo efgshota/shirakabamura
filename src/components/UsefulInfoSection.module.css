@@ -36,31 +36,16 @@
 }
 
 .titleIcon {
-  position: absolute;
-  top: -60px;
-  left: 50%;
-  transform: translate(-50%, -54%) scale(0.3);
+  transform: scale(0.3);
   transition: transform 1s;
-  z-index: 2;
-  width: 100px;
+  margin-bottom: 48px;
 }
 
 .titleWrap.visible .titleIcon {
-  transform: translate(-50%, -54%) scale(1);
-}
-
-.title {
-  writing-mode: vertical-rl;
-  display: inline-block;
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: 0.35em;
-  color: #253c30;
-  margin: 0 auto;
+  transform: scale(1);
 }
 
 .subtitle {
-  margin-top: 16px;
   font-size: 1.4rem;
   color: #253c30;
   opacity: 0.7;
@@ -150,9 +135,6 @@
     grid-template-columns: 1fr;
   }
 
-  .title {
-    font-size: 2rem;
-  }
 
   .hideMobile {
     display: none;

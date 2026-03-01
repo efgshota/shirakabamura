@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>白樺村 サイトマニュアル</title>
+  <!-- Adobe Typekit (kinto-sans) -->
+  <link rel="stylesheet" href="https://use.typekit.net/bvi2lkh.css">
+  <style>
+    :root {
+      --color-primary: #253c30;
+      --color-accent: #7bbec8;
+      --color-bg: #FAFAF7;
+      --color-card: #FFFFFF;
+      --color-border: #E0E0DA;
+      --color-text: #253c30;
+      --color-text-secondary: #6B7B73;
+      --color-highlight: #FFF8E1;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "kinto-sans", "Yu Gothic", YuGothic, "Hiragino Sans", "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.8;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 24px 24px;
+    }
+
+    /* Cover */
+    .cover {
+      text-align: center;
+      padding: 32px 24px 28px;
+      background: linear-gradient(180deg, #B8CED3, #B8CED3, #BED9D2, #C3E2D1, #C3E2D1);
+      color: var(--color-primary);
+      margin-bottom: 24px;
+    }
+    .cover h1 {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 0;
+    }
+    .cover .domain {
+      font-size: 16px;
+      opacity: 0.5;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .cover .subtitle {
+      font-size: 14px;
+      opacity: 0.45;
+      letter-spacing: 0.04em;
+    }
+
+    /* TOC */
+    .toc {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .toc h2 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: var(--color-primary);
+    }
+    .toc ol { padding-left: 24px; }
+    .toc li { margin-bottom: 8px; }
+    .toc a {
+      color: var(--color-text);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--color-border);
+    }
+    .toc a:hover { color: var(--color-accent); }
+
+    /* Section */
+    section { margin-bottom: 48px; }
+    section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--color-primary);
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--color-primary);
+      margin-bottom: 12px;
+    }
+    section h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin: 12px 0 8px;
+    }
+    p { margin-bottom: 12px; }
+    ul { padding-left: 20px; margin-bottom: 12px; }
+    ul li { margin-bottom: 4px; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    thead th {
+      background: var(--color-primary);
+      color: #fff;
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+    }
+    thead th:first-child { border-radius: 6px 0 0 0; }
+    thead th:last-child { border-radius: 0 6px 0 0; }
+    tbody td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: top;
+    }
+    tbody tr:nth-child(even) { background: #F7F7F4; }
+
+    /* Card */
+    .card {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 16px 0;
+    }
+    .card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #5B8C5A;
+      margin-bottom: 8px;
+    }
+
+    /* Overview card */
+    .overview-card {
+      background: var(--color-card);
+      border: 2px solid var(--color-primary);
+      border-radius: 10px;
+      padding: 0;
+      overflow: hidden;
+    }
+    .overview-card table {
+      margin: 0;
+    }
+    .overview-card tbody td {
+      padding: 12px 20px;
+    }
+    .overview-card tbody td:first-child {
+      width: 160px;
+      background: #F2F5F3;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    /* Steps */
+    .steps {
+      counter-reset: step;
+      padding-left: 0;
+      list-style: none;
+    }
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 48px;
+      margin-bottom: 20px;
+      min-height: 36px;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0; top: 0;
+      width: 32px; height: 32px;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* Highlight */
+    .highlight {
+      background: var(--color-highlight);
+      border-left: 4px solid #F0C040;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    /* Sitemap */
+    .sitemap {
+      font-family: "SF Mono", "Consolas", monospace;
+      font-size: 14px;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 24px;
+      line-height: 2;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    /* Flow */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+    .flow .box {
+      background: var(--color-primary);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .flow .arrow {
+      color: var(--color-text-secondary);
+      font-size: 18px;
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge-cms { background: #E8F5E9; color: #2E7D32; }
+    .badge-static { background: #E3F2FD; color: #1565C0; }
+
+    /* MicroCMS mock UI */
+    .mcms-window {
+      border: 1px solid #D0D0D0;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 20px 0;
+      font-size: 13px;
+      background: #fff;
+    }
+    .mcms-titlebar {
+      background: #1B2A4A;
+      color: #fff;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mcms-titlebar .dot {
+      width: 10px; height: 10px; border-radius: 50%; display: inline-block;
+    }
+    .mcms-titlebar .dot-r { background: #FF5F57; }
+    .mcms-titlebar .dot-y { background: #FFBD2E; }
+    .mcms-titlebar .dot-g { background: #28CA41; }
+    .mcms-sidebar { display: flex; min-height: 280px; }
+    .mcms-nav {
+      width: 180px;
+      background: #F5F6F8;
+      border-right: 1px solid #E0E0E0;
+      padding: 12px 0;
+      flex-shrink: 0;
+    }
+    .mcms-nav-item {
+      padding: 8px 16px;
+      color: #555;
+      font-size: 13px;
+      cursor: default;
+    }
+    .mcms-nav-item.active {
+      background: #E8EDFB;
+      color: #1B2A4A;
+      font-weight: 600;
+      border-left: 3px solid #4A6CF7;
+      padding-left: 13px;
+    }
+    .mcms-main { flex: 1; padding: 16px 20px; }
+    .mcms-main h5 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1B2A4A;
+    }
+    .mcms-btn {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      cursor: default;
+    }
+    .mcms-btn-primary { background: #4A6CF7; color: #fff; }
+    .mcms-btn-outline { background: #fff; color: #4A6CF7; border: 1px solid #4A6CF7; }
+    .mcms-list-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #F0F0F0;
+      gap: 12px;
+    }
+    .mcms-list-item:last-child { border-bottom: none; }
+    .mcms-thumb {
+      width: 48px; height: 48px;
+      background: #E8E8E8;
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .mcms-list-title { font-weight: 600; color: #1B2A4A; font-size: 13px; }
+    .mcms-list-meta { font-size: 11px; color: #999; margin-top: 2px; }
+    .mcms-badge {
+      font-size: 10px; padding: 2px 8px; border-radius: 10px;
+      background: #E8F5E9; color: #2E7D32; font-weight: 600; margin-left: auto;
+    }
+    .mcms-field { margin-bottom: 16px; }
+    .mcms-field label {
+      display: block; font-size: 12px; font-weight: 600;
+      color: #555; margin-bottom: 4px;
+    }
+    .mcms-field label .req { color: #E53935; font-size: 10px; margin-left: 4px; }
+    .mcms-field input, .mcms-field textarea, .mcms-field select {
+      width: 100%; padding: 8px 10px; border: 1px solid #D0D0D0;
+      border-radius: 4px; font-size: 13px; color: #333;
+      background: #fff; font-family: inherit;
+    }
+    .mcms-field textarea { height: 60px; resize: none; }
+    .mcms-field .mcms-img-upload {
+      width: 120px; height: 80px; border: 2px dashed #D0D0D0;
+      border-radius: 6px; display: flex; align-items: center;
+      justify-content: center; color: #AAA; font-size: 24px; cursor: default;
+    }
+    .mcms-toolbar {
+      display: flex; justify-content: flex-end; gap: 8px;
+      padding-top: 12px; border-top: 1px solid #F0F0F0; margin-top: 12px;
+    }
+
+    /* DNS panel mock */
+    .dns-panel {
+      border: 1px solid #D0D0D0;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 20px 0;
+      background: #fff;
+    }
+    .dns-panel-header {
+      padding: 12px 20px;
+      border-bottom: 1px solid #E0E0E0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .dns-panel-header .status-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .dns-panel-header .status-ok { background: #28CA41; }
+    .dns-panel-header .status-warn { background: #FFBD2E; }
+    .dns-panel-body { padding: 16px 20px; }
+    .dns-panel-body table { font-size: 13px; }
+    .dns-panel-body thead th {
+      background: #F5F6F8; color: #555; font-size: 12px; padding: 8px 12px;
+    }
+    .dns-panel-body thead th:first-child { border-radius: 4px 0 0 0; }
+    .dns-panel-body thead th:last-child { border-radius: 0 4px 0 0; }
+    .dns-panel-body tbody td { padding: 8px 12px; font-family: "SF Mono", "Consolas", monospace; font-size: 12px; }
+    .dns-panel-note {
+      background: #FFFDE7; border: 1px solid #FFF59D;
+      border-radius: 4px; padding: 8px 12px; margin-top: 12px;
+      font-size: 12px; color: #666;
+    }
+
+    /* Footer */
+    .site-footer {
+      background: var(--color-accent);
+      color: #fff;
+      text-align: center;
+      padding: 40px 24px;
+    }
+    .site-footer p {
+      margin-bottom: 16px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+    }
+
+    /* Color Palette */
+    .color-palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .color-swatch {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+    }
+    .color-swatch-block {
+      height: 72px;
+    }
+    .color-swatch-info {
+      padding: 8px 10px;
+      background: var(--color-card);
+    }
+    .color-swatch-hex {
+      font-size: 12px;
+      font-family: monospace;
+      color: var(--color-text);
+      font-weight: 700;
+    }
+    .color-swatch-label {
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      margin-top: 2px;
+    }
+
+    /* Font Demo */
+    .font-demo {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 12px;
+    }
+    .font-demo-name {
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .font-demo-sample {
+      font-size: 22px;
+      line-height: 1.6;
+      color: var(--color-text);
+    }
+    .font-demo-meta {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--color-text-secondary);
+    }
+    .font-demo-meta code {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 3px;
+      padding: 1px 5px;
+      font-family: monospace;
+    }
+
+    /* Print */
+    @media print {
+      body { font-size: 12px; background: #fff; }
+      .cover { padding: 48px 24px; page-break-after: always; }
+      section { page-break-inside: avoid; }
+      .container { padding: 20px; }
+      .site-footer { background: var(--color-accent) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="cover">
+  <h1 aria-label="白樺村"><svg xmlns="http://www.w3.org/2000/svg" width="22.85" height="88.2" style="height: 88px; width: auto;"><path d="M11.975 3.725a12.406 12.406 0 00.75-2.6c0-.7-.775-1.125-1.5-1.125a1.175 1.175 0 00-1.3 1.025 17.543 17.543 0 01-.55 2.725c-.85.025-1.65.05-2.35.075-1.925.075-3.2 1.1-3.25 2.65C3.725 8.1 3.7 10.2 3.7 12.25c0 2.325.025 4.6.075 6.175.075 1.8 1.2 2.825 3.45 2.925 1.275.05 2.775.075 4.3.075 1.725 0 3.525-.025 5.15-.075a3.127 3.127 0 003.225-3c.05-1.3.075-3.6.075-5.95 0-2.125-.025-4.25-.075-5.75a3.094 3.094 0 00-3.15-2.825c-1.275-.05-3-.1-4.775-.1zM6.1 10.875c0-1.25.05-2.4.075-3.325.075-1.725.45-1.725 5.675-1.725 5.175 0 5.55 0 5.625 1.725.025.925.05 2.075.05 3.325zm11.45 2.15c0 1.625-.025 3.175-.075 4.375-.075 1.8-.925 1.8-5.65 1.8-5.075 0-5.6-.075-5.65-1.725-.05-1.125-.075-2.75-.075-4.45zM21.475 37a.963.963 0 100-1.925H18.5V34.3a1.064 1.064 0 00-2.125 0v.775H14V34.3a1.051 1.051 0 00-2.1 0v.775H9.175a.963.963 0 100 1.925H11.9v.55a.972.972 0 001.05.95.972.972 0 001.05-.95V37h2.375v.55a1.069 1.069 0 002.125 0V37zM21.2 51.925a.922.922 0 00.95-.975.91.91 0 00-.95-.975h-5.025V48.45H21a.938.938 0 000-1.875h-1.2v-2.1h2.125a.884.884 0 00.9-.925.871.871 0 00-.9-.925H19.8v-1.9H21a.938.938 0 000-1.875H9.475a.938.938 0 100 1.875h1.175v1.9H9.025a.919.919 0 00-.975.925v.15c-.45-.6-1.55-1.6-2.075-1.6H5.85c0-.5.025-1.05.025-1.6l1.425.05h.05a.972.972 0 00.95-1.05 1 1 0 00-1-1.075H5.9c.025-2.275.075-4.3.075-4.3V34.1a1.141 1.141 0 00-1.2-1.15A1.081 1.081 0 003.65 34.1v.025l.075 4.3h-1.7a1.056 1.056 0 00-1.1 1.075 1.009 1.009 0 001.05 1.05h.05l1.725-.05v.525a21.959 21.959 0 01-3.45 5.95 1.131 1.131 0 00-.3.775 1.229 1.229 0 001.2 1.175c.675 0 1.225-.6 2.525-3.35l-.075 8.65v.025A1.063 1.063 0 004.8 55.3a1.071 1.071 0 001.175-1.05v-.025S5.875 48 5.85 44a10.01 10.01 0 01.725 1.075.808.808 0 00.7.425 1.119 1.119 0 001.05-1.1.55.55 0 00-.025-.2.96.96 0 00.725.275h1.625v2.1H9.475a.938.938 0 100 1.875h4.575v1.525H8.975a.958.958 0 00-1.025.975.972.972 0 001.025.975h5.075l-.025 2.275a1.088 1.088 0 102.175 0l-.025-2.275zm-3.425-9.3h-1.6v-1.9h1.6zm-3.725 0H12.5v-1.9h1.55zm3.725 3.95h-1.6v-2.1h1.6zm-3.725 0H12.5v-2.1h1.55zm3.1 37.35c0 1.05-.475 1.6-1.725 1.6a9.583 9.583 0 01-2.175-.35 1.72 1.72 0 00-.325-.05 1.057 1.057 0 00-1.05 1.125 1.259 1.259 0 001.075 1.25 12.248 12.248 0 002.475.3c3.15 0 4.15-1.825 4.15-3.375v-.05l-.05-3.45V73.7h2.125a1.093 1.093 0 100-2.175h-2.125v-4.25a1.188 1.188 0 00-2.375 0v4.25h-5a1.116 1.116 0 00-1.175 1.125 1.06 1.06 0 001.175 1.05h5zm-.975-4.65c0-1.225-3.275-3.4-4.075-3.4a1.153 1.153 0 00-1.175 1.025.946.946 0 00.525.8 11.144 11.144 0 012.6 2.375.984.984 0 00.85.45 1.328 1.328 0 001.275-1.25zm-8.7 7.875s-.1-5.45-.125-9.325a13.923 13.923 0 011.625 1.825.933.933 0 00.8.45 1.275 1.275 0 001.2-1.225 1.079 1.079 0 00-.25-.675C10.3 77.675 8.525 76 7.8 76a1.416 1.416 0 00-.45.075c0-.7.025-1.55.025-2.45l2.05.025h.025a1.021 1.021 0 001.075-1.075 1.062 1.062 0 00-1.1-1.1H7.4c.025-2.275.075-4.275.075-4.275v-.025a1.124 1.124 0 00-1.225-1.1 1.093 1.093 0 00-1.175 1.1v.025l.075 4.275H2.275a1.075 1.075 0 00-1.15 1.1A1.049 1.049 0 002.25 73.65h.025l2.9-.05v.1a25.638 25.638 0 01-4.55 6.725 1.183 1.183 0 00-.375.8 1.237 1.237 0 001.25 1.15 1.178 1.178 0 00.95-.475 30.007 30.007 0 002.725-4l-.1 9.25v.025a1.073 1.073 0 001.2 1.025 1.089 1.089 0 001.2-1.025z" fill="#fff"/></svg></h1>
+  <p class="domain">shirakabamura.com</p>
+  <p class="subtitle">サイト構成・仕様・コンテンツ更新ガイド（2026年2月作成）</p>
+  <div style="margin-top: 24px; opacity: 0.6;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 97.81 13.07" style="height: 19px; width: auto;"><g><path fill="#ffffff" d="M6.26,7.08c.13-.14.27-.23.44-.26.4-.08.71.17.78.52.04.19-.01.36-.12.53-.52.83-1.49,1.35-2.41,1.55-2.3.48-4.33-.76-4.84-3.22C-.41,3.74.95,1.79,3.26,1.31c.92-.19,2.01-.1,2.83.45.17.11.28.25.32.44.07.35-.11.71-.51.79-.16.03-.33,0-.5-.07-.52-.25-1.06-.45-1.86-.29-1.54.32-2.31,1.7-1.98,3.26s1.58,2.51,3.12,2.19c.8-.17,1.22-.57,1.59-1.01Z"/><path fill="#ffffff" d="M13.09,8.27c-2.34.19-4.24-1.48-4.43-3.79C8.48,2.17,10.08.21,12.42.01s4.24,1.48,4.43,3.79c.19,2.31-1.41,4.27-3.75,4.46ZM12.53,1.33c-1.63.13-2.51,1.51-2.39,3.02.12,1.52,1.22,2.73,2.85,2.6s2.51-1.51,2.39-3.03c-.12-1.52-1.22-2.73-2.85-2.6Z"/><path fill="#ffffff" d="M24.37,9.18c-.4-.09-.64-.49-.54-.89l.63-2.71-3.69-.86-.63,2.71c-.09.4-.47.65-.87.56-.4-.09-.65-.5-.56-.89l1.52-6.52c.09-.4.5-.65.89-.56s.63.49.53.89l-.58,2.48,3.69.86.58-2.48c.09-.4.48-.65.88-.56s.64.49.54.89l-1.52,6.52c-.09.4-.48.65-.88.56Z"/><path fill="#ffffff" d="M32.34,10.83l-3.34-1.21-1.14,1.14c-.21.18-.42.27-.71.16-.41-.15-.54-.55-.42-.88.03-.09.09-.17.17-.25l5.22-5.37c.18-.19.42-.25.72-.15.29.11.44.3.46.57l.55,7.47c.01.11,0,.21-.03.3-.12.33-.48.55-.89.4-.29-.11-.4-.3-.44-.58l-.14-1.61ZM32.16,6.15l-2.22,2.44,2.35.85-.13-3.29Z"/><path fill="#ffffff" d="M44.19,12.12c-.22.04-.4-.02-.56-.16l-4.94-4.48.79,4.74c.06.38-.2.73-.57.79-.37.06-.73-.2-.79-.56l-1.12-6.71c-.06-.37.16-.73.6-.81.19-.03.41.04.54.17l4.94,4.48-.79-4.72c-.06-.37.16-.73.56-.8.4-.07.74.21.8.57l1.12,6.71c.06.37-.17.72-.57.79Z"/><path fill="#ffffff" d="M54.05,10.01c-.96.16-2.1.04-2.87-.38-.27-.15-.47-.36-.51-.62-.06-.37.14-.65.5-.71.13-.02.25,0,.38.05.71.3,1.2.58,2.31.4,1.14-.18,1.51-.72,1.43-1.25-.09-.58-.6-.8-2.09-.95-2.24-.22-2.99-.8-3.18-1.99-.23-1.44.88-2.42,2.77-2.72.43-.07,1.02-.09,1.55-.03.57.07,1.31.3,1.39.77.05.32-.08.68-.49.75-.09.02-.19.02-.29-.01-.58-.16-1.19-.32-1.94-.2-1.05.17-1.65.56-1.55,1.17.09.58.6.7,2.09.89,1.7.21,2.92.49,3.17,2,.22,1.37-.66,2.51-2.67,2.84Z"/><path fill="#ffffff" d="M64.77,3.27l-2.04-.23-.66,5.93c-.04.41-.42.7-.82.66-.41-.04-.68-.41-.63-.82l.66-5.93-2.05-.23c-.38-.04-.66-.39-.62-.76.04-.38.38-.66.77-.61l5.55.62c.38.04.66.39.62.77-.04.37-.37.65-.77.6Z"/><path fill="#ffffff" d="M72.8,4.71c.05-.41.41-.7.82-.65s.69.42.64.83l-.49,4.09c-.25,2.05-1.68,3.2-3.8,2.94s-3.24-1.71-2.99-3.76l.49-4.09c.05-.41.41-.7.82-.65s.69.42.64.83l-.51,4.24c-.13,1.11.44,1.96,1.72,2.12,1.28.15,2.04-.54,2.17-1.65l.51-4.24Z"/><path fill="#ffffff" d="M80.2,10.53l-2.16.41c-.4.08-.79-.19-.87-.59l-1.23-6.4c-.08-.4.19-.78.59-.86l2.16-.41c2.39-.46,4.24.98,4.66,3.17.42,2.19-.77,4.21-3.16,4.67ZM78.88,4.02l-1.38.26.99,5.18,1.38-.26c1.62-.31,2.34-1.56,2.05-3.08-.29-1.52-1.42-2.42-3.04-2.1Z"/><path fill="#ffffff" d="M86.54,9.8c-.41.01-.75-.31-.77-.72l-.21-6.69c-.01-.41.31-.75.72-.77.41-.01.73.31.74.72l.21,6.69c.01.41-.29.75-.7.77Z"/><path fill="#ffffff" d="M92.91,10.4c-2.31-.45-3.68-2.57-3.24-4.85.44-2.27,2.51-3.73,4.82-3.28,2.31.45,3.68,2.57,3.24,4.85-.44,2.27-2.51,3.73-4.82,3.28ZM94.24,3.56c-1.6-.31-2.83.77-3.12,2.27s.44,2.96,2.04,3.27c1.6.31,2.83-.77,3.12-2.27.29-1.5-.44-2.96-2.04-3.27Z"/></g></svg>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ==================== TOC ==================== -->
+<nav class="toc">
+  <h2>目次</h2>
+  <ol>
+    <li><a href="#overview">サイト概要</a></li>
+    <li><a href="#sitemap">ページ構成</a></li>
+    <li><a href="#top">トップページのセクション</a></li>
+    <li><a href="#cms">コンテンツの更新方法（MicroCMS）</a></li>
+    <li><a href="#cms-property">物件情報の登録・編集</a></li>
+    <li><a href="#cms-case">事業者事例の登録・編集</a></li>
+    <li><a href="#cms-useful">お役立ち帳の登録・編集</a></li>
+    <li><a href="#cms-news">ニュースの登録・編集</a></li>
+    <li><a href="#contact">お問い合わせフォーム</a></li>
+    <li><a href="#deploy">公開・デプロイの仕組み</a></li>
+    <li><a href="#dns">ドメイン・DNS設定</a></li>
+    <li><a href="#seo">SEO・OGP設定</a></li>
+    <li><a href="#design-guide">デザインガイド（カラー・フォント）</a></li>
+  </ol>
+</nav>
+
+<!-- ==================== 1. OVERVIEW ==================== -->
+<section id="overview">
+  <h2>1. サイト概要</h2>
+
+  <div class="overview-card">
+    <table>
+      <tbody>
+        <tr><td>サイト名</td><td>白樺村（しらかばむら）</td></tr>
+        <tr><td>URL</td><td>https://shirakabamura.com</td></tr>
+        <tr><td>目的</td><td>白樺湖周辺での移住・開業・くらしをサポートする情報サイト</td></tr>
+        <tr><td>主な機能</td><td>物件情報 / 事業者事例 / お役立ち帳 / ロケーションレンタル / お問い合わせ</td></tr>
+        <tr><td>CMS</td><td>MicroCMS（コンテンツ管理システム）</td></tr>
+        <tr><td>ホスティング</td><td>Vercel</td></tr>
+        <tr><td>フレームワーク</td><td>Next.js 15</td></tr>
+        <tr><td>制作・運用</td><td>COHAN STUDIO</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 2. SITEMAP ==================== -->
+<section id="sitemap">
+  <h2>2. ページ構成</h2>
+
+  <div class="sitemap">shirakabamura.com
+├── /                       トップページ
+├── /property/              物件一覧
+│   └── /property/[物件ID]/ 物件詳細
+├── /business/[事業者ID]/   事業者詳細（開業ストーリー）
+├── /useful/                お役立ち帳
+└── /location-rental/       ロケーションレンタル（中之島）</div>
+
+  <table>
+    <thead>
+      <tr><th>ページ</th><th>URL</th><th>データ</th><th>概要</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>トップ</strong></td>
+        <td>/</td>
+        <td><span class="badge badge-cms">CMS</span></td>
+        <td>全セクションを統合した入口ページ</td>
+      </tr>
+      <tr>
+        <td><strong>物件一覧</strong></td>
+        <td>/property/</td>
+        <td><span class="badge badge-cms">CMS</span></td>
+        <td>売物件・賃貸・土地の一覧</td>
+      </tr>
+      <tr>
+        <td><strong>物件詳細</strong></td>
+        <td>/property/[ID]/</td>
+        <td><span class="badge badge-cms">CMS</span></td>
+        <td>物件の写真・スペック・詳細情報</td>
+      </tr>
+      <tr>
+        <td><strong>事業者詳細</strong></td>
+        <td>/business/[ID]/</td>
+        <td><span class="badge badge-cms">CMS</span></td>
+        <td>開業者のインタビュー・プロフィール</td>
+      </tr>
+      <tr>
+        <td><strong>お役立ち帳</strong></td>
+        <td>/useful/</td>
+        <td><span class="badge badge-cms">CMS</span></td>
+        <td>地域施設（病院・スーパー等）の連絡先一覧</td>
+      </tr>
+      <tr>
+        <td><strong>ロケーションレンタル</strong></td>
+        <td>/location-rental/</td>
+        <td><span class="badge badge-static">静的</span></td>
+        <td>中之島の貸切サービス案内（CMS不使用）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight">
+    <strong>「CMS」と「静的」の違い：</strong><br>
+    <span class="badge badge-cms">CMS</span> のページは MicroCMS から内容を更新できます。<br>
+    <span class="badge badge-static">静的</span> のページは開発者による修正が必要です。
+  </div>
+</section>
+
+<!-- ==================== 3. TOP PAGE ==================== -->
+<section id="top">
+  <h2>3. トップページのセクション</h2>
+  <p>トップページは上から順に以下のセクションで構成されています。</p>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>セクション</th><th>内容</th><th>データ元</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td><strong>ヒーロー</strong></td><td>メインビジュアル + キャッチコピー</td><td>静的</td></tr>
+      <tr><td>2</td><td><strong>白樺村とは</strong></td><td>コンセプト・ミッション紹介</td><td>静的</td></tr>
+      <tr><td>3</td><td><strong>物件情報</strong></td><td>最新6件の物件カード</td><td><span class="badge badge-cms">CMS</span></td></tr>
+      <tr><td>4</td><td><strong>お役立ち帳</strong></td><td>カテゴリ別の地域施設一覧</td><td><span class="badge badge-cms">CMS</span></td></tr>
+      <tr><td>5</td><td><strong>中之島</strong></td><td>ロケーションレンタル紹介</td><td>静的</td></tr>
+      <tr><td>6</td><td><strong>事業者事例</strong></td><td>開業者の写真グリッド</td><td><span class="badge badge-cms">CMS</span></td></tr>
+      <tr><td>7</td><td><strong>ニュース</strong></td><td>最新3件のお知らせ</td><td><span class="badge badge-cms">CMS</span></td></tr>
+      <tr><td>8</td><td><strong>お問い合わせ</strong></td><td>フォーム（名前・メール・電話・本文）</td><td>送信先固定</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ==================== 4. CMS OVERVIEW ==================== -->
+<section id="cms">
+  <h2>4. コンテンツの更新方法（MicroCMS）</h2>
+
+  <h3>MicroCMS とは</h3>
+  <p>MicroCMS は日本製のコンテンツ管理システムです。ブラウザからログインして、物件情報やニュースなどを追加・編集・削除できます。変更は自動的にサイトに反映されます。</p>
+
+  <h3>ログイン方法</h3>
+  <ol class="steps">
+    <li><strong>MicroCMS にアクセス</strong><br>
+      <a href="https://app.microcms.io" target="_blank">https://app.microcms.io</a> をブラウザで開く</li>
+    <li><strong>ログイン</strong><br>
+      メールアドレスとパスワードでログイン</li>
+    <li><strong>サービスを選択</strong><br>
+      白樺村のサービスをクリック</li>
+    <li><strong>APIを選択</strong><br>
+      編集したいコンテンツ種別（物件 / 事業者 / お役立ち / ニュース）をクリック</li>
+  </ol>
+
+  <h3>管理しているコンテンツ一覧</h3>
+  <table>
+    <thead>
+      <tr><th>コンテンツ</th><th>API名</th><th>表示箇所</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>物件情報</strong></td><td>property</td><td>トップ / 物件一覧 / 物件詳細</td></tr>
+      <tr><td><strong>事業者事例</strong></td><td>case</td><td>トップ / 事業者詳細</td></tr>
+      <tr><td><strong>お役立ち帳</strong></td><td>useful-infos</td><td>トップ / お役立ち帳</td></tr>
+      <tr><td><strong>ニュース</strong></td><td>news</td><td>トップ</td></tr>
+    </tbody>
+  </table>
+
+  <h3>管理画面のイメージ</h3>
+  <p>MicroCMS にログインすると、以下のような画面が表示されます。</p>
+
+  <div class="mcms-window">
+    <div class="mcms-titlebar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span style="margin-left: 8px;">MicroCMS &mdash; 白樺村</span>
+    </div>
+    <div class="mcms-sidebar">
+      <div class="mcms-nav">
+        <div class="mcms-nav-item active">property</div>
+        <div class="mcms-nav-item">case</div>
+        <div class="mcms-nav-item">useful-infos</div>
+        <div class="mcms-nav-item">news</div>
+        <div class="mcms-nav-item" style="margin-top: 20px; color: #AAA; font-size: 11px;">API設定</div>
+        <div class="mcms-nav-item" style="color: #AAA; font-size: 11px;">メンバー</div>
+      </div>
+      <div class="mcms-main">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h5 style="margin: 0;">property</h5>
+          <span class="mcms-btn mcms-btn-primary">+ 追加</span>
+        </div>
+        <div class="mcms-list-item">
+          <div class="mcms-thumb">🏠</div>
+          <div>
+            <div class="mcms-list-title">白樺湖畔の一軒家</div>
+            <div class="mcms-list-meta">茅野市北山 &middot; 1,980万円</div>
+          </div>
+          <span class="mcms-badge">公開中</span>
+        </div>
+        <div class="mcms-list-item">
+          <div class="mcms-thumb">🌲</div>
+          <div>
+            <div class="mcms-list-title">森の中のログハウス</div>
+            <div class="mcms-list-meta">茅野市北山 &middot; 1,280万円</div>
+          </div>
+          <span class="mcms-badge">公開中</span>
+        </div>
+        <div class="mcms-list-item">
+          <div class="mcms-thumb">🏔</div>
+          <div>
+            <div class="mcms-list-title">高台の土地 350坪</div>
+            <div class="mcms-list-meta">立科町 &middot; 680万円</div>
+          </div>
+          <span class="mcms-badge" style="background: #FFF3E0; color: #E65100;">下書き</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size: 13px; color: var(--color-text-secondary);">左のメニューからコンテンツ種別を選び、右側のリストから編集したい項目をクリックします。</p>
+
+  <div class="highlight">
+    <strong>反映タイミング：</strong>
+    MicroCMS で「公開」した内容は、次にサイトが読み込まれたタイミングで反映されます。Vercel のキャッシュにより、反映まで数分かかる場合があります。
+  </div>
+</section>
+
+<!-- ==================== 5. PROPERTY ==================== -->
+<section id="cms-property">
+  <h2>5. 物件情報の登録・編集</h2>
+  <p>MicroCMS の「property」API で管理します。</p>
+
+  <h3>入力フィールド一覧</h3>
+  <table>
+    <thead>
+      <tr><th>フィールド</th><th>内容</th><th>必須</th><th>入力例</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>title</strong></td><td>物件名称</td><td>必須</td><td>白樺湖畔の一軒家</td></tr>
+      <tr><td><strong>location</strong></td><td>地域名</td><td>必須</td><td>茅野市北山</td></tr>
+      <tr><td><strong>type</strong></td><td>物件種別（複数可）</td><td>必須</td><td>sell / rent / land</td></tr>
+      <tr><td><strong>image</strong></td><td>サムネイル画像</td><td>必須</td><td>一覧表示用のメイン写真</td></tr>
+      <tr><td><strong>images</strong></td><td>ギャラリー画像（複数）</td><td>任意</td><td>詳細ページの追加写真</td></tr>
+      <tr><td><strong>price</strong></td><td>価格</td><td>必須</td><td>1,980万円</td></tr>
+      <tr><td><strong>floorPlan</strong></td><td>間取り</td><td>任意</td><td>3LDK</td></tr>
+      <tr><td><strong>floorArea</strong></td><td>延床面積</td><td>任意</td><td>120.5m&sup2;</td></tr>
+      <tr><td><strong>specs</strong></td><td>スペック概要</td><td>任意</td><td>リフォーム済・南向き</td></tr>
+      <tr><td><strong>details</strong></td><td>詳細情報（HTML）</td><td>任意</td><td>テーブル形式で物件概要を記載</td></tr>
+      <tr><td><strong>comment</strong></td><td>担当者コメント</td><td>任意</td><td>おすすめポイントなど</td></tr>
+      <tr><td><strong>description</strong></td><td>説明文</td><td>任意</td><td>物件の紹介文</td></tr>
+      <tr><td><strong>address</strong></td><td>住所</td><td>任意</td><td>長野県茅野市北山...</td></tr>
+      <tr><td><strong>access</strong></td><td>アクセス方法</td><td>任意</td><td>中央道諏訪ICから30分</td></tr>
+    </tbody>
+  </table>
+
+  <div class="card">
+    <h4>物件種別（type）の値</h4>
+    <table>
+      <tbody>
+        <tr><td><code>sell</code></td><td>売買物件</td></tr>
+        <tr><td><code>rent</code></td><td>賃貸物件</td></tr>
+        <tr><td><code>land</code></td><td>土地</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>編集画面のイメージ</h3>
+  <div class="mcms-window">
+    <div class="mcms-titlebar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span style="margin-left: 8px;">property &mdash; コンテンツ編集</span>
+    </div>
+    <div style="padding: 20px;">
+      <div class="mcms-field">
+        <label>title <span class="req">必須</span></label>
+        <input type="text" value="白樺湖畔の一軒家" readonly>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="mcms-field">
+          <label>location <span class="req">必須</span></label>
+          <input type="text" value="茅野市北山" readonly>
+        </div>
+        <div class="mcms-field">
+          <label>price <span class="req">必須</span></label>
+          <input type="text" value="1,980万円" readonly>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+        <div class="mcms-field">
+          <label>type <span class="req">必須</span></label>
+          <select disabled><option>sell（売買）</option></select>
+        </div>
+        <div class="mcms-field">
+          <label>floorPlan</label>
+          <input type="text" value="3LDK" readonly>
+        </div>
+        <div class="mcms-field">
+          <label>floorArea</label>
+          <input type="text" value="120.5m&sup2;" readonly>
+        </div>
+      </div>
+      <div class="mcms-field">
+        <label>image <span class="req">必須</span></label>
+        <div class="mcms-img-upload">+</div>
+        <span style="font-size: 11px; color: #999; margin-top: 4px; display: block;">クリックして画像をアップロード</span>
+      </div>
+      <div class="mcms-field">
+        <label>comment</label>
+        <textarea readonly>湖畔まで徒歩5分。リフォーム済みですぐに生活を始められます。</textarea>
+      </div>
+      <div class="mcms-toolbar">
+        <span class="mcms-btn mcms-btn-outline">下書き保存</span>
+        <span class="mcms-btn mcms-btn-primary">公開</span>
+      </div>
+    </div>
+  </div>
+  <p style="font-size: 13px; color: var(--color-text-secondary);">各フィールドに入力し、「公開」ボタンを押すとサイトに反映されます。「下書き保存」は公開せずに保存します。</p>
+
+  <h3>表示される場所</h3>
+  <ul>
+    <li><strong>トップページ</strong>：最新6件がカード形式で表示</li>
+    <li><strong>物件一覧（/property/）</strong>：全物件がリスト表示</li>
+    <li><strong>物件詳細（/property/[ID]/）</strong>：ギャラリー + 全フィールドが表示</li>
+  </ul>
+</section>
+
+<!-- ==================== 6. CASE ==================== -->
+<section id="cms-case">
+  <h2>6. 事業者事例の登録・編集</h2>
+  <p>MicroCMS の「case」API で管理します。</p>
+
+  <h3>入力フィールド一覧</h3>
+  <table>
+    <thead>
+      <tr><th>フィールド</th><th>内容</th><th>必須</th><th>入力例</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>title</strong></td><td>事業者名・施設名</td><td>必須</td><td>Cafe Birch</td></tr>
+      <tr><td><strong>image</strong></td><td>メイン画像</td><td>必須</td><td>事業者の写真</td></tr>
+      <tr><td><strong>operator</strong></td><td>事業者の人名</td><td>任意</td><td>山田太郎</td></tr>
+      <tr><td><strong>businessType</strong></td><td>事業の種類</td><td>任意</td><td>カフェ / 民宿 / アウトドアガイド</td></tr>
+      <tr><td><strong>previousJob</strong></td><td>前職</td><td>任意</td><td>IT企業勤務</td></tr>
+      <tr><td><strong>phone</strong></td><td>電話番号</td><td>任意</td><td>0266-XX-XXXX</td></tr>
+      <tr><td><strong>website</strong></td><td>ウェブサイトURL</td><td>任意</td><td>https://example.com</td></tr>
+      <tr><td><strong>qa</strong></td><td>インタビューQ&amp;A（繰り返し）</td><td>任意</td><td>質問と回答のペアを複数追加</td></tr>
+    </tbody>
+  </table>
+
+  <h3>編集画面のイメージ</h3>
+  <div class="mcms-window">
+    <div class="mcms-titlebar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span style="margin-left: 8px;">case &mdash; コンテンツ編集</span>
+    </div>
+    <div style="padding: 20px;">
+      <div class="mcms-field">
+        <label>title <span class="req">必須</span></label>
+        <input type="text" value="Cafe Birch" readonly>
+      </div>
+      <div class="mcms-field">
+        <label>image <span class="req">必須</span></label>
+        <div class="mcms-img-upload">+</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="mcms-field">
+          <label>operator</label>
+          <input type="text" value="山田 太郎" readonly>
+        </div>
+        <div class="mcms-field">
+          <label>businessType</label>
+          <input type="text" value="カフェ" readonly>
+        </div>
+      </div>
+      <div class="mcms-field">
+        <label>previousJob</label>
+        <input type="text" value="IT企業勤務" readonly>
+      </div>
+      <div style="border: 1px solid #E0E0E0; border-radius: 6px; padding: 16px; margin-bottom: 16px;">
+        <label style="font-size: 12px; font-weight: 600; color: #555; display: block; margin-bottom: 8px;">qa（繰り返しフィールド）</label>
+        <div style="background: #F9F9FC; border-radius: 4px; padding: 12px; margin-bottom: 8px; border-left: 3px solid #4A6CF7;">
+          <div class="mcms-field" style="margin-bottom: 8px;">
+            <label style="font-size: 11px;">question</label>
+            <input type="text" value="なぜ白樺湖で開業しようと思ったのですか？" readonly style="font-size: 12px;">
+          </div>
+          <div class="mcms-field" style="margin-bottom: 0;">
+            <label style="font-size: 11px;">answer</label>
+            <textarea readonly style="font-size: 12px; height: 40px;">東京で働いていた頃から自然の中で暮らしたいと思っていて...</textarea>
+          </div>
+        </div>
+        <span class="mcms-btn mcms-btn-outline" style="font-size: 11px;">+ Q&amp;A を追加</span>
+      </div>
+      <div class="mcms-toolbar">
+        <span class="mcms-btn mcms-btn-outline">下書き保存</span>
+        <span class="mcms-btn mcms-btn-primary">公開</span>
+      </div>
+    </div>
+  </div>
+  <p style="font-size: 13px; color: var(--color-text-secondary);">Q&amp;A は「+ Q&amp;A を追加」ボタンで質問・回答ペアを増やせます。不要なものは右端の削除ボタンで削除できます。</p>
+
+  <h3>表示される場所</h3>
+  <ul>
+    <li><strong>トップページ</strong>：画像グリッドで全事業者を表示</li>
+    <li><strong>事業者詳細（/business/[ID]/）</strong>：プロフィール + インタビュー全文</li>
+  </ul>
+</section>
+
+<!-- ==================== 7. USEFUL ==================== -->
+<section id="cms-useful">
+  <h2>7. お役立ち帳の登録・編集</h2>
+  <p>MicroCMS の「useful-infos」API で管理します。</p>
+
+  <h3>入力フィールド一覧</h3>
+  <table>
+    <thead>
+      <tr><th>フィールド</th><th>内容</th><th>必須</th><th>入力例</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>title</strong></td><td>施設名・サービス名</td><td>必須</td><td>諏訪中央病院</td></tr>
+      <tr><td><strong>category</strong></td><td>カテゴリ</td><td>必須</td><td>病院 / スーパー / 役所</td></tr>
+      <tr><td><strong>description</strong></td><td>説明文</td><td>任意</td><td>救急対応あり</td></tr>
+      <tr><td><strong>address</strong></td><td>住所</td><td>任意</td><td>長野県茅野市...</td></tr>
+      <tr><td><strong>phone</strong></td><td>電話番号</td><td>任意</td><td>0266-XX-XXXX</td></tr>
+      <tr><td><strong>url</strong></td><td>ウェブサイト</td><td>任意</td><td>https://...</td></tr>
+      <tr><td><strong>image</strong></td><td>施設画像</td><td>任意</td><td>施設の外観写真など</td></tr>
+    </tbody>
+  </table>
+
+  <h3>編集画面のイメージ</h3>
+  <div class="mcms-window">
+    <div class="mcms-titlebar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span style="margin-left: 8px;">useful-infos &mdash; コンテンツ編集</span>
+    </div>
+    <div style="padding: 20px;">
+      <div class="mcms-field">
+        <label>title <span class="req">必須</span></label>
+        <input type="text" value="諏訪中央病院" readonly>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="mcms-field">
+          <label>category <span class="req">必須</span></label>
+          <input type="text" value="病院" readonly>
+        </div>
+        <div class="mcms-field">
+          <label>phone</label>
+          <input type="text" value="0266-72-1000" readonly>
+        </div>
+      </div>
+      <div class="mcms-field">
+        <label>address</label>
+        <input type="text" value="長野県茅野市玉川4300" readonly>
+      </div>
+      <div class="mcms-field">
+        <label>description</label>
+        <textarea readonly>総合病院。救急外来あり。内科・外科・小児科・整形外科など。</textarea>
+      </div>
+      <div class="mcms-field">
+        <label>url</label>
+        <input type="text" value="https://www.suwachuo.jp/" readonly>
+      </div>
+      <div class="mcms-field">
+        <label>image</label>
+        <div class="mcms-img-upload">+</div>
+      </div>
+      <div class="mcms-toolbar">
+        <span class="mcms-btn mcms-btn-outline">下書き保存</span>
+        <span class="mcms-btn mcms-btn-primary">公開</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <strong>カテゴリについて：</strong>
+    カテゴリは自由入力です。同じカテゴリ名を使うと、サイト上でタブ（フィルタ）として自動的にまとまります。カテゴリ名の表記ゆれ（例：「スーパー」と「スーパーマーケット」）にご注意ください。
+  </div>
+
+  <h3>表示される場所</h3>
+  <ul>
+    <li><strong>トップページ</strong>：カテゴリ別タブ付きリスト</li>
+    <li><strong>お役立ち帳（/useful/）</strong>：フィルタ付き全件表示</li>
+  </ul>
+</section>
+
+<!-- ==================== 8. NEWS ==================== -->
+<section id="cms-news">
+  <h2>8. ニュースの登録・編集</h2>
+  <p>MicroCMS の「news」API で管理します。</p>
+
+  <h3>入力フィールド一覧</h3>
+  <table>
+    <thead>
+      <tr><th>フィールド</th><th>内容</th><th>必須</th><th>入力例</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>title</strong></td><td>ニュースタイトル</td><td>必須</td><td>白樺村サイトをリニューアルしました</td></tr>
+      <tr><td><strong>date</strong></td><td>日付</td><td>必須</td><td>2026-02-28</td></tr>
+      <tr><td><strong>content</strong></td><td>本文</td><td>任意</td><td>詳細テキスト</td></tr>
+      <tr><td><strong>category</strong></td><td>カテゴリ</td><td>任意</td><td>お知らせ / イベント</td></tr>
+    </tbody>
+  </table>
+
+  <h3>編集画面のイメージ</h3>
+  <div class="mcms-window">
+    <div class="mcms-titlebar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span style="margin-left: 8px;">news &mdash; コンテンツ編集</span>
+    </div>
+    <div style="padding: 20px;">
+      <div class="mcms-field">
+        <label>title <span class="req">必須</span></label>
+        <input type="text" value="白樺村サイトをリニューアルしました" readonly>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="mcms-field">
+          <label>date <span class="req">必須</span></label>
+          <input type="text" value="2026-02-28" readonly>
+        </div>
+        <div class="mcms-field">
+          <label>category</label>
+          <input type="text" value="お知らせ" readonly>
+        </div>
+      </div>
+      <div class="mcms-field">
+        <label>content</label>
+        <textarea readonly style="height: 80px;">新しいデザインでサイトをリニューアルしました。物件情報やお役立ち帳が見やすくなりました。今後ともよろしくお願いいたします。</textarea>
+      </div>
+      <div class="mcms-toolbar">
+        <span class="mcms-btn mcms-btn-outline">下書き保存</span>
+        <span class="mcms-btn mcms-btn-primary">公開</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>表示される場所</h3>
+  <ul>
+    <li><strong>トップページ</strong>：最新3件がリスト表示（新しい順）</li>
+  </ul>
+</section>
+
+<!-- ==================== 9. CONTACT ==================== -->
+<section id="contact">
+  <h2>9. お問い合わせフォーム</h2>
+
+  <p>トップページ下部にお問い合わせフォームが設置されています。</p>
+
+  <h3>フォームの項目</h3>
+  <table>
+    <thead>
+      <tr><th>項目</th><th>必須</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>お名前</td><td>必須</td></tr>
+      <tr><td>メールアドレス</td><td>必須</td></tr>
+      <tr><td>電話番号</td><td>任意</td></tr>
+      <tr><td>お問い合わせ内容</td><td>必須</td></tr>
+    </tbody>
+  </table>
+
+  <h3>送信時の動作</h3>
+  <ol class="steps">
+    <li><strong>スパム判定</strong><br>
+      Google reCAPTCHA v3 でボットかどうかを自動判定</li>
+    <li><strong>管理者に通知メール</strong><br>
+      <code>shirakabamura@cfquod.jp</code> 宛てに問い合わせ内容が届く</li>
+    <li><strong>お客様に自動返信</strong><br>
+      お客様のメールアドレスに受付確認メールが届く</li>
+  </ol>
+
+  <div class="card">
+    <h4>メール送信について</h4>
+    <p>メール送信には <strong>Resend</strong> というサービスを使用しています。送信元アドレスは <code>noreply@shirakabamura.com</code> です。</p>
+    <p>管理者の受信先を変更したい場合は、開発者にご連絡ください。</p>
+  </div>
+</section>
+
+<!-- ==================== 10. DEPLOY ==================== -->
+<section id="deploy">
+  <h2>10. 公開・デプロイの仕組み</h2>
+
+  <h3>サイト更新の2つの方法</h3>
+
+  <div class="card">
+    <h4>A. コンテンツの更新（MicroCMS）</h4>
+    <p>物件・事業者・お役立ち・ニュースなど、<strong>データの追加・編集・削除</strong>はMicroCMSから行います。コードの変更は不要です。</p>
+    <div class="flow">
+      <span class="box">MicroCMSで編集</span>
+      <span class="arrow">&rarr;</span>
+      <span class="box">公開ボタン</span>
+      <span class="arrow">&rarr;</span>
+      <span class="box">サイトに自動反映</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4>B. デザイン・機能の更新（コード変更）</h4>
+    <p>レイアウト変更・新機能追加・デザイン修正など、<strong>サイトの見た目や動作を変える</strong>場合はコード修正が必要です。</p>
+    <div class="flow">
+      <span class="box">コード修正</span>
+      <span class="arrow">&rarr;</span>
+      <span class="box">PR作成</span>
+      <span class="arrow">&rarr;</span>
+      <span class="box">レビュー</span>
+      <span class="arrow">&rarr;</span>
+      <span class="box">マージ</span>
+      <span class="arrow">&rarr;</span>
+      <span class="box">自動デプロイ</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 11. DNS ==================== -->
+<section id="dns">
+  <h2>11. ドメイン・DNS設定</h2>
+
+  <h3>現在の構成</h3>
+  <div class="overview-card">
+    <table>
+      <tbody>
+        <tr><td>ドメイン</td><td>shirakabamura.com</td></tr>
+        <tr><td>ドメイン登録先</td><td>ムームードメイン（muumuu-domain.com）</td></tr>
+        <tr><td>ネームサーバー</td><td>dns01.muumuu-domain.com / dns02.muumuu-domain.com</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Vercel ドメイン設定</h3>
+  <p>ムームードメインの DNS 設定で、以下のレコードを登録します。</p>
+
+  <!-- Vercel DNS mock: shirakabamura.com -->
+  <div class="dns-panel">
+    <div class="dns-panel-header">
+      <span class="status-dot status-warn"></span>
+      <span>shirakabamura.com</span>
+      <span style="font-size: 12px; color: #999; font-weight: 400; margin-left: 8px;">&rarr; www.shirakabamura.com へ 307 リダイレクト</span>
+    </div>
+    <div class="dns-panel-body">
+      <table>
+        <thead><tr><th>Type</th><th>Name</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>A</td><td>@</td><td>216.150.1.1</td></tr>
+        </tbody>
+      </table>
+      <div class="dns-panel-note">
+        Vercel の新しい IP レンジ（216.150.1.1）を使用します。旧 IP（76.76.21.21）や cname.vercel-dns.com も引き続き動作しますが、新しい値の使用を推奨します。
+      </div>
+    </div>
+  </div>
+
+  <!-- Vercel DNS mock: www -->
+  <div class="dns-panel">
+    <div class="dns-panel-header">
+      <span class="status-dot status-warn"></span>
+      <span>www.shirakabamura.com</span>
+      <span style="font-size: 12px; color: #999; font-weight: 400; margin-left: 8px;">Production</span>
+    </div>
+    <div class="dns-panel-body">
+      <table>
+        <thead><tr><th>Type</th><th>Name</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>CNAME</td><td>www</td><td>7aa1c10e21dc4783.vercel-dns-016.com.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>メール送信用 DNS 設定（Resend）</h3>
+  <p>お問い合わせフォームのメール送信（<code>noreply@shirakabamura.com</code>）を正常に届けるため、以下の DNS レコードも必要です。</p>
+
+  <!-- Resend DNS: DKIM -->
+  <div class="dns-panel">
+    <div class="dns-panel-header">
+      <span style="font-weight: 600;">Domain Verification（DKIM）</span>
+    </div>
+    <div class="dns-panel-body">
+      <table>
+        <thead><tr><th>Type</th><th>Name</th><th>Content</th></tr></thead>
+        <tbody>
+          <tr><td>TXT</td><td>resend._domainkey</td><td style="word-break: break-all;">p=MIGfMA...QIDAQAB</td></tr>
+        </tbody>
+      </table>
+      <div class="dns-panel-note">DKIM 署名用の公開鍵。メールの送信元を証明するために必要です。実際の値は Resend 管理画面で確認してください。</div>
+    </div>
+  </div>
+
+  <!-- Resend DNS: SPF -->
+  <div class="dns-panel">
+    <div class="dns-panel-header">
+      <span style="font-weight: 600;">SPF（送信許可）</span>
+    </div>
+    <div class="dns-panel-body">
+      <table>
+        <thead><tr><th>Type</th><th>Name</th><th>Content</th><th>Priority</th></tr></thead>
+        <tbody>
+          <tr><td>MX</td><td>send</td><td>feedback-smtp.us-east-1.amazonses.com</td><td>10</td></tr>
+          <tr><td>TXT</td><td>send</td><td>v=spf1 include:amazonses.com ~all</td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Resend DNS: DMARC -->
+  <div class="dns-panel">
+    <div class="dns-panel-header">
+      <span style="font-weight: 600;">DMARC（任意・推奨）</span>
+    </div>
+    <div class="dns-panel-body">
+      <table>
+        <thead><tr><th>Type</th><th>Name</th><th>Content</th></tr></thead>
+        <tbody>
+          <tr><td>TXT</td><td>_dmarc</td><td>v=DMARC1; p=none;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>DNS 設定の確認手順</h3>
+  <ol class="steps">
+    <li><strong>DNS反映を待つ</strong><br>
+      変更後、反映まで数分〜最大48時間かかります（通常は30分以内）</li>
+    <li><strong>SSL証明書</strong><br>
+      Vercel が自動でSSL証明書（HTTPS）を発行します。手動設定は不要です</li>
+    <li><strong>動作確認</strong><br>
+      <code>https://shirakabamura.com</code> にアクセスして新サイトが表示されることを確認</li>
+    <li><strong>メール送信テスト</strong><br>
+      お問い合わせフォームからテスト送信し、メールが正常に届くことを確認</li>
+  </ol>
+
+  <div class="highlight">
+    <strong>切り替え時の注意：</strong><br>
+    DNS変更は全世界に反映されるまでタイムラグがあります。旧サイトと新サイトが混在する時間帯が発生するため、アクセスが少ない時間帯（深夜〜早朝）での切り替えを推奨します。
+  </div>
+</section>
+
+<!-- ==================== 12. SEO ==================== -->
+<section id="seo">
+  <h2>12. SEO・OGP設定</h2>
+
+  <h3>基本設定</h3>
+  <table>
+    <thead>
+      <tr><th>項目</th><th>設定値</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>ページタイトル</strong></td><td>白樺村｜白樺湖周辺での移住・開業・くらしをサポート</td></tr>
+      <tr><td><strong>サブページタイトル形式</strong></td><td>[ページ名]｜白樺村</td></tr>
+      <tr><td><strong>ディスクリプション</strong></td><td>「50年先も続くレイクリゾート」をめざす白樺村。白樺湖周辺での移住・開業・不動産物件...</td></tr>
+      <tr><td><strong>OGP画像</strong></td><td>/images/top/mv.jpg（1280&times;800px）</td></tr>
+      <tr><td><strong>言語</strong></td><td>日本語（ja_JP）</td></tr>
+    </tbody>
+  </table>
+
+  <h3>アクセス解析</h3>
+  <table>
+    <tbody>
+      <tr><td><strong>Google Analytics</strong></td><td>G-8SE19JC0CG</td></tr>
+    </tbody>
+  </table>
+
+  <h3>構造化マークアップ（Schema.org）</h3>
+  <p>検索エンジンに対して、以下の構造化データを自動出力しています。</p>
+  <table>
+    <thead>
+      <tr><th>ページ</th><th>マークアップ種別</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>トップ</td><td>LocalBusiness（法人情報）</td></tr>
+      <tr><td>物件詳細</td><td>RealEstateListing（不動産情報）</td></tr>
+      <tr><td>ロケーションレンタル</td><td>TouristAttraction（観光施設）</td></tr>
+      <tr><td>事業者詳細</td><td>FAQPage（Q&amp;A形式）</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ==================== 13. DESIGN GUIDE ==================== -->
+<section id="design-guide">
+  <h2>13. デザインガイド（カラー・フォント）</h2>
+  <p>サイトで使用しているカラーとフォントの一覧です。新しいページやコンポーネントを追加する際はこれらを参照してください。</p>
+
+  <h3>カラーパレット</h3>
+
+  <div class="color-palette">
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#253c30;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-hex">#253c30</div>
+        <div class="color-swatch-label">プライマリ<br>テキスト・ブランド</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#94b3ba;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-hex">#94b3ba</div>
+        <div class="color-swatch-label">サブカラー<br>くすみティール</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#2ca4a8;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-hex">#2ca4a8</div>
+        <div class="color-swatch-label">アクセント<br>ボタンホバー</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#a1d1db;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-hex">#a1d1db</div>
+        <div class="color-swatch-label">ライトティール<br>ボタン（blue）</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#f8f8f5; border-bottom: 1px solid var(--color-border);"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-hex">#f8f8f5</div>
+        <div class="color-swatch-label">背景<br>オフホワイト</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#f5f4f0; border-bottom: 1px solid var(--color-border);"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-hex">#f5f4f0</div>
+        <div class="color-swatch-label">セクション背景<br>ライトベージュ</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#ffffff; border-bottom: 1px solid var(--color-border);"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-hex">#ffffff</div>
+        <div class="color-swatch-label">ホワイト<br>カード・本文背景</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#c03c3c;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-hex">#c03c3c</div>
+        <div class="color-swatch-label">エラー・警告<br>フォーム等</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 32px;">フォント</h3>
+
+  <div class="font-demo">
+    <div class="font-demo-name">① Zen Kaku Gothic Antique — メイン和文フォント（Google Fonts）</div>
+    <div class="font-demo-sample" style="font-family: var(--font-zen-kaku, 'Zen Kaku Gothic Antique', sans-serif);">
+      白樺湖に浮かぶ中之島　ABC 123
+    </div>
+    <div class="font-demo-meta">
+      ウェイト: <code>400</code> / <code>700</code> &nbsp;｜&nbsp;
+      CSS変数: <code>--font-zen-kaku</code> &nbsp;｜&nbsp;
+      クラス: <code>.font-kinto</code><br>
+      用途: 本文・見出し全般（デフォルトフォント）
+    </div>
+  </div>
+
+  <div class="font-demo">
+    <div class="font-demo-name">② FOT-筑紫A丸ゴシック Std（fot-tsukuardgothic-std）— Adobe Typekit</div>
+    <div class="font-demo-sample" style="font-family: 'fot-tsukuardgothic-std', sans-serif;">
+      白樺湖に浮かぶ中之島　ABC 123
+    </div>
+    <div class="font-demo-meta">
+      ロード: Adobe Typekit <code>bvi2lkh</code> &nbsp;｜&nbsp;
+      クラス: <code>.font-tsuku</code><br>
+      用途: 一部ラベル・アクセントテキスト
+    </div>
+  </div>
+
+  <div class="font-demo">
+    <div class="font-demo-name">③ Inter — 数字・英字補完（Google Fonts）</div>
+    <div class="font-demo-sample" style="font-family: 'Inter', sans-serif;">
+      shirakabamura.com &nbsp; 2,000㎡ &nbsp; ¥150,000
+    </div>
+    <div class="font-demo-meta">
+      CSS変数: <code>--font-inter</code><br>
+      用途: URL・数値・英字が多い箇所での補完
+    </div>
+  </div>
+
+  <div class="font-demo">
+    <div class="font-demo-name">フォールバックスタック</div>
+    <div class="font-demo-meta" style="margin-top: 0;">
+      <code>"Zen Kaku Gothic Antique"</code> → <code>"Yu Gothic"</code> → <code>"Hiragino Sans"</code> → <code>"Hiragino Kaku Gothic Pro"</code> → <code>"Meiryo"</code> → <code>sans-serif</code>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.container -->
+
+<!-- ==================== FOOTER ==================== -->
+<div class="site-footer">
+  <p>All Rights Reserved, Cohan Studio</p>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 97.81 13.07" style="height: 24px; width: auto;"><g><path fill="#fff" d="M6.26,7.08c.13-.14.27-.23.44-.26.4-.08.71.17.78.52.04.19-.01.36-.12.53-.52.83-1.49,1.35-2.41,1.55-2.3.48-4.33-.76-4.84-3.22C-.41,3.74.95,1.79,3.26,1.31c.92-.19,2.01-.1,2.83.45.17.11.28.25.32.44.07.35-.11.71-.51.79-.16.03-.33,0-.5-.07-.52-.25-1.06-.45-1.86-.29-1.54.32-2.31,1.7-1.98,3.26s1.58,2.51,3.12,2.19c.8-.17,1.22-.57,1.59-1.01Z"/><path fill="#fff" d="M13.09,8.27c-2.34.19-4.24-1.48-4.43-3.79C8.48,2.17,10.08.21,12.42.01s4.24,1.48,4.43,3.79c.19,2.31-1.41,4.27-3.75,4.46ZM12.53,1.33c-1.63.13-2.51,1.51-2.39,3.02.12,1.52,1.22,2.73,2.85,2.6s2.51-1.51,2.39-3.03c-.12-1.52-1.22-2.73-2.85-2.6Z"/><path fill="#fff" d="M24.37,9.18c-.4-.09-.64-.49-.54-.89l.63-2.71-3.69-.86-.63,2.71c-.09.4-.47.65-.87.56-.4-.09-.65-.5-.56-.89l1.52-6.52c.09-.4.5-.65.89-.56s.63.49.53.89l-.58,2.48,3.69.86.58-2.48c.09-.4.48-.65.88-.56s.64.49.54.89l-1.52,6.52c-.09.4-.48.65-.88.56Z"/><path fill="#fff" d="M32.34,10.83l-3.34-1.21-1.14,1.14c-.21.18-.42.27-.71.16-.41-.15-.54-.55-.42-.88.03-.09.09-.17.17-.25l5.22-5.37c.18-.19.42-.25.72-.15.29.11.44.3.46.57l.55,7.47c.01.11,0,.21-.03.3-.12.33-.48.55-.89.4-.29-.11-.4-.3-.44-.58l-.14-1.61ZM32.16,6.15l-2.22,2.44,2.35.85-.13-3.29Z"/><path fill="#fff" d="M44.19,12.12c-.22.04-.4-.02-.56-.16l-4.94-4.48.79,4.74c.06.38-.2.73-.57.79-.37.06-.73-.2-.79-.56l-1.12-6.71c-.06-.37.16-.73.6-.81.19-.03.41.04.54.17l4.94,4.48-.79-4.72c-.06-.37.16-.73.56-.8.4-.07.74.21.8.57l1.12,6.71c.06.37-.17.72-.57.79Z"/><path fill="#fff" d="M54.05,10.01c-.96.16-2.1.04-2.87-.38-.27-.15-.47-.36-.51-.62-.06-.37.14-.65.5-.71.13-.02.25,0,.38.05.71.3,1.2.58,2.31.4,1.14-.18,1.51-.72,1.43-1.25-.09-.58-.6-.8-2.09-.95-2.24-.22-2.99-.8-3.18-1.99-.23-1.44.88-2.42,2.77-2.72.43-.07,1.02-.09,1.55-.03.57.07,1.31.3,1.39.77.05.32-.08.68-.49.75-.09.02-.19.02-.29-.01-.58-.16-1.19-.32-1.94-.2-1.05.17-1.65.56-1.55,1.17.09.58.6.7,2.09.89,1.7.21,2.92.49,3.17,2,.22,1.37-.66,2.51-2.67,2.84Z"/><path fill="#fff" d="M64.77,3.27l-2.04-.23-.66,5.93c-.04.41-.42.7-.82.66-.41-.04-.68-.41-.63-.82l.66-5.93-2.05-.23c-.38-.04-.66-.39-.62-.76.04-.38.38-.66.77-.61l5.55.62c.38.04.66.39.62.77-.04.37-.37.65-.77.6Z"/><path fill="#fff" d="M72.8,4.71c.05-.41.41-.7.82-.65s.69.42.64.83l-.49,4.09c-.25,2.05-1.68,3.2-3.8,2.94s-3.24-1.71-2.99-3.76l.49-4.09c.05-.41.41-.7.82-.65s.69.42.64.83l-.51,4.24c-.13,1.11.44,1.96,1.72,2.12,1.28.15,2.04-.54,2.17-1.65l.51-4.24Z"/><path fill="#fff" d="M80.2,10.53l-2.16.41c-.4.08-.79-.19-.87-.59l-1.23-6.4c-.08-.4.19-.78.59-.86l2.16-.41c2.39-.46,4.24.98,4.66,3.17.42,2.19-.77,4.21-3.16,4.67ZM78.88,4.02l-1.38.26.99,5.18,1.38-.26c1.62-.31,2.34-1.56,2.05-3.08-.29-1.52-1.42-2.42-3.04-2.1Z"/><path fill="#fff" d="M86.54,9.8c-.41.01-.75-.31-.77-.72l-.21-6.69c-.01-.41.31-.75.72-.77.41-.01.73.31.74.72l.21,6.69c.01.41-.29.75-.7.77Z"/><path fill="#fff" d="M92.91,10.4c-2.31-.45-3.68-2.57-3.24-4.85.44-2.27,2.51-3.73,4.82-3.28,2.31.45,3.68,2.57,3.24,4.85-.44,2.27-2.51,3.73-4.82,3.28ZM94.24,3.56c-1.6-.31-2.83.77-3.12,2.27s.44,2.96,2.04,3.27c1.6.31,2.83-.77,3.12-2.27.29-1.5-.44-2.96-2.04-3.27Z"/></g></svg>
+</div>
+
+</body>
+</html>

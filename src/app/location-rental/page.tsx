@@ -68,15 +68,16 @@ export default function LocationRentalPage() {
         {/* ══ Hero ══ */}
         <section className={styles.hero}>
           <div className={styles.heroTop}>
-            <div className={styles.heroIcon}>
+            <div className={`${styles.heroIcon} c-iconTitle`}>
+              <h1 className="c-iconTitle__text">ロケーション<br />レンタル</h1>
               <Image
+                className="c-iconTitle__icon"
                 src="/images/nakanoshima.svg"
                 alt=""
                 width={155}
                 height={146}
               />
             </div>
-            <h1 className={styles.heroTitle}>ロケーション<br />レンタル</h1>
             <p className={styles.heroDesc}>
               白樺湖に浮かぶ約2,000平方メートルの中之島（なかのしま）をお貸しします
             </p>

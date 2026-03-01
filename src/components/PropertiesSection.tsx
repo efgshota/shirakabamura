@@ -45,15 +45,16 @@ export default function PropertiesSection({
           ref={titleRef}
           className={`${styles.titleWrap} ${titleVisible ? styles.visible : ""}`}
         >
-          <div className={styles.titleIcon}>
+          <div className={`${styles.titleIcon} c-iconTitle`}>
+            <h2 className="c-iconTitle__text font-tsuku">白樺村の物件</h2>
             <Image
+              className="c-iconTitle__icon"
               src="/images/common/icon_property.svg"
               alt=""
               width={100}
               height={100}
             />
           </div>
-          <h2 className={styles.title}>白樺村の<br />物件</h2>
           <p className={styles.subtitle}>
             湖のほとり、森の中、山の景色、
             <br />
