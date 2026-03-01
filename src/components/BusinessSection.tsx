@@ -53,7 +53,7 @@ export default function BusinessSection({ businesses }: { businesses: BusinessIt
             {businesses.map((biz) => (
               <Link
                 key={biz.id}
-                href={`/business/${encodeURIComponent(biz.id)}/`}
+                href={`/stories/${encodeURIComponent(biz.slug ?? biz.id)}/`}
                 className={styles.card}
               >
                 <div className={styles.cardImage}>

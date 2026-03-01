@@ -40,16 +40,16 @@ function normalizeStaticBiz(b: (typeof staticBusinesses)[number]): BizData {
 }
 
 export async function generateStaticParams() {
-  const ids: string[] = [];
+  const slugs: string[] = [];
   try {
     const { contents } = await getBusinesses({ limit: 100 });
-    ids.push(...contents.map((b) => b.id));
+    slugs.push(...contents.map((b) => b.slug ?? b.id));
   } catch {
     // fallback
   }
-  const staticIds = staticBusinesses.map((b) => b.slug);
-  const allIds = Array.from(new Set([...ids, ...staticIds]));
-  return allIds.map((id) => ({ slug: encodeURIComponent(id) }));
+  const staticSlugs = staticBusinesses.map((b) => b.slug);
+  const allSlugs = Array.from(new Set([...slugs, ...staticSlugs]));
+  return allSlugs.map((s) => ({ slug: encodeURIComponent(s) }));
 }
 
 export async function generateMetadata({
@@ -106,10 +106,14 @@ export default async function BusinessDetailPage({
   let allBizIds: { id: string; name: string; image: string }[] = [];
 
   try {
-    const [detail, list] = await Promise.all([
-      getBusiness(decoded),
-      getBusinesses({ limit: 100 }),
-    ]);
+    // slug フィールドで検索し、なければ id で取得
+    const list = await getBusinesses({ limit: 100 });
+    const matched = list.contents.find(
+      (b) => (b.slug ?? b.id) === decoded
+    );
+    const detail = matched
+      ? await getBusiness(matched.id)
+      : await getBusiness(decoded);
     const mainImage = getFirstImageUrl(detail.image);
     biz = {
       id: detail.id,
@@ -127,9 +131,9 @@ export default async function BusinessDetailPage({
       })),
     };
     allBizIds = list.contents
-      .filter((b) => b.id !== decoded)
+      .filter((b) => (b.slug ?? b.id) !== decoded)
       .map((b) => ({
-        id: b.id,
+        id: b.slug ?? b.id,
         name: b.title,
         image: getFirstImageUrl(b.image),
       }));
@@ -337,7 +341,7 @@ export default async function BusinessDetailPage({
                 {allBizIds.map((r) => (
                   <Link
                     key={r.id}
-                    href={`/business/${encodeURIComponent(r.id)}/`}
+                    href={`/stories/${encodeURIComponent(r.id)}/`}
                     className={styles.relatedCard}
                   >
                     {r.image && (

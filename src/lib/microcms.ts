@@ -19,6 +19,7 @@ export const client =
 // 物件情報
 export type Property = {
   title: string;
+  slug?: string;
   location: string;
   type: string[];
   image: MicroCMSImage | MicroCMSImage[];
@@ -49,6 +50,7 @@ export type UsefulInfo = {
 // 物件事例（caseエンドポイント）
 export type Case = {
   title: string;
+  slug?: string;
   image?: MicroCMSImage;
   operator?: string;
   businessType?: string;
@@ -64,6 +66,7 @@ export type Business = Case;
 // お知らせ
 export type News = {
   title: string;
+  slug?: string;
   date: string;
   content?: string;
   category?: string;
@@ -83,6 +86,7 @@ export type UsefulInfoItem = {
 // BusinessSection 共通型
 export type BusinessItem = {
   id: string;
+  slug?: string;
   name: string;
   image: string;
   businessType?: string;

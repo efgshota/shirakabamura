@@ -174,6 +174,7 @@ export default async function Home() {
     businessFetched = true;
     businessItems = contents.map((b) => ({
       id: b.id,
+      slug: b.slug,
       name: b.title,
       image: getFirstImageUrl(b.image),
       businessType: b.businessType,

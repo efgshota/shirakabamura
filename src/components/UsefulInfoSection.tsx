@@ -87,7 +87,7 @@ export default function UsefulInfoSection({ infos }: { infos: UsefulInfoItem[] }
         </div>
 
         <div className={styles.more}>
-          <Link href="/useful/" className="c-moreBtn">
+          <Link href="/info/" className="c-moreBtn">
             すべて見る
           </Link>
         </div>

@@ -4,7 +4,7 @@ import styles from "./Footer.module.css";
 const navItems = [
   { href: "/#intro", label: "はじめに" },
   { href: "/property/", label: "白樺村の物件" },
-  { href: "/useful/", label: "お役立ち帳" },
+  { href: "/info/", label: "お役立ち帳" },
   { href: "/location-rental/", label: "中之島の利用" },
   { href: "/#business", label: "事業者の方々へ" },
   { href: "/#contact", label: "お問い合わせ" },

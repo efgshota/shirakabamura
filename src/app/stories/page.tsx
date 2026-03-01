@@ -23,6 +23,7 @@ const FIG8_PATH =
 
 type BizItem = {
   id: string;
+  slug?: string;
   name: string;
   image: string;
   businessType?: string;
@@ -36,6 +37,7 @@ export default async function BusinessListPage() {
     if (contents.length > 0) {
       items = contents.map((b) => ({
         id: b.id,
+        slug: b.slug,
         name: b.title,
         image: getFirstImageUrl(b.image),
         businessType: b.businessType,
@@ -84,7 +86,7 @@ export default async function BusinessListPage() {
               {items.map((biz) => (
                 <Link
                   key={biz.id}
-                  href={`/business/${encodeURIComponent(biz.id)}/`}
+                  href={`/stories/${encodeURIComponent(biz.slug ?? biz.id)}/`}
                   className={styles.card}
                 >
                   <div className={styles.cardImage}>
