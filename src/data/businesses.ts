@@ -5,6 +5,7 @@ export type BusinessData = {
   businessType: string;
   previousJob: string;
   image: string;
+  photo?: string;
   phone?: string;
   website?: string;
   qa: { question: string; answer: string }[];
@@ -18,6 +19,7 @@ export const businesses: BusinessData[] = [
     businessType: "セレクトショップ",
     previousJob: "スキープレイヤー、都内ショップ",
     image: "/images/business/hygge.png",
+    photo: "/images/business/hygge/photo.jpg",
     phone: "050-5526-4408",
     website: "https://camp.hygge-shirakaba.com/",
     qa: [
@@ -58,6 +60,7 @@ export const businesses: BusinessData[] = [
     businessType: "カフェ経営",
     previousJob: "会社員",
     image: "/images/business/kariomon.png",
+    photo: "/images/business/kariomon/photo.jpg",
     phone: "0266-55-2139",
     website: "https://kariomon.shop/index.html",
     qa: [
@@ -98,6 +101,7 @@ export const businesses: BusinessData[] = [
     businessType: "ペンション経営",
     previousJob: "自衛隊員",
     image: "/images/business/pension-kofu.png",
+    photo: "/images/business/pension-kofu/photo.jpg",
     phone: "00000000000",
     website: "https://shirakabamura.com/",
     qa: [

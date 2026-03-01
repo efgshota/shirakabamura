@@ -1,0 +1,129 @@
+.page {
+  background: #f8f8f5;
+  min-height: 100vh;
+}
+
+.main {
+  padding-top: 100px;
+  padding-bottom: 0;
+}
+
+.hero {
+  text-align: center;
+  padding: 40px 0 64px;
+  background: #f8f8f5;
+}
+
+.inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.titleIcon {
+  margin-bottom: 32px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #253c30;
+  line-height: 1.8;
+}
+
+/* ===== List Section ===== */
+.listSection {
+  padding: 0 0 80px;
+  background: #b8b9d3;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding-top: 80px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.card:hover {
+  opacity: 0.85;
+}
+
+.cardImage {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.cardSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cardName {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+
+/* ===== CTA Section ===== */
+.cta {
+  background: #f8f8f5;
+  padding: 80px 0 120px;
+  text-align: center;
+}
+
+.ctaText {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: #253c30;
+  margin-bottom: 32px;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 767px) {
+  .main {
+    padding-top: 70px;
+  }
+
+  .inner {
+    padding: 0 24px;
+  }
+
+  .hero {
+    padding: 32px 0 48px;
+  }
+
+  .subtitle {
+    font-size: 1.4rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding-top: 48px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .cardName {
+    font-size: 1.8rem;
+  }
+
+  .cta {
+    padding: 60px 0 80px;
+  }
+
+  .ctaText {
+    font-size: 1.4rem;
+  }
+}

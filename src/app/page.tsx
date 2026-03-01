@@ -81,6 +81,7 @@ export default async function Home() {
         price: p.price,
         floorPlan: p.floorPlan ?? undefined,
         floorArea: p.floorArea ?? undefined,
+        landArea: p.landArea ?? undefined,
         highlight: p.comment ?? undefined,
         type: p.type?.[0] ?? undefined,
       }));
@@ -162,24 +163,24 @@ export default async function Home() {
     }));
   }
 
-  // 事業者データ（MicroCMS → 静的データフォールバック）
+  // 事業者データ（MicroCMS優先、接続エラー時のみ静的データフォールバック）
   let businessItems: BusinessItem[] = [];
+  let businessFetched = false;
 
   try {
     const { contents } = await getBusinesses({ limit: 100 });
-    if (contents.length > 0) {
-      businessItems = contents.map((b) => ({
-        id: b.id,
-        name: b.title,
-        image: getFirstImageUrl(b.image),
-        businessType: b.businessType,
-      }));
-    }
+    businessFetched = true;
+    businessItems = contents.map((b) => ({
+      id: b.id,
+      name: b.title,
+      image: getFirstImageUrl(b.image),
+      businessType: b.businessType,
+    }));
   } catch {
-    // fallback
+    // 接続エラー時のみ静的データを使用
   }
 
-  if (businessItems.length === 0) {
+  if (!businessFetched) {
     businessItems = staticBusinesses.map((b) => ({
       id: b.slug,
       name: b.name,

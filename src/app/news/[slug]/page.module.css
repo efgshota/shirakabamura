@@ -1,0 +1,173 @@
+.page {
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+.main {
+  padding-top: 100px;
+  padding-bottom: 120px;
+}
+
+.article {
+  padding: 48px 0 0;
+}
+
+.inner {
+  max-width: 733px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.date {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #94b3ba;
+  letter-spacing: 0.05em;
+}
+
+.category {
+  font-size: 1.2rem;
+  color: #94b3ba;
+  border: 1px solid #94b3ba;
+  padding: 2px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+
+.title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #253c30;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  margin-bottom: 40px;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  margin-bottom: 48px;
+}
+
+/* MicroCMS リッチテキスト */
+.content {
+  font-size: 1.5rem;
+  line-height: 1.9;
+  color: #253c30;
+}
+
+.content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 48px 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #94b3ba;
+}
+
+.content h3 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin: 36px 0 16px;
+}
+
+.content h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 28px 0 12px;
+}
+
+.content p {
+  margin-bottom: 24px;
+}
+
+/* Tailwind preflight がリストマーカーを消すので明示的に復元 */
+.content ul {
+  list-style-type: disc;
+  margin: 0 0 24px 1.5em;
+}
+
+.content ol {
+  list-style-type: decimal;
+  margin: 0 0 24px 1.5em;
+}
+
+.content li {
+  margin-bottom: 8px;
+}
+
+/* Tailwind preflight が strong/em をリセットするので復元 */
+.content strong {
+  font-weight: 700;
+}
+
+.content em {
+  font-style: italic;
+}
+
+.content u {
+  text-decoration: underline;
+}
+
+.content a {
+  color: #2ca4a8;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.content blockquote {
+  border-left: 4px solid #94b3ba;
+  padding-left: 20px;
+  margin: 0 0 24px;
+  color: rgba(37, 60, 48, 0.7);
+}
+
+.content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 24px 0;
+}
+
+.content hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 40px 0;
+}
+
+.noContent {
+  font-size: 1.5rem;
+  color: #253c30;
+  opacity: 0.5;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.backLink {
+  margin-top: 64px;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding-top: 70px;
+  }
+
+  .inner {
+    padding: 0 24px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .content {
+    font-size: 1.4rem;
+  }
+}

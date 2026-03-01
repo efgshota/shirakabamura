@@ -26,6 +26,7 @@ export type Property = {
   price: string;
   floorPlan?: string | null;
   floorArea?: string | null;
+  landArea?: string | null;
   specs?: string;
   details?: string;
   comment?: string;
@@ -139,4 +140,9 @@ export const getBusiness = getCase;
 export async function getNews(queries?: MicroCMSQueries) {
   if (!client) throw new Error("MicroCMS client is not configured");
   return client.getList<News>({ endpoint: "news", queries });
+}
+
+export async function getNewsItem(contentId: string, queries?: MicroCMSQueries) {
+  if (!client) throw new Error("MicroCMS client is not configured");
+  return client.getListDetail<News>({ endpoint: "news", contentId, queries });
 }
