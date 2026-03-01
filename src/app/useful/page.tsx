@@ -45,15 +45,16 @@ export default async function UsefulListPage() {
       <main className={styles.main}>
         <section className={styles.hero}>
           <div className={styles.inner}>
-            <div className={styles.titleIcon}>
+            <div className={`${styles.titleIcon} c-iconTitle`}>
+              <h1 className="c-iconTitle__text">お役立ち帳</h1>
               <Image
+                className="c-iconTitle__icon"
                 src="/images/common/icon_useful.svg"
                 alt=""
                 width={100}
                 height={100}
               />
             </div>
-            <h1 className={styles.title}>お役立ち帳</h1>
             <p className={styles.subtitle}>
               暮らしに関わる便利な連絡先集めてます
             </p>
