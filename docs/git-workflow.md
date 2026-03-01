@@ -214,22 +214,26 @@ git push
 ② 作業ブランチを作る
    git checkout -b feature/xxx
 
-③ コードを編集する
-   （Claude Code やエディタで作業）
+③ 開発サーバーを起動してプレビューを確認する
+   npm run dev
+   → http://localhost:3000（空きポートの場合 3001/3002/3003 など）
 
-④ 変更を保存（コミット）
+④ コードを編集する
+   （Claude Code やエディタで作業。ブラウザで随時確認）
+
+⑤ 変更を保存（コミット）
    git add ファイル名
    git commit -m "説明"
 
-⑤ GitHub にプッシュ
+⑥ GitHub にプッシュ
    git push -u origin feature/xxx
 
-⑥ PR を作成
+⑦ PR を作成
    GitHub で「Compare & pull request」
 
-⑦ レビュー → マージ
+⑧ レビュー → マージ
 
-⑧ 次の作業へ（①に戻る）
+⑨ 次の作業へ（①に戻る）
 ```
 
 途中で相手のPRがマージされたら：
@@ -245,6 +249,37 @@ git push
 - [ ] `git pull` した（最新取得）
 - [ ] `git checkout -b feature/xxx` でブランチを作った
 - [ ] `main` ブランチで直接編集していない
+- [ ] `npm run dev` で開発サーバーを起動してブラウザで確認した（URL: http://localhost:3000 or 3001/3002/3003）
+- [ ] （デプロイ前）`vercel whoami` が `efgshota-3561` になっている
+
+---
+
+---
+
+## Vercel アカウント確認
+
+このプロジェクトは `efgshota-3561`（`efgshota@gmail.com`）のアカウントにデプロイされている。
+**作業前に必ずアカウントを確認すること。**
+
+### 確認コマンド
+
+```bash
+vercel whoami
+```
+
+期待値: `efgshota-3561`
+
+### 間違ったアカウントでログインしていた場合
+
+```bash
+vercel logout
+vercel login
+# ブラウザが開くので efgshota@gmail.com でログイン
+vercel whoami  # efgshota-3561 になっていれば OK
+```
+
+> **注意**: `sfujii-8453`（`s.fujii@stadiums.co.jp`）は THE PERSON 用アカウント。
+> shirakabamura では使わない。
 
 ---
 
