@@ -102,27 +102,45 @@ export default function LocationRentalPage() {
               湖に浮かんでいるような幻想的な景色や空間がお待ちしています。
             </p>
 
-            <p className={styles.bodyText}>
-              白樺湖の「中之島」は、湖の中心に浮かぶ美しい小島で、自然豊かな環境に囲まれた絶好の撮影スポットです。この小島は、白樺の木々が生い茂る静かな場所で、四季折々の風景が訪れる人を魅了します。春は新緑、夏は青々とした木々、秋には紅葉が色鮮やかに映え、冬は湖の静寂と相まって幻想的な雰囲気が広がります。
-            </p>
+            {/* 中之島マップ SVG */}
+            <div className={styles.nakanojimaMap}>
+              <Image
+                src="/images/location-rental/map-nakanojima.svg"
+                alt="白樺湖と中之島の地図"
+                width={440}
+                height={328}
+                className={styles.nakanojimaMapImg}
+              />
+            </div>
 
-            {/* Info table */}
-            <div className={styles.infoTable}>
-              <div className={styles.infoRow}>
-                <dt className={styles.infoLabel}>所在地</dt>
-                <dd className={styles.infoValue}>長野県茅野市</dd>
+            {/* 2カラム: 中之島の情報 | 概要テーブル */}
+            <div className={styles.nakanojimaInfo}>
+              <div className={styles.nakanojimaBody}>
+                <h3 className={styles.nakanojimaSubTitle}>中之島の情報</h3>
+                <p className={styles.bodyText}>
+                  白樺湖の「中之島」は、湖の中心に浮かぶ美しい小島で、自然豊かな環境に囲まれた絶好の撮影スポットです。この小島は、白樺の木々が生い茂る静かな場所で、四季折々の風景が訪れる人を魅了します。春は新緑、夏は青々とした木々、秋には紅葉が色鮮やかに映え、冬は湖の静寂と相まって幻想的な雰囲気が広がります。
+                </p>
               </div>
-              <div className={styles.infoRow}>
-                <dt className={styles.infoLabel}>面積</dt>
-                <dd className={styles.infoValue}>約2,000平方メートル（0.2ヘクタール）</dd>
-              </div>
-              <div className={styles.infoRow}>
-                <dt className={styles.infoLabel}>利用可能時間</dt>
-                <dd className={styles.infoValue}>日の出〜日の入り（季節により変動）</dd>
-              </div>
-              <div className={styles.infoRow}>
-                <dt className={styles.infoLabel}>貸切利用可能人数</dt>
-                <dd className={styles.infoValue}>〜20人（要相談）</dd>
+              <div className={styles.nakanojimaTableWrap}>
+                <h3 className={styles.nakanojimaSubTitle}>概要</h3>
+                <div className={styles.infoTable}>
+                  <div className={styles.infoRow}>
+                    <dt className={styles.infoLabel}>所在地</dt>
+                    <dd className={styles.infoValue}>長野県茅野市</dd>
+                  </div>
+                  <div className={styles.infoRow}>
+                    <dt className={styles.infoLabel}>面積</dt>
+                    <dd className={styles.infoValue}>約2,000平方メートル（0.2ヘクタール）</dd>
+                  </div>
+                  <div className={styles.infoRow}>
+                    <dt className={styles.infoLabel}>利用可能時間</dt>
+                    <dd className={styles.infoValue}>日の出〜日の入り（季節により変動）</dd>
+                  </div>
+                  <div className={styles.infoRow}>
+                    <dt className={styles.infoLabel}>貸切利用可能人数</dt>
+                    <dd className={styles.infoValue}>〜20人（要相談）</dd>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -136,40 +154,40 @@ export default function LocationRentalPage() {
               <h2 className={`${styles.sectionTitle}`}>アクセス</h2>
             </div>
 
-            {/* Map placeholder */}
-            <div className={styles.mapWrap}>
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.9!2d138.2!3d36.07!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601ce3b7c2e6d9a5%3A0x5d23d1f1b5e37b87!2z55aK5qmL5rmWIOe2gumZouWIsA!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
-                className={styles.mapIframe}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="白樺湖 中之島マップ"
-              />
-            </div>
-
-            <div className={styles.accessGrid}>
-              <div className={styles.accessBlock}>
-                <h3 className={styles.accessHead}>公共交通機関でお越しの場合</h3>
-                <p className={styles.accessText}>
-                  JR中央本線「茅野駅」より：路線バス（アルピコ交通）で約60分、タクシーで約45分<br />
-                  特急バス：新宿駅より直通バスで約3時間30分<br />
-                  名古屋駅より直通バスで約4時間
-                </p>
+            {/* 2カラム: 日本地図 SVG | アクセス情報 */}
+            <div className={styles.accessLayout}>
+              <div className={styles.accessMapWrap}>
+                <Image
+                  src="/images/location-rental/map-japan.svg"
+                  alt="日本地図 - 白樺湖の位置"
+                  width={570}
+                  height={504}
+                  className={styles.accessMapImg}
+                />
               </div>
-              <div className={styles.accessBlock}>
-                <h3 className={styles.accessHead}>お車でお越しの場合</h3>
-                <p className={styles.accessText}>
-                  中央自動車道「諏訪ICまたは岡谷IC」より：約40分（一般道利用）<br />
-                  上信越自動車道「佐久IC」より：約1時間（一般道利用）
-                </p>
-              </div>
-              <div className={styles.accessBlock}>
-                <h3 className={styles.accessHead}>最寄り駅・IC</h3>
-                <p className={styles.accessText}>
-                  最寄り駅：JR中央本線「茅野駅」<br />
-                  最寄りIC：中央自動車道「諏訪IC」「岡谷IC」
-                </p>
+              <div className={styles.accessInfo}>
+                <div className={styles.accessBlock}>
+                  <h3 className={styles.accessHead}>【公共交通機関でお越しの場合】</h3>
+                  <p className={styles.accessText}>
+                    JR中央本線「茅野駅」より：路線バス（アルピコ交通）で約60分、タクシーで約45分<br />
+                    特急バス：新宿駅より直通バスで約3時間30分<br />
+                    名古屋駅より直通バスで約4時間
+                  </p>
+                </div>
+                <div className={styles.accessBlock}>
+                  <h3 className={styles.accessHead}>【お車でお越しの場合】</h3>
+                  <p className={styles.accessText}>
+                    中央自動車道「諏訪ICまたは岡谷IC」より：約40分（一般道利用）<br />
+                    上信越自動車道「佐久IC」より：約1時間（一般道利用）
+                  </p>
+                </div>
+                <div className={styles.accessBlock}>
+                  <h3 className={styles.accessHead}>【最寄り駅・IC】</h3>
+                  <p className={styles.accessText}>
+                    最寄り駅：JR中央本線「茅野駅」<br />
+                    最寄りIC：中央自動車道「諏訪IC」「岡谷IC」
+                  </p>
+                </div>
               </div>
             </div>
           </div>
