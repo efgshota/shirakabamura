@@ -82,13 +82,16 @@
 
 .cardImage {
   width: 100%;
-  aspect-ratio: 300 / 261;
+  aspect-ratio: 1 / 0.85;
   margin-bottom: 20px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
-.cardSvg {
+.cardImg {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   display: block;
 }
 

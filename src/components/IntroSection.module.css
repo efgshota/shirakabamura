@@ -325,6 +325,10 @@ a.infoCard:hover {
     min-height: 320px;
   }
 
+  .cardLabel {
+    margin-bottom: 32px;
+  }
+
   .cardContent {
     flex-direction: column;
     gap: 16px;

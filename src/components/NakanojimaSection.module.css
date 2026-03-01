@@ -116,4 +116,8 @@
   .photo {
     display: none;
   }
+
+  .more {
+    margin-bottom: 80px;
+  }
 }

@@ -76,6 +76,7 @@
 @media (max-width: 767px) {
   .news {
     padding: 120px 0 120px;
+    margin-top: 240px;
   }
 
   .inner {
