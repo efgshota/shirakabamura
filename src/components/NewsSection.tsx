@@ -49,10 +49,14 @@ export default function NewsSection({
           className={`${styles.list} ${listVisible ? styles.visible : ""}`}
         >
           {newsItems.map((item) => (
-            <div key={item.id} className={styles.item}>
+            <Link
+              key={item.id}
+              href={`/news/${encodeURIComponent(item.id)}/`}
+              className={styles.item}
+            >
               <time className={styles.itemDate}>{formatDate(item.date)}</time>
               <p className={styles.itemTitle}>{item.title}</p>
-            </div>
+            </Link>
           ))}
         </div>
 

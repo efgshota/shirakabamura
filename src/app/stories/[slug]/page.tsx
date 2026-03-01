@@ -8,6 +8,8 @@ import { getBusiness, getBusinesses, getFirstImageUrl } from "@/lib/microcms";
 import { businesses as staticBusinesses } from "@/data/businesses";
 import styles from "./page.module.css";
 
+export const revalidate = 3600;
+
 const FIG8_PATH =
   "M 0.816,0.498 C 0.928,0.447 1,0.369 1,0.281 C 1,0.126 0.776,0 0.5,0 C 0.224,0 0,0.126 0,0.281 C 0,0.369 0.072,0.447 0.184,0.498 C 0.072,0.550 0,0.628 0,0.716 C 0,0.871 0.224,0.997 0.5,0.997 C 0.776,0.997 1,0.871 1,0.716 C 1,0.628 0.928,0.550 0.816,0.498 Z";
 

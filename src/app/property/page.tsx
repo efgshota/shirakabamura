@@ -7,6 +7,8 @@ import { properties as staticProperties } from "@/data/properties";
 import PropertyListClient, { PropertyCardData } from "./PropertyListClient";
 import styles from "./page.module.css";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "白樺村の物件",
   description:

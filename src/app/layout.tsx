@@ -3,6 +3,7 @@ import { Zen_Kaku_Gothic_Antique, Inter } from "next/font/google";
 import Script from "next/script";
 import FloatingButtons from "@/components/FloatingButtons";
 import RecaptchaProvider from "@/components/RecaptchaProvider";
+import JsonLd from "@/components/JsonLd";
 import "./globals.css";
 
 const zenKaku = Zen_Kaku_Gothic_Antique({
@@ -84,6 +85,20 @@ export default function RootLayout({
         </Script>
       </head>
       <body suppressHydrationWarning>
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "白樺村",
+          url: siteUrl,
+          description: "白樺湖周辺での移住・開業・くらしをサポート",
+        }} />
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "白樺村",
+          url: siteUrl,
+          logo: `${siteUrl}/images/common/logo.svg`,
+        }} />
         <RecaptchaProvider>
           {children}
         </RecaptchaProvider>

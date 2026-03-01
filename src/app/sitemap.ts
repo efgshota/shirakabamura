@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
-import { getProperties, getBusinesses } from "@/lib/microcms";
+import { getProperties, getBusinesses, getNews } from "@/lib/microcms";
 import { properties as staticProperties } from "@/data/properties";
 import { businesses as staticBusinesses } from "@/data/businesses";
+import { news as staticNews } from "@/data/news";
 
 const siteUrl = "https://shirakabamura.com";
 
@@ -83,5 +84,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
   }
 
-  return [...staticRoutes, ...propertyRoutes, ...storiesRoutes];
+  // ニュース詳細ページ（MicroCMS → 静的データフォールバック）
+  let newsRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const { contents } = await getNews({ limit: 100 });
+    newsRoutes = contents.map((n) => ({
+      url: `${siteUrl}/news/${encodeURIComponent(n.slug ?? n.id)}/`,
+      lastModified: new Date(n.updatedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }));
+  } catch {
+    newsRoutes = staticNews.map((n) => ({
+      url: `${siteUrl}/news/${encodeURIComponent(n.slug)}/`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }));
+  }
+
+  return [...staticRoutes, ...propertyRoutes, ...storiesRoutes, ...newsRoutes];
 }

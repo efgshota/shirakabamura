@@ -7,6 +7,8 @@ import { getBusinesses, getFirstImageUrl } from "@/lib/microcms";
 import { businesses as staticBusinesses } from "@/data/businesses";
 import styles from "./page.module.css";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "物件事例",
   description:
@@ -33,7 +35,7 @@ export default async function BusinessListPage() {
   let items: BizItem[] = [];
 
   try {
-    const { contents } = await getBusinesses({ limit: 100 });
+    const { contents } = await getBusinesses({ limit: 100, filters: "publishedAt[exists]" });
     if (contents.length > 0) {
       items = contents.map((b) => ({
         id: b.id,

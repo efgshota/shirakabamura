@@ -74,6 +74,14 @@ export type News = {
 
 // ===== UI用 正規化済み型 =====
 
+// NewsListPage 共通型
+export type NewsListItem = {
+  id: string;
+  title: string;
+  date: string;
+  category?: string;
+};
+
 // UsefulInfoSection / UsefulListPage 共通型
 export type UsefulInfoItem = {
   id: string;
@@ -124,17 +132,17 @@ export async function getProperty(contentId: string, queries?: MicroCMSQueries) 
 
 export async function getUsefulInfos(queries?: MicroCMSQueries) {
   if (!client) throw new Error("MicroCMS client is not configured");
-  return client.getList<UsefulInfo>({ endpoint: "useful-infos", queries });
+  return client.getList<UsefulInfo>({ endpoint: "info", queries });
 }
 
 export async function getCases(queries?: MicroCMSQueries) {
   if (!client) throw new Error("MicroCMS client is not configured");
-  return client.getList<Case>({ endpoint: "case", queries });
+  return client.getList<Case>({ endpoint: "stories", queries });
 }
 
 export async function getCase(contentId: string, queries?: MicroCMSQueries) {
   if (!client) throw new Error("MicroCMS client is not configured");
-  return client.getListDetail<Case>({ endpoint: "case", contentId, queries });
+  return client.getListDetail<Case>({ endpoint: "stories", contentId, queries });
 }
 
 // 後方互換エイリアス

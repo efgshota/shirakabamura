@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { getNews } from "@/lib/microcms";
+import { getNews, type NewsListItem } from "@/lib/microcms";
 import { news as staticNews } from "@/data/news";
 import styles from "./page.module.css";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "お知らせ",
@@ -16,19 +18,35 @@ export const metadata: Metadata = {
   },
 };
 
+const PER_PAGE = 20;
+
 function formatDate(dateStr: string) {
   const d = new Date(dateStr);
   return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
 }
 
-export default async function NewsPage() {
-  let newsItems: { id: string; title: string; date: string; category?: string }[] = [];
+export default async function NewsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const { page: pageParam } = await searchParams;
+  const page = Math.max(1, parseInt(pageParam ?? "1", 10) || 1);
+  const offset = (page - 1) * PER_PAGE;
+
+  let newsItems: NewsListItem[] = [];
+  let totalCount = 0;
 
   try {
-    const { contents } = await getNews({ limit: 100, orders: "-publishedAt" });
-    if (contents.length > 0) {
+    const { contents, totalCount: total } = await getNews({
+      limit: PER_PAGE,
+      offset,
+      orders: "-date",
+    });
+    if (total > 0) {
+      totalCount = total;
       newsItems = contents.map((n) => ({
-        id: n.id,
+        id: n.slug ?? n.id,
         title: n.title,
         date: n.date,
         category: n.category ?? undefined,
@@ -39,13 +57,18 @@ export default async function NewsPage() {
   }
 
   if (newsItems.length === 0) {
-    newsItems = staticNews.map((n) => ({
+    const all = staticNews.map((n) => ({
       id: n.slug,
       title: n.title,
       date: n.date,
       category: n.category,
     }));
+    totalCount = all.length;
+    newsItems = all.slice(offset, offset + PER_PAGE);
   }
+
+  const totalPages = Math.ceil(totalCount / PER_PAGE);
+  const showPager = totalPages > 1;
 
   return (
     <div className={styles.page}>
@@ -84,6 +107,38 @@ export default async function NewsPage() {
                   </li>
                 ))}
               </ul>
+            )}
+
+            {showPager && (
+              <nav className={styles.pager} aria-label="ページナビゲーション">
+                {page > 1 && (
+                  <Link
+                    href={page === 2 ? "/news/" : `/news/?page=${page - 1}`}
+                    className={styles.pagerBtn}
+                  >
+                    ← 前へ
+                  </Link>
+                )}
+                <div className={styles.pagerPages}>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                    <Link
+                      key={p}
+                      href={p === 1 ? "/news/" : `/news/?page=${p}`}
+                      className={`${styles.pagerPage} ${p === page ? styles.pagerPageActive : ""}`}
+                    >
+                      {p}
+                    </Link>
+                  ))}
+                </div>
+                {page < totalPages && (
+                  <Link
+                    href={`/news/?page=${page + 1}`}
+                    className={styles.pagerBtn}
+                  >
+                    次へ →
+                  </Link>
+                )}
+              </nav>
             )}
           </div>
         </section>

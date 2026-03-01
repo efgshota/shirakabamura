@@ -1,4 +1,4 @@
-export const revalidate = 0;
+export const revalidate = 3600;
 
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
@@ -170,7 +170,7 @@ export default async function Home() {
   let businessFetched = false;
 
   try {
-    const { contents } = await getBusinesses({ limit: 100 });
+    const { contents } = await getBusinesses({ limit: 100, filters: "publishedAt[exists]" });
     businessFetched = true;
     businessItems = contents.map((b) => ({
       id: b.id,
