@@ -8,6 +8,8 @@ import { getBusiness, getBusinesses, getFirstImageUrl } from "@/lib/microcms";
 import { businesses as staticBusinesses } from "@/data/businesses";
 import styles from "./page.module.css";
 
+export const revalidate = 3600;
+
 const FIG8_PATH =
   "M 0.816,0.498 C 0.928,0.447 1,0.369 1,0.281 C 1,0.126 0.776,0 0.5,0 C 0.224,0 0,0.126 0,0.281 C 0,0.369 0.072,0.447 0.184,0.498 C 0.072,0.550 0,0.628 0,0.716 C 0,0.871 0.224,0.997 0.5,0.997 C 0.776,0.997 1,0.871 1,0.716 C 1,0.628 0.928,0.550 0.816,0.498 Z";
 
@@ -40,16 +42,16 @@ function normalizeStaticBiz(b: (typeof staticBusinesses)[number]): BizData {
 }
 
 export async function generateStaticParams() {
-  const ids: string[] = [];
+  const slugs: string[] = [];
   try {
     const { contents } = await getBusinesses({ limit: 100 });
-    ids.push(...contents.map((b) => b.id));
+    slugs.push(...contents.map((b) => b.slug ?? b.id));
   } catch {
     // fallback
   }
-  const staticIds = staticBusinesses.map((b) => b.slug);
-  const allIds = Array.from(new Set([...ids, ...staticIds]));
-  return allIds.map((id) => ({ slug: encodeURIComponent(id) }));
+  const staticSlugs = staticBusinesses.map((b) => b.slug);
+  const allSlugs = Array.from(new Set([...slugs, ...staticSlugs]));
+  return allSlugs.map((s) => ({ slug: encodeURIComponent(s) }));
 }
 
 export async function generateMetadata({
@@ -106,10 +108,14 @@ export default async function BusinessDetailPage({
   let allBizIds: { id: string; name: string; image: string }[] = [];
 
   try {
-    const [detail, list] = await Promise.all([
-      getBusiness(decoded),
-      getBusinesses({ limit: 100 }),
-    ]);
+    // slug フィールドで検索し、なければ id で取得
+    const list = await getBusinesses({ limit: 100 });
+    const matched = list.contents.find(
+      (b) => (b.slug ?? b.id) === decoded
+    );
+    const detail = matched
+      ? await getBusiness(matched.id)
+      : await getBusiness(decoded);
     const mainImage = getFirstImageUrl(detail.image);
     biz = {
       id: detail.id,
@@ -127,9 +133,9 @@ export default async function BusinessDetailPage({
       })),
     };
     allBizIds = list.contents
-      .filter((b) => b.id !== decoded)
+      .filter((b) => (b.slug ?? b.id) !== decoded)
       .map((b) => ({
-        id: b.id,
+        id: b.slug ?? b.id,
         name: b.title,
         image: getFirstImageUrl(b.image),
       }));
@@ -337,7 +343,7 @@ export default async function BusinessDetailPage({
                 {allBizIds.map((r) => (
                   <Link
                     key={r.id}
-                    href={`/business/${encodeURIComponent(r.id)}/`}
+                    href={`/stories/${encodeURIComponent(r.id)}/`}
                     className={styles.relatedCard}
                   >
                     {r.image && (

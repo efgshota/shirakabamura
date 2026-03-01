@@ -537,16 +537,19 @@
   <h2>2. ページ構成</h2>
 
   <div class="sitemap">shirakabamura.com
-├── /                       トップページ
-├── /property/              物件一覧
-│   └── /property/[物件ID]/ 物件詳細
-├── /business/[事業者ID]/   事業者詳細（開業ストーリー）
-├── /useful/                お役立ち帳
-└── /location-rental/       ロケーションレンタル（中之島）</div>
+├── /                         トップページ
+├── /property/                物件一覧
+│   └── /property/[slug]/     物件詳細
+├── /stories/                 物件事例一覧
+│   └── /stories/[slug]/      事例詳細（開業ストーリー）
+├── /info/                    お役立ち帳
+├── /news/                    お知らせ一覧
+│   └── /news/[slug]/         お知らせ詳細
+└── /location-rental/         ロケーションレンタル（中之島）</div>
 
   <table>
     <thead>
-      <tr><th>ページ</th><th>URL</th><th>データ</th><th>概要</th></tr>
+      <tr><th>ページ</th><th>URL（新）</th><th>データ</th><th>概要</th></tr>
     </thead>
     <tbody>
       <tr>
@@ -563,21 +566,39 @@
       </tr>
       <tr>
         <td><strong>物件詳細</strong></td>
-        <td>/property/[ID]/</td>
+        <td>/property/[slug]/</td>
         <td><span class="badge badge-cms">CMS</span></td>
         <td>物件の写真・スペック・詳細情報</td>
       </tr>
       <tr>
-        <td><strong>事業者詳細</strong></td>
-        <td>/business/[ID]/</td>
+        <td><strong>物件事例一覧</strong></td>
+        <td>/stories/</td>
+        <td><span class="badge badge-cms">CMS</span></td>
+        <td>開業事例の一覧</td>
+      </tr>
+      <tr>
+        <td><strong>事例詳細</strong></td>
+        <td>/stories/[slug]/</td>
         <td><span class="badge badge-cms">CMS</span></td>
         <td>開業者のインタビュー・プロフィール</td>
       </tr>
       <tr>
         <td><strong>お役立ち帳</strong></td>
-        <td>/useful/</td>
+        <td>/info/</td>
         <td><span class="badge badge-cms">CMS</span></td>
         <td>地域施設（病院・スーパー等）の連絡先一覧</td>
+      </tr>
+      <tr>
+        <td><strong>お知らせ一覧</strong></td>
+        <td>/news/</td>
+        <td><span class="badge badge-cms">CMS</span></td>
+        <td>白樺村からのお知らせ</td>
+      </tr>
+      <tr>
+        <td><strong>お知らせ詳細</strong></td>
+        <td>/news/[slug]/</td>
+        <td><span class="badge badge-cms">CMS</span></td>
+        <td>個別記事ページ</td>
       </tr>
       <tr>
         <td><strong>ロケーションレンタル</strong></td>
@@ -592,6 +613,72 @@
     <strong>「CMS」と「静的」の違い：</strong><br>
     <span class="badge badge-cms">CMS</span> のページは MicroCMS から内容を更新できます。<br>
     <span class="badge badge-static">静的</span> のページは開発者による修正が必要です。
+  </div>
+
+  <h3>URL変更履歴（旧URL → 新URL）</h3>
+  <p>旧URLへのアクセスは自動的に新URLへ301リダイレクトされます。ブックマークや共有リンクは差し替えをお願いします。</p>
+
+  <table>
+    <thead>
+      <tr><th>ページ</th><th>旧URL</th><th>新URL</th><th>変更理由</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>物件事例一覧</strong></td>
+        <td style="text-decoration:line-through; color:#999;">/business/</td>
+        <td><strong>/stories/</strong></td>
+        <td>内容（開業ストーリー）に合わせた名称に変更</td>
+      </tr>
+      <tr>
+        <td><strong>事例詳細</strong></td>
+        <td style="text-decoration:line-through; color:#999;">/business/[ID]/</td>
+        <td><strong>/stories/[slug]/</strong></td>
+        <td>URLパスの変更 + 可読性の高いslugに切り替え</td>
+      </tr>
+      <tr>
+        <td><strong>お役立ち帳</strong></td>
+        <td style="text-decoration:line-through; color:#999;">/useful/</td>
+        <td><strong>/info/</strong></td>
+        <td>シンプルで直感的な名称に変更</td>
+      </tr>
+      <tr>
+        <td><strong>物件詳細</strong></td>
+        <td style="text-decoration:line-through; color:#999;">/property/[自動ID]/</td>
+        <td><strong>/property/[slug]/</strong></td>
+        <td>ランダムIDから可読性の高いslugに切り替え</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>slugの命名ルール</h3>
+  <p>MicroCMS の各記事に <code>slug</code> フィールドを設定することで、URLが読みやすくなります。</p>
+
+  <table>
+    <thead>
+      <tr><th>エンドポイント</th><th>slugの形式</th><th>例</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>お知らせ（/news/）</strong></td>
+        <td>公開日（YYYYMMDD）＋ハイフン＋連番</td>
+        <td><code>20260301-1</code>、<code>20260301-2</code></td>
+      </tr>
+      <tr>
+        <td><strong>物件事例（/stories/）</strong></td>
+        <td>施設名の英語表記（小文字・ハイフン区切り）</td>
+        <td><code>hygge</code>、<code>pension-kofu</code>、<code>kariomon</code></td>
+      </tr>
+      <tr>
+        <td><strong>物件（/property/）</strong></td>
+        <td>地番または場所を示す英数字</td>
+        <td><code>kashiwabara-19-16</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight">
+    <strong>slugを設定していない場合：</strong><br>
+    MicroCMS の自動生成ID（例: <code>gu0jqlpsvn1</code>）がそのままURLになります。記事登録時に <code>slug</code> フィールドを入力することを推奨します。
   </div>
 </section>
 
@@ -881,7 +968,7 @@
   <h3>表示される場所</h3>
   <ul>
     <li><strong>トップページ</strong>：画像グリッドで全事業者を表示</li>
-    <li><strong>事業者詳細（/business/[ID]/）</strong>：プロフィール + インタビュー全文</li>
+    <li><strong>事例詳細（/stories/[slug]/）</strong>：プロフィール + インタビュー全文</li>
   </ul>
 </section>
 
@@ -958,7 +1045,7 @@
   <h3>表示される場所</h3>
   <ul>
     <li><strong>トップページ</strong>：カテゴリ別タブ付きリスト</li>
-    <li><strong>お役立ち帳（/useful/）</strong>：フィルタ付き全件表示</li>
+    <li><strong>お役立ち帳（/info/）</strong>：フィルタ付き全件表示</li>
   </ul>
 </section>
 
@@ -974,11 +1061,26 @@
     </thead>
     <tbody>
       <tr><td><strong>title</strong></td><td>ニュースタイトル</td><td>必須</td><td>白樺村サイトをリニューアルしました</td></tr>
+      <tr><td><strong>slug</strong></td><td>URL識別子（英数字・ハイフン）</td><td>推奨</td><td>20260301-1</td></tr>
       <tr><td><strong>date</strong></td><td>日付</td><td>必須</td><td>2026-02-28</td></tr>
       <tr><td><strong>content</strong></td><td>本文</td><td>任意</td><td>詳細テキスト</td></tr>
       <tr><td><strong>category</strong></td><td>カテゴリ</td><td>任意</td><td>お知らせ / イベント</td></tr>
     </tbody>
   </table>
+
+  <div class="highlight">
+    <strong>slug の入力ルール（/news/ の URL になります）：</strong><br>
+    形式：<code>公開日8桁 + ハイフン + 連番</code><br>
+    例：2026年3月1日の1本目 → <code>20260301-1</code> → URL は <code>/news/20260301-1/</code><br>
+    <br>
+    他の形式の参考：
+    <ul style="margin-top: 8px; padding-left: 20px;">
+      <li><code>20260301-1</code>（日付＋連番） ← <strong>採用中</strong></li>
+      <li><code>suzuran-revival</code>（内容を表す英語）← SEO上最も強いが入力コストが高い</li>
+      <li><code>news-001</code>（連番のみ）← シンプルだが日付がわからない</li>
+    </ul>
+    slugを空欄にすると MicroCMS の自動ID（例：<code>abc123xyz</code>）がURLになります。
+  </div>
 
   <h3>編集画面のイメージ</h3>
   <div class="mcms-window">
@@ -991,10 +1093,14 @@
         <label>title <span class="req">必須</span></label>
         <input type="text" value="白樺村サイトをリニューアルしました" readonly>
       </div>
+      <div class="mcms-field">
+        <label>slug <span style="font-size:11px; color:#888;">（URLになります）</span></label>
+        <input type="text" value="20260301-1" readonly>
+      </div>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
         <div class="mcms-field">
           <label>date <span class="req">必須</span></label>
-          <input type="text" value="2026-02-28" readonly>
+          <input type="text" value="2026-03-01" readonly>
         </div>
         <div class="mcms-field">
           <label>category</label>
@@ -1015,6 +1121,8 @@
   <h3>表示される場所</h3>
   <ul>
     <li><strong>トップページ</strong>：最新3件がリスト表示（新しい順）</li>
+    <li><strong>お知らせ一覧（/news/）</strong>：全件表示</li>
+    <li><strong>お知らせ詳細（/news/[slug]/）</strong>：個別記事ページ</li>
   </ul>
 </section>
 

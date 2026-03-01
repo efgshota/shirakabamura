@@ -10,6 +10,8 @@ import { getProperty, getProperties, getAllImageUrls, getFirstImageUrl } from "@
 import { properties as staticProperties } from "@/data/properties";
 import styles from "./page.module.css";
 
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   try {
     const { contents } = await getProperties({ limit: 100 });

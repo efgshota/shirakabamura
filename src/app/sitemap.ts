@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
-import { getProperties } from "@/lib/microcms";
+import { getProperties, getBusinesses, getNews } from "@/lib/microcms";
 import { properties as staticProperties } from "@/data/properties";
-import { businesses } from "@/data/businesses";
+import { businesses as staticBusinesses } from "@/data/businesses";
+import { news as staticNews } from "@/data/news";
 
 const siteUrl = "https://shirakabamura.com";
 
@@ -26,10 +27,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${siteUrl}/useful/`,
+      url: `${siteUrl}/info/`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
+    },
+    {
+      url: `${siteUrl}/stories/`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${siteUrl}/news/`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
     },
   ];
 
@@ -38,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const { contents } = await getProperties({ limit: 100 });
     propertyRoutes = contents.map((p) => ({
-      url: `${siteUrl}/property/${encodeURIComponent(p.id)}/`,
+      url: `${siteUrl}/property/${encodeURIComponent(p.slug ?? p.id)}/`,
       lastModified: new Date(p.updatedAt),
       changeFrequency: "monthly" as const,
       priority: 0.8,
@@ -52,13 +65,43 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
   }
 
-  // 事業者詳細ページ
-  const businessRoutes: MetadataRoute.Sitemap = businesses.map((b) => ({
-    url: `${siteUrl}/business/${encodeURIComponent(b.slug)}/`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
+  // 物件事例詳細ページ（MicroCMS → 静的データフォールバック）
+  let storiesRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const { contents } = await getBusinesses({ limit: 100 });
+    storiesRoutes = contents.map((b) => ({
+      url: `${siteUrl}/stories/${encodeURIComponent(b.slug ?? b.id)}/`,
+      lastModified: new Date(b.updatedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
+  } catch {
+    storiesRoutes = staticBusinesses.map((b) => ({
+      url: `${siteUrl}/stories/${encodeURIComponent(b.slug)}/`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
+  }
 
-  return [...staticRoutes, ...propertyRoutes, ...businessRoutes];
+  // ニュース詳細ページ（MicroCMS → 静的データフォールバック）
+  let newsRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const { contents } = await getNews({ limit: 100 });
+    newsRoutes = contents.map((n) => ({
+      url: `${siteUrl}/news/${encodeURIComponent(n.slug ?? n.id)}/`,
+      lastModified: new Date(n.updatedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }));
+  } catch {
+    newsRoutes = staticNews.map((n) => ({
+      url: `${siteUrl}/news/${encodeURIComponent(n.slug)}/`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }));
+  }
+
+  return [...staticRoutes, ...propertyRoutes, ...storiesRoutes, ...newsRoutes];
 }

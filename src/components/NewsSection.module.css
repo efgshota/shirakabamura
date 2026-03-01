@@ -46,6 +46,12 @@
   gap: 32px;
   padding: 24px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.item:hover {
+  opacity: 0.6;
 }
 
 .item:first-child {
