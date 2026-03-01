@@ -129,6 +129,7 @@ a:hover {
   color: #253c30;
   white-space: nowrap;
   margin: 0;
+  margin-bottom: -0.35em; /* letter-spacing末尾分を相殺して中心を合わせる */
 }
 
 .c-iconTitle__icon {

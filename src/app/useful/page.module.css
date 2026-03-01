@@ -18,17 +18,7 @@
 }
 
 .titleIcon {
-  width: 100px;
-  margin: 0 auto 16px;
-}
-
-.title {
-  writing-mode: vertical-rl;
-  display: inline-block;
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: 0.35em;
-  color: #253c30;
+  margin-bottom: 48px;
 }
 
 .subtitle {
@@ -129,11 +119,7 @@
   }
 
   .titleIcon {
-    width: 80px;
-  }
-
-  .title {
-    font-size: 2rem;
+    margin-bottom: 32px;
   }
 
   .grid {
