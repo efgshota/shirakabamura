@@ -236,15 +236,15 @@
 }
 
 .sceneImgWrap {
-  position: relative;
   width: 100%;
-  aspect-ratio: 3 / 4;
   overflow: hidden;
+  border-radius: 8px;
 }
 
 .sceneImg {
-  object-fit: cover;
-  object-position: center;
+  display: block;
+  width: 100%;
+  height: auto;
   transition: transform 0.4s ease;
 }
 

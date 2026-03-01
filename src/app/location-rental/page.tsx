@@ -211,9 +211,11 @@ export default function LocationRentalPage() {
               <span className={styles.sectionEn}>Scenes</span>
               <h2 className={`${styles.sectionTitle}`}>利用シーンについて</h2>
             </div>
-            <p className={styles.bodyText}>
-              中之島は、その特異な立地から唯一無二の撮影環境を提供します。湖面に反射する光、白樺の木立、四季の表情——
-              あらゆる表現のための舞台として、多彩なシーンにお応えします。
+            <p className={styles.catchCopy}>
+              イベント / ロケ地 / スチール・ムービー撮影 / ウェディングフォトなど
+            </p>
+            <p className={styles.catchSub}>
+              湖を渡ることでしか辿り着けないロケーションで、湖に浮かんでいるような幻想的な景色や空間がお待ちしています。
             </p>
 
             <div className={styles.sceneGrid}>
@@ -232,7 +234,8 @@ export default function LocationRentalPage() {
                     <Image
                       src={scene.src}
                       alt={scene.label}
-                      fill
+                      width={458}
+                      height={596}
                       className={styles.sceneImg}
                       sizes="(max-width: 767px) 50vw, 25vw"
                     />
