@@ -217,7 +217,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  height: 80px;
+  height: 64px;
   text-decoration: none;
   transition: opacity 0.2s;
 }
@@ -329,8 +329,10 @@
   }
 
   .lakeBg {
-    width: 80%;
-    right: -8%;
+    width: 60%;
+    right: auto;
+    left: 50%;
+    transform: translate(-50%, -50%);
     opacity: 0.5;
   }
 
