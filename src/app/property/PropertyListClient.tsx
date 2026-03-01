@@ -52,7 +52,7 @@ export default function PropertyListClient({
     if (typeFilter !== "all") result = result.filter((p) => p.type === typeFilter);
     if (areaFilter !== "all") result = result.filter((p) => p.location === areaFilter);
     return result;
-  }, [properties, typeFilter, usageFilter, areaFilter]);
+  }, [properties, typeFilter, areaFilter]);
 
   return (
     <>

@@ -13,10 +13,13 @@ type PropertyItem = {
   area: string;
   price?: string;
   floorPlan?: string;
-  floorArea?: string;
+  floorArea?: string | number;
+  landArea?: string | number;
   highlight?: string;
   type?: string;
 };
+
+const withSqm = (v?: string | number) => v != null ? (String(v).includes("㎡") ? String(v) : `${v}㎡`) : undefined;
 
 const filterTiles = [
   { key: "land", label: "土地のみ", icon: "/images/tonkachi.png" },
@@ -111,8 +114,8 @@ export default function PropertiesSection({
                   <Image
                     src={prop.image}
                     alt={prop.title}
-                    width={260}
-                    height={180}
+                    width={116}
+                    height={128}
                     className={styles.cardImg}
                   />
                 ) : (
@@ -120,9 +123,9 @@ export default function PropertiesSection({
                 )}
               </div>
               <div className={styles.cardBody}>
-                {(prop.floorPlan || prop.floorArea) && (
+                {(prop.floorPlan || prop.floorArea || prop.landArea) && (
                   <p className={styles.cardSpecs}>
-                    {[prop.floorPlan, prop.floorArea].filter(Boolean).join(" / ")}
+                    {[prop.floorPlan, withSqm(prop.floorArea ?? prop.landArea)].filter(Boolean).join(" / ")}
                   </p>
                 )}
                 {prop.highlight && (

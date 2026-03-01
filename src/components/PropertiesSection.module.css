@@ -100,24 +100,25 @@
   margin-bottom: 48px;
 }
 
-/* ── 横型物件カード ── */
+/* ── 横型物件カード（2列グリッド） ── */
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 25px;
 }
 
 .card {
   background: #fff;
   border-radius: 20px;
-  padding: 20px;
+  padding: 22px 24px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 24px;
+  justify-content: space-between;
+  gap: 16px;
   text-decoration: none;
   transition: opacity 0.2s;
-  height: 160px;
+  height: 176px;
 }
 
 .card:hover {
@@ -125,13 +126,12 @@
 }
 
 .cardImage {
-  width: 200px;
-  height: 100%;
+  width: 116px;
+  height: 128px;
   flex-shrink: 0;
-  aspect-ratio: 4/3;
+  position: relative;
   border-radius: 12px;
   overflow: hidden;
-  position: relative;
 }
 
 .cardImg {
@@ -152,27 +152,33 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 4px 0;
+  text-align: right;
 }
 
 .cardSpecs {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #253c30;
+  text-align: right;
 }
 
 .cardHighlight {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #253c30;
   line-height: 1.6;
   white-space: pre-line;
+  text-align: right;
 }
 
 .cardPrice {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #253c30;
+  text-align: right;
 }
 
 /* ── もっと見る ── */
@@ -223,6 +229,11 @@
     transform: scale(1);
   }
 
+  .list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
   .filterTiles {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -234,18 +245,18 @@
   }
 
   .card {
-    padding: 14px;
+    padding: 16px 18px;
     gap: 14px;
-    height: auto;
-    min-height: 120px;
+    height: 140px;
   }
 
   .cardImage {
-    width: 120px;
+    width: 96px;
+    height: 106px;
   }
 
   .cardBody {
-    gap: 6px;
+    gap: 8px;
   }
 
   .cardSpecs {

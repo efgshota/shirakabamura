@@ -11,8 +11,8 @@ const pcNavItems = [
   { href: "/property/",         label: "白樺村の物件" },
   { href: "/useful/",           label: "お役立ち帳" },
   { href: "/location-rental/",  label: "ロケーションレンタル" },
-  { href: "/#business",         label: "物件事例" },
-  { href: "/#news",             label: "お知らせ" },
+  { href: "/business/",         label: "物件事例" },
+  { href: "/news/",             label: "お知らせ" },
   { href: "/#contact",          label: "お問い合わせ" },
 ];
 
@@ -22,7 +22,7 @@ const menuItems = [
   { href: "/property/",        label: "白樺村の物件",       icon: "/images/common/icon_nav_property.svg", size: 44 },
   { href: "/useful/",          label: "お役立ち帳",         icon: "/images/common/icon_nav_useful.svg",   size: 44 },
   { href: "/location-rental/", label: "ロケーションレンタル", icon: "/images/common/icon_nav_location.svg", size: 64 },
-  { href: "/#business",        label: "事業者の方々へ",     icon: "/images/common/icon_nav_business.svg", size: 44 },
+  { href: "/business/",        label: "事業者の方々へ",     icon: "/images/common/icon_nav_business.svg", size: 44 },
   { href: "/#contact",         label: "お問い合わせ",       icon: "/images/common/icon_nav_contact.svg",  size: 44 },
 ];
 

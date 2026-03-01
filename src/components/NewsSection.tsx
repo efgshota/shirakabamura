@@ -57,7 +57,7 @@ export default function NewsSection({
         </div>
 
         <div className={styles.more}>
-          <Link href="/#news" className="c-moreBtn">
+          <Link href="/news/" className="c-moreBtn">
             もっと見る
           </Link>
         </div>

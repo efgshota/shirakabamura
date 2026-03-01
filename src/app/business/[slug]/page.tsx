@@ -8,12 +8,14 @@ import { getBusiness, getBusinesses, getFirstImageUrl } from "@/lib/microcms";
 import { businesses as staticBusinesses } from "@/data/businesses";
 import styles from "./page.module.css";
 
-const FIG8_PATH = "M 0.816,0.498 C 0.928,0.447 1,0.369 1,0.281 C 1,0.126 0.776,0 0.5,0 C 0.224,0 0,0.126 0,0.281 C 0,0.369 0.072,0.447 0.184,0.498 C 0.072,0.550 0,0.628 0,0.716 C 0,0.871 0.224,0.997 0.5,0.997 C 0.776,0.997 1,0.871 1,0.716 C 1,0.628 0.928,0.550 0.816,0.498 Z";
+const FIG8_PATH =
+  "M 0.816,0.498 C 0.928,0.447 1,0.369 1,0.281 C 1,0.126 0.776,0 0.5,0 C 0.224,0 0,0.126 0,0.281 C 0,0.369 0.072,0.447 0.184,0.498 C 0.072,0.550 0,0.628 0,0.716 C 0,0.871 0.224,0.997 0.5,0.997 C 0.776,0.997 1,0.871 1,0.716 C 1,0.628 0.928,0.550 0.816,0.498 Z";
 
 type BizData = {
   id: string;
   name: string;
   image: string;
+  photoUrl: string;
   operator?: string;
   businessType?: string;
   previousJob?: string;
@@ -27,6 +29,7 @@ function normalizeStaticBiz(b: (typeof staticBusinesses)[number]): BizData {
     id: b.slug,
     name: b.name,
     image: b.image,
+    photoUrl: b.photo ?? b.image,
     operator: b.operator,
     businessType: b.businessType,
     previousJob: b.previousJob,
@@ -37,7 +40,6 @@ function normalizeStaticBiz(b: (typeof staticBusinesses)[number]): BizData {
 }
 
 export async function generateStaticParams() {
-  // MicroCMSとフォールバック両方のIDを返す
   const ids: string[] = [];
   try {
     const { contents } = await getBusinesses({ limit: 100 });
@@ -103,16 +105,17 @@ export default async function BusinessDetailPage({
   let biz: BizData | null = null;
   let allBizIds: { id: string; name: string; image: string }[] = [];
 
-  // MicroCMSから取得を試みる
   try {
     const [detail, list] = await Promise.all([
       getBusiness(decoded),
       getBusinesses({ limit: 100 }),
     ]);
+    const mainImage = getFirstImageUrl(detail.image);
     biz = {
       id: detail.id,
       name: detail.title,
-      image: getFirstImageUrl(detail.image),
+      image: mainImage,
+      photoUrl: mainImage,
       operator: detail.operator,
       businessType: detail.businessType,
       previousJob: detail.previousJob,
@@ -131,7 +134,6 @@ export default async function BusinessDetailPage({
         image: getFirstImageUrl(b.image),
       }));
   } catch {
-    // 静的データフォールバック
     const staticBiz = staticBusinesses.find((b) => b.slug === decoded);
     if (staticBiz) {
       biz = normalizeStaticBiz(staticBiz);
@@ -156,38 +158,57 @@ export default async function BusinessDetailPage({
         }
       : null;
 
+  const hasPhone = biz.phone && biz.phone !== "00000000000";
+  const hasWebsite =
+    biz.website && biz.website !== "https://shirakabamura.com/";
+
   return (
     <div className={styles.page}>
       {faqSchema && <JsonLd data={faqSchema} />}
       <Header />
+
+      {/* 全ページ共通クリップパス定義 */}
+      <svg
+        width="0"
+        height="0"
+        aria-hidden
+        style={{ position: "absolute", overflow: "hidden" }}
+      >
+        <defs>
+          <clipPath id="bizMvClip" clipPathUnits="objectBoundingBox">
+            <path d={FIG8_PATH} />
+          </clipPath>
+          {allBizIds.map((r) => (
+            <clipPath
+              key={r.id}
+              id={`relClip-${r.id}`}
+              clipPathUnits="objectBoundingBox"
+            >
+              <path d={FIG8_PATH} />
+            </clipPath>
+          ))}
+        </defs>
+      </svg>
+
       <main className={styles.main}>
+        {/* MV: FIG8クリップ画像 + タイトル */}
         <section className={styles.mv}>
-          <div className={styles.mvContent}>
-            {biz.image && (
-              <div className={styles.mvImage}>
-                <svg
-                  viewBox="0 0 300 261"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={styles.mvSvg}
-                >
-                  <defs>
-                    <clipPath id="bizMvClip" clipPathUnits="objectBoundingBox">
-                      <path d={FIG8_PATH} />
-                    </clipPath>
-                  </defs>
-                  <image
-                    href={biz.image}
-                    x="0" y="0" width="300" height="261"
-                    preserveAspectRatio="xMidYMid slice"
-                    clipPath="url(#bizMvClip)"
-                  />
-                </svg>
-              </div>
-            )}
-            <h1 className={styles.mvTitle}>{biz.name}</h1>
-          </div>
+          {biz.image && (
+            <div className={styles.mvImage}>
+              <Image
+                src={biz.image}
+                alt={biz.name}
+                fill
+                className={styles.mvImg}
+                sizes="(max-width: 767px) 80vw, 440px"
+                priority
+              />
+            </div>
+          )}
+          <h1 className={`${styles.mvTitle} font-kinto`}>{biz.name}</h1>
         </section>
 
+        {/* プロフィール */}
         <section className={styles.profile}>
           <div className={styles.inner}>
             <dl className={styles.profileList}>
@@ -217,58 +238,100 @@ export default async function BusinessDetailPage({
           </div>
         </section>
 
+        {/* 全幅写真 */}
+        {biz.photoUrl && (
+          <div className={styles.fullPhoto}>
+            <Image
+              src={biz.photoUrl}
+              alt={biz.name}
+              fill
+              className={styles.fullPhotoImg}
+              sizes="100vw"
+            />
+          </div>
+        )}
+
+        {/* インタビューQ&A */}
         {biz.qa.length > 0 && (
           <section className={styles.interview}>
             <div className={styles.inner}>
-              <dl className={styles.qaList}>
-                {biz.qa.map((item, i) => (
-                  <div key={i} className={styles.qaItem}>
-                    <dt className={styles.question}>
-                      Q. {item.question}
-                    </dt>
-                    <dd className={styles.answer}>{item.answer}</dd>
-                  </div>
-                ))}
-              </dl>
+              {biz.qa.map((item, i) => (
+                <div key={i} className={styles.qaItem}>
+                  <p className={styles.question}>Q. {item.question}</p>
+                  <p className={styles.answer}>{item.answer}</p>
+                </div>
+              ))}
             </div>
           </section>
         )}
 
-        <section className={styles.contact}>
-          <div className={styles.inner}>
-            {biz.phone && biz.phone !== "00000000000" && (
-              <p className={styles.contactItem}>
-                <span className={styles.contactLabel}>電話</span>
-                <a href={`tel:${biz.phone}`}>{biz.phone}</a>
-              </p>
-            )}
-            {biz.website && biz.website !== "https://shirakabamura.com/" && (
-              <p className={styles.contactItem}>
-                <span className={styles.contactLabel}>ウェブ</span>
-                <a href={biz.website} target="_blank" rel="noopener noreferrer">
-                  {biz.website}
-                </a>
-              </p>
-            )}
-          </div>
-        </section>
+        {/* もっと [name] セクション */}
+        <section className={styles.more}>
+          <div className={styles.moreInner}>
+            <Image
+              src="/images/common/icon_business.svg"
+              alt=""
+              width={80}
+              height={63}
+              className={styles.moreIcon}
+            />
+            <p className={styles.moreLabel}>もっと</p>
+            <h2 className={`${styles.moreName} font-kinto`}>{biz.name}</h2>
 
-        <section className={styles.cta}>
-          <div className={styles.inner}>
-            <p className={styles.ctaText}>
-              詳しいご説明など行いますので、お気軽にお問い合わせください。
-            </p>
-            <div className={styles.ctaBtn}>
-              <Link href="/#contact" className="c-moreBtn blue">
-                お問い合わせ
-              </Link>
+            {(hasPhone || hasWebsite) && (
+              <div className={styles.moreLinks}>
+                {hasPhone && (
+                  <a href={`tel:${biz.phone}`} className={styles.moreLink}>
+                    <Image
+                      src="/images/common/icon_tel.svg"
+                      alt="電話"
+                      width={44}
+                      height={44}
+                    />
+                  </a>
+                )}
+                {hasWebsite && (
+                  <a
+                    href={biz.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.moreLink}
+                  >
+                    <Image
+                      src="/images/common/icon_web.svg"
+                      alt="ウェブサイト"
+                      width={44}
+                      height={44}
+                    />
+                  </a>
+                )}
+              </div>
+            )}
+
+            <div className={styles.shirakabako}>
+              <div className={styles.shirakabakoBadge}>
+                <span className={`${styles.shirakabakoBadgeText} font-kinto`}>
+                  白樺湖
+                  <br />
+                  のこと
+                </span>
+              </div>
+              <a
+                href="https://shirakabako.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.shirakabakLink}
+              >
+                観光案内サイト「白樺湖のこと」で見る
+              </a>
             </div>
           </div>
         </section>
 
+        {/* 他の事例 */}
         {allBizIds.length > 0 && (
           <section className={styles.related}>
-            <div className={styles.inner}>
+            <div className={styles.relatedInner}>
               <h2 className={styles.relatedTitle}>他の事例</h2>
               <div className={styles.relatedGrid}>
                 {allBizIds.map((r) => (
@@ -278,24 +341,17 @@ export default async function BusinessDetailPage({
                     className={styles.relatedCard}
                   >
                     {r.image && (
-                      <div className={styles.relatedImage}>
-                        <svg
-                          viewBox="0 0 300 261"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className={styles.relatedSvg}
-                        >
-                          <defs>
-                            <clipPath id={`relClip-${r.id}`} clipPathUnits="objectBoundingBox">
-                              <path d={FIG8_PATH} />
-                            </clipPath>
-                          </defs>
-                          <image
-                            href={r.image}
-                            x="0" y="0" width="300" height="261"
-                            preserveAspectRatio="xMidYMid slice"
-                            clipPath={`url(#relClip-${r.id})`}
-                          />
-                        </svg>
+                      <div
+                        className={styles.relatedImage}
+                        style={{ clipPath: `url(#relClip-${r.id})` }}
+                      >
+                        <Image
+                          src={r.image}
+                          alt={r.name}
+                          fill
+                          className={styles.relatedImg}
+                          sizes="(max-width: 767px) 80vw, 300px"
+                        />
                       </div>
                     )}
                     <h3 className={`${styles.relatedName} font-kinto`}>
