@@ -131,7 +131,7 @@ export default function IntroSection() {
             </div>
             <div className={styles.cardSocials}>
               <a
-                href="https://note.com/"
+                href="https://note.com/laketime"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
@@ -139,7 +139,7 @@ export default function IntroSection() {
                 note<ExtIcon />
               </a>
               <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/laketimejp?igsh=MWxhbHFzZW1lb2tzcw=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
@@ -147,7 +147,7 @@ export default function IntroSection() {
                 Instagram<ExtIcon />
               </a>
               <a
-                href="https://x.com/"
+                href="https://x.com/laketimejp?s=20"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
