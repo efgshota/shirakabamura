@@ -14,7 +14,7 @@
 }
 
 .breadcrumbInner {
-  max-width: 860px;
+  max-width: 1060px;
   margin: 0 auto;
   padding: 0 30px;
   display: flex;
@@ -53,7 +53,7 @@
 }
 
 .inner {
-  max-width: 860px;
+  max-width: 1060px;
   margin: 0 auto;
   padding: 0 30px;
 }
@@ -80,7 +80,7 @@
 
 /* ===== Specs ===== */
 .specsSection {
-  padding: 40px 0 0;
+  padding: 48px 0 0;
 }
 
 .specsGrid {
@@ -91,7 +91,7 @@
 
 .specsMain {
   flex-shrink: 0;
-  width: 40%;
+  width: 36%;
 }
 
 .specItem {
@@ -99,36 +99,28 @@
 }
 
 .specLabel {
-  font-size: 1.2rem;
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
   color: #253c30;
   opacity: 0.5;
   margin-bottom: 4px;
 }
 
 .specValue {
-  font-size: 1.5rem;
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 2.8rem;
   font-weight: 700;
   color: #253c30;
   letter-spacing: 0.02em;
 }
 
 .specPrice {
-  font-size: 2.4rem;
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 2.8rem;
   font-weight: 700;
   color: #253c30;
   letter-spacing: 0.02em;
-}
-
-.specFloorPlan {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.floorPlanIcon {
-  width: 20px;
-  height: 20px;
-  opacity: 0.5;
 }
 
 /* ===== Detail Table ===== */
@@ -139,54 +131,51 @@
 .detailTable {
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .detailTable tr {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.detailTable tr:first-child {
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .detailTable th,
 .detailTable td {
-  padding: 10px 0;
-  font-size: 1.3rem;
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  padding: 14px 16px;
+  font-size: 1.4rem;
   color: #253c30;
   vertical-align: top;
 }
 
 .detailTable th {
-  font-weight: 400;
-  opacity: 0.5;
-  white-space: nowrap;
-  padding-right: 20px;
-  width: 1%;
+  font-weight: 500;
+  width: 40%;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .detailTable td {
-  font-weight: 500;
+  font-weight: 350;
 }
 
 /* ===== Comment ===== */
 .commentSection {
+  position: relative;
   margin-top: 160px;
-  padding: 60px 0 0;
   background: #f8f8f5;
-}
-
-.commentGrid {
-  display: flex;
-  gap: 48px;
-  align-items: flex-start;
+  padding: 160px 30px 64px;
+  text-align: center;
 }
 
 .commentHeader {
-  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: flex-end;
+  justify-content: center;
   gap: 8px;
+  z-index: 1;
 }
 
 .commentVertical {
@@ -211,20 +200,18 @@
   padding-bottom: 2px;
 }
 
-.commentRight {
-  flex: 1;
-}
-
 .commentBody {
+  max-width: 680px;
+  margin: 0 auto;
   font-size: 1.5rem;
   line-height: 2;
   color: #253c30;
+  text-align: left;
 }
 
 /* ===== Contact Button ===== */
 .contactBtn {
-  margin-top: 48px;
-  padding-bottom: 80px;
+  margin-top: 40px;
   text-align: center;
 }
 
@@ -320,7 +307,7 @@
   }
 
   .inner {
-    max-width: 860px;
+    max-width: 1060px;
   }
 
   .title {
@@ -379,11 +366,7 @@
 
   .commentSection {
     margin-top: 80px;
-  }
-
-  .commentGrid {
-    flex-direction: column;
-    gap: 24px;
+    padding: 100px 24px 48px;
   }
 
   .commentVertical {
