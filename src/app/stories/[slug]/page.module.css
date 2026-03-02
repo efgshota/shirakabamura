@@ -12,11 +12,11 @@
   flex-direction: column;
   align-items: center;
   padding: 120px 30px 64px;
-  background: #f8f8f5;
+  background: #e5e5e5;
 }
 
 .mvImage {
-  width: 440px;
+  width: 660px;
   max-width: calc(100vw - 60px);
   aspect-ratio: 300 / 261;
   position: relative;
@@ -55,23 +55,19 @@
 
 .profileItem {
   padding: 20px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.profileItem:first-child {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .profileItem dt {
-  font-size: 1.2rem;
-  color: #94b3ba;
+  font-size: 1.5rem;
+  color: #253c30;
+  opacity: 0.5;
   font-weight: 400;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   letter-spacing: 0.05em;
 }
 
 .profileItem dd {
-  font-size: 1.8rem;
+  font-size: 3.0rem;
   color: #253c30;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -81,7 +77,7 @@
 .fullPhoto {
   position: relative;
   width: 100%;
-  height: 480px;
+  height: 640px;
 }
 
 .fullPhotoImg {
@@ -123,23 +119,35 @@
   border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.moreInner {
-  max-width: 480px;
+.moreCardWrap {
+  max-width: 560px;
   margin: 0 auto;
   padding: 0 30px;
-  text-align: center;
+  position: relative;
 }
 
 .moreIcon {
   display: block;
-  margin: 0 auto 20px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.moreCard {
+  background: #fff;
+  border-radius: 20px;
+  padding: 56px 40px 48px;
+  margin-top: -32px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .moreLabel {
-  font-size: 1.3rem;
-  color: #94b3ba;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #253c30;
   letter-spacing: 0.1em;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .moreName {
@@ -153,14 +161,22 @@
 .moreLinks {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 24px;
   margin-bottom: 48px;
 }
 
 .moreLink {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+}
+
+.moreLinkLabel {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #253c30;
+  letter-spacing: 0.03em;
 }
 
 /* 白樺湖のこと */
@@ -168,30 +184,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 }
 
-.shirakabakoBadge {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: #2ca4a8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.shirakabakoBanner {
+  display: block;
+  width: 280px;
+  max-width: 100%;
 }
 
-.shirakabakoBadgeText {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #fff;
-  text-align: center;
-  line-height: 1.5;
-  letter-spacing: 0.05em;
+.shirakabakoBannerImg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .shirakabakLink {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  font-weight: 700;
   color: #253c30;
   text-decoration: underline;
   text-underline-offset: 3px;

@@ -76,7 +76,7 @@ export default async function BusinessListPage() {
             </div>
             <p className={styles.subtitle}>
               白樺湖周辺で物件を取得して別荘や店舗として利用している方々に
-              <br />
+              <br className={styles.brDesktop} />
               ご協力いただき、生の声をインタビューさせていただきました。
             </p>
           </div>

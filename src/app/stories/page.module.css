@@ -107,6 +107,10 @@
     font-size: 1.4rem;
   }
 
+  .brDesktop {
+    display: none;
+  }
+
   .grid {
     grid-template-columns: 1fr;
     gap: 48px;

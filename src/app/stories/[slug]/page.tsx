@@ -206,7 +206,7 @@ export default async function BusinessDetailPage({
                 alt={biz.name}
                 fill
                 className={styles.mvImg}
-                sizes="(max-width: 767px) 80vw, 440px"
+                sizes="(max-width: 767px) 80vw, 660px"
                 priority
               />
             </div>
@@ -273,7 +273,7 @@ export default async function BusinessDetailPage({
 
         {/* もっと [name] セクション */}
         <section className={styles.more}>
-          <div className={styles.moreInner}>
+          <div className={styles.moreCardWrap}>
             <Image
               src="/images/common/icon_business.svg"
               alt=""
@@ -281,55 +281,66 @@ export default async function BusinessDetailPage({
               height={63}
               className={styles.moreIcon}
             />
-            <p className={styles.moreLabel}>もっと</p>
-            <h2 className={`${styles.moreName} font-kinto`}>{biz.name}</h2>
+            <div className={styles.moreCard}>
+              <p className={`${styles.moreLabel} font-kinto`}>もっと</p>
+              <h2 className={`${styles.moreName} font-kinto`}>{biz.name}</h2>
 
-            {(hasPhone || hasWebsite) && (
-              <div className={styles.moreLinks}>
-                {hasPhone && (
-                  <a href={`tel:${biz.phone}`} className={styles.moreLink}>
-                    <Image
-                      src="/images/common/icon_tel.svg"
-                      alt="電話"
-                      width={44}
-                      height={44}
-                    />
-                  </a>
-                )}
-                {hasWebsite && (
-                  <a
-                    href={biz.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.moreLink}
-                  >
-                    <Image
-                      src="/images/common/icon_web.svg"
-                      alt="ウェブサイト"
-                      width={44}
-                      height={44}
-                    />
-                  </a>
-                )}
-              </div>
-            )}
+              {(hasPhone || hasWebsite) && (
+                <div className={styles.moreLinks}>
+                  {hasWebsite && (
+                    <a
+                      href={biz.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.moreLink}
+                    >
+                      <Image
+                        src="/images/common/icon_web.svg"
+                        alt="ウェブサイト"
+                        width={44}
+                        height={44}
+                      />
+                      <span className={styles.moreLinkLabel}>ウェブ</span>
+                    </a>
+                  )}
+                  {hasPhone && (
+                    <a href={`tel:${biz.phone}`} className={styles.moreLink}>
+                      <Image
+                        src="/images/common/icon_tel.svg"
+                        alt="電話"
+                        width={44}
+                        height={44}
+                      />
+                      <span className={styles.moreLinkLabel}>電話</span>
+                    </a>
+                  )}
+                </div>
+              )}
 
-            <div className={styles.shirakabako}>
-              <div className={styles.shirakabakoBadge}>
-                <span className={`${styles.shirakabakoBadgeText} font-kinto`}>
-                  白樺湖
-                  <br />
-                  のこと
-                </span>
+              <div className={styles.shirakabako}>
+                <a
+                  href="https://shirakabako.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.shirakabakoBanner}
+                >
+                  <Image
+                    src="/images/business/hygge/banner.png"
+                    alt="白樺湖のこと"
+                    width={400}
+                    height={400}
+                    className={styles.shirakabakoBannerImg}
+                  />
+                </a>
+                <a
+                  href="https://shirakabako.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.shirakabakLink}
+                >
+                  観光案内サイト「白樺湖のこと」で見る
+                </a>
               </div>
-              <a
-                href="https://shirakabako.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.shirakabakLink}
-              >
-                観光案内サイト「白樺湖のこと」で見る
-              </a>
             </div>
           </div>
         </section>
