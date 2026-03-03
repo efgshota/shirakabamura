@@ -70,10 +70,10 @@
   background: #fff;
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 21px 24px 8px;
+  padding: 16px 24px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
 }
 
@@ -86,7 +86,7 @@
   font-size: 1.2rem;
   color: #bababa;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .cardName {
