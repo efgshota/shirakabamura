@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Zen_Kaku_Gothic_Antique, Inter } from "next/font/google";
+import { Zen_Kaku_Gothic_Antique, Inter, Noto_Sans_JP } from "next/font/google";
 import Script from "next/script";
 import FloatingButtons from "@/components/FloatingButtons";
 import RecaptchaProvider from "@/components/RecaptchaProvider";
@@ -17,6 +17,12 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+
+const notoSansJP = Noto_Sans_JP({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-noto-sans-jp",
 });
 
 const siteUrl = "https://shirakabamura.com";
@@ -68,7 +74,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${zenKaku.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html lang="ja" className={`${zenKaku.variable} ${inter.variable} ${notoSansJP.variable}`} suppressHydrationWarning>
       <head>
         {/* Google Analytics */}
         <Script

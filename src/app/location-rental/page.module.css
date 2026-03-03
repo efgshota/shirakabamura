@@ -5,6 +5,7 @@
 .main {
   position: relative;
   z-index: 1;
+  padding-top: 100px;
 }
 
 /* ══ Hero ══ */
@@ -57,16 +58,6 @@
   margin-bottom: 48px;
 }
 
-.sectionEn {
-  display: block;
-  font-size: 1.2rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #94b3ba;
-  margin-bottom: 8px;
-  font-family: "futura-pt", sans-serif;
-}
-
 .sectionTitle {
   font-size: 3.2rem;
   font-weight: 700;
@@ -102,31 +93,35 @@
 
 /* Info table */
 .infoTable {
-  border-top: 1px solid rgba(37, 60, 48, 0.12);
   margin-top: 40px;
 }
 
 .infoRow {
   display: flex;
   align-items: baseline;
-  gap: 32px;
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(37, 60, 48, 0.12);
+  gap: 16px;
+  padding: 6px 0;
 }
 
 .infoLabel {
   flex-shrink: 0;
-  width: 160px;
+  width: auto;
   font-size: 1.3rem;
   font-weight: 600;
   color: #94b3ba;
   letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.infoLabel::after {
+  content: "：";
 }
 
 .infoValue {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #253c30;
-  line-height: 1.6;
+  line-height: 1.5;
+  white-space: nowrap;
 }
 
 /* ══ Nakanojima Map & Info ══ */
@@ -138,6 +133,8 @@
 .nakanojimaMapImg {
   max-width: 100%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .nakanojimaInfo {
@@ -168,13 +165,13 @@
 /* ══ Access ══ */
 .accessLayout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  grid-template-columns: 3fr 2fr;
+  gap: 48px;
   align-items: start;
 }
 
 .accessMapWrap {
-  /* left column */
+  position: relative;
 }
 
 .accessMapImg {
@@ -483,22 +480,18 @@
 
 /* ══ Apply section ══ */
 .applySection {
-  background: #253c30;
+  background: #f8f8f5;
   padding: 120px 0 140px;
 }
 
-.sectionEnLight {
-  color: rgba(255, 255, 255, 0.5) !important;
-}
-
 .sectionTitleLight {
-  color: #fff !important;
+  color: #253c30 !important;
 }
 
 .applyText {
   font-size: 1.6rem;
   line-height: 2;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(37, 60, 48, 0.7);
   margin-bottom: 48px;
 }
 
@@ -509,13 +502,13 @@
 }
 
 .applyBtnPrimary {
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: #253c30 !important;
   color: #fff !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border: none !important;
 }
 
 .applyBtnPrimary:hover {
-  background: rgba(255, 255, 255, 0.2) !important;
+  opacity: 0.8 !important;
 }
 
 .applyBtnLine {
@@ -542,6 +535,10 @@
 }
 
 @media (max-width: 767px) {
+  .main {
+    padding-top: 70px;
+  }
+
   .heroTop {
     padding: 40px 24px 36px;
   }
@@ -576,7 +573,7 @@
 
   .infoRow {
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
   }
 
   .infoLabel {

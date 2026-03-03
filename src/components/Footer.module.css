@@ -6,38 +6,82 @@
   z-index: 1;
   background: #7bbec8;
   color: #253c30;
+  overflow: hidden;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  opacity: 0.35;
+  pointer-events: none;
 }
 
 .inner {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 60px;
 }
 
 /* ─────────────────────────────────────────
-   Grid（4カラム）
+   上段：ナビゲーション横一列
 ───────────────────────────────────────── */
-.grid {
+.nav {
+  padding: 80px 0 120px;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #253c30;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+}
+
+.navLink:hover {
+  opacity: 0.6;
+}
+
+.navIcon {
+  height: 18px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────
+   中段：サブセクション + ロゴ
+───────────────────────────────────────── */
+.middle {
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 80px;
+}
+
+.subSections {
+  display: flex;
   gap: 60px;
-  padding: 60px 0 48px;
 }
 
-/* ナビゲーション（flex-grow で余白を使う） */
-.nav {
+.subSection {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  flex: 1;
-}
-
-.sns,
-.related {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  flex-shrink: 0;
 }
 
 /* ─────────────────────────────────────────
@@ -53,25 +97,25 @@
 }
 
 /* ─────────────────────────────────────────
-   ナビリスト
+   サブリスト
 ───────────────────────────────────────── */
-.navList {
+.subList {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.navList li {
+.subList li {
   line-height: 1;
   margin-bottom: 10px;
 }
 
-.navList li:last-child {
+.subList li:last-child {
   margin-bottom: 0;
 }
 
-.navList a,
-.navList a:visited {
+.subList a,
+.subList a:visited {
   font-size: 1.5rem;
   font-weight: 700;
   color: #253c30;
@@ -80,25 +124,7 @@
   transition: opacity 0.2s;
 }
 
-.navList a:hover {
-  opacity: 0.6;
-}
-
-/* ─────────────────────────────────────────
-   電話番号
-───────────────────────────────────────── */
-.tel {
-  display: block;
-  margin-top: 20px;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #253c30;
-  text-decoration: none;
-  letter-spacing: 0.04em;
-  transition: opacity 0.2s;
-}
-
-.tel:hover {
+.subList a:hover {
   opacity: 0.6;
 }
 
@@ -106,33 +132,27 @@
    ロゴ（縦書き・右端）
 ───────────────────────────────────────── */
 .logoWrap {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  flex-shrink: 0;
-  padding-top: 4px;
+  position: absolute;
+  top: 80px;
+  right: 0;
 }
 
 .logo {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #253c30;
-  letter-spacing: 0.1em;
-  line-height: 1.3;
-  text-align: center;
+  height: 160px;
+  width: auto;
 }
 
 /* ─────────────────────────────────────────
    下部（仕切り線 + コピーライト）
 ───────────────────────────────────────── */
 .bottom {
-  padding-bottom: 32px;
+  padding-bottom: 24px;
 }
 
 .divider {
   height: 1px;
   background: rgba(37, 60, 48, 0.2);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .copyright {
@@ -152,7 +172,11 @@
     padding: 0 40px;
   }
 
-  .grid {
+  .navList {
+    gap: 24px;
+  }
+
+  .subSections {
     gap: 40px;
   }
 }
@@ -165,17 +189,41 @@
     padding: 0 24px;
   }
 
-  .grid {
+  .nav {
+    padding: 40px 0 32px;
+  }
+
+  .navList {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .navIcon {
+    width: 28px;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .middle {
     flex-direction: column;
     gap: 32px;
-    padding: 48px 0 40px;
+    padding-bottom: 40px;
+  }
+
+  .subSections {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .sectionLabel {
+    margin-left: -1em;
   }
 
   .logoWrap {
-    justify-content: flex-start;
+    right: 24px;
   }
 
   .logo {
-    font-size: 2rem;
+    height: 100px;
   }
 }

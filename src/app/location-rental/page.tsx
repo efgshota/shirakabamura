@@ -90,7 +90,6 @@ export default function LocationRentalPage() {
         <section id="nakanojima" className={styles.section}>
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
-              <span className={styles.sectionEn}>About Nakanojima</span>
               <h2 className={`${styles.sectionTitle}`}>中之島とは</h2>
             </div>
 
@@ -150,7 +149,6 @@ export default function LocationRentalPage() {
         <section id="access" className={`${styles.section} ${styles.sectionAlt}`}>
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
-              <span className={styles.sectionEn}>Access</span>
               <h2 className={`${styles.sectionTitle}`}>アクセス</h2>
             </div>
 
@@ -196,7 +194,7 @@ export default function LocationRentalPage() {
         {/* ══ Full-width banner ══ */}
         <div className={styles.banner}>
           <Image
-            src="/images/location-rental/banner.png"
+            src="/images/location-rental/banner.jpg"
             alt="白樺湖 中之島"
             fill
             className={styles.bannerImg}
@@ -208,7 +206,6 @@ export default function LocationRentalPage() {
         <section id="scenes" className={styles.section}>
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
-              <span className={styles.sectionEn}>Scenes</span>
               <h2 className={`${styles.sectionTitle}`}>利用シーンについて</h2>
             </div>
             <p className={styles.catchCopy}>
@@ -251,7 +248,6 @@ export default function LocationRentalPage() {
         <section id="service" className={`${styles.section} ${styles.sectionAlt}`}>
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
-              <span className={styles.sectionEn}>Service</span>
               <h2 className={`${styles.sectionTitle}`}>サービス</h2>
             </div>
 
@@ -287,7 +283,6 @@ export default function LocationRentalPage() {
         <section id="rules" className={styles.section}>
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
-              <span className={styles.sectionEn}>Rules</span>
               <h2 className={`${styles.sectionTitle}`}>無人島での過ごし方 / ルール</h2>
             </div>
 
@@ -341,7 +336,6 @@ export default function LocationRentalPage() {
         <section id="price" className={`${styles.section} ${styles.sectionAlt}`}>
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
-              <span className={styles.sectionEn}>Price</span>
               <h2 className={`${styles.sectionTitle}`}>利用料金</h2>
             </div>
 
@@ -420,7 +414,6 @@ export default function LocationRentalPage() {
         <section id="payment" className={styles.section}>
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
-              <span className={styles.sectionEn}>Payment</span>
               <h2 className={`${styles.sectionTitle}`}>支払い方法</h2>
             </div>
 
@@ -456,7 +449,6 @@ export default function LocationRentalPage() {
         <section id="cancel" className={`${styles.section} ${styles.sectionAlt}`}>
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
-              <span className={styles.sectionEn}>Cancellation Policy</span>
               <h2 className={`${styles.sectionTitle}`}>キャンセルポリシー</h2>
             </div>
 
@@ -515,7 +507,6 @@ export default function LocationRentalPage() {
         <section id="apply" className={styles.applySection}>
           <div className={styles.inner}>
             <div className={styles.sectionHead}>
-              <span className={`${styles.sectionEn} ${styles.sectionEnLight}`}>Apply / Contact</span>
               <h2 className={`${styles.sectionTitle} ${styles.sectionTitleLight}`}>
                 お申し込み / お問い合わせ
               </h2>

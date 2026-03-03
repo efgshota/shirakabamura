@@ -26,10 +26,10 @@ const MAP_AREAS: {
   labelY: number;
   color: string;
 }[] = [
-  { name: "湖畔・西", pathKey: "lakeWest", fillColor: "#3A9A9D", labelX: 28, labelY: 27, color: "#4FB2B5" },
-  { name: "湖畔・南", pathKey: "lakeSouth", fillColor: "#2D6E63", labelX: 48, labelY: 44, color: "#2D6E63" },
-  { name: "森・東", pathKey: "forestEast", fillColor: "#1B7A4A", labelX: 68, labelY: 55, color: "#1B7A4A" },
-  { name: "森・西", pathKey: "forestWest", fillColor: "#135C27", labelX: 28, labelY: 68, color: "#3A650E" },
+  { name: "湖畔・西", pathKey: "lakeWest", fillColor: "#3A9A9D", labelX: 28, labelY: 27, color: "#253c30" },
+  { name: "湖畔・南", pathKey: "lakeSouth", fillColor: "#2D6E63", labelX: 48, labelY: 44, color: "#253c30" },
+  { name: "森・東", pathKey: "forestEast", fillColor: "#1B7A4A", labelX: 68, labelY: 55, color: "#253c30" },
+  { name: "森・西", pathKey: "forestWest", fillColor: "#135C27", labelX: 28, labelY: 68, color: "#253c30" },
 ];
 
 export default function PropertyListClient({
@@ -120,24 +120,34 @@ export default function PropertyListClient({
               className={styles.mapSvgOverlay}
             >
               {MAP_AREAS.map((area) => (
-                <path
-                  key={area.name}
-                  d={AREA_PATHS[area.pathKey]}
-                  fill={area.fillColor}
-                  className={`${styles.mapAreaPath} ${areaFilter === area.name ? styles.mapAreaPathActive : ""}`}
-                  onClick={() => setAreaFilter(areaFilter === area.name ? "all" : area.name)}
-                  onMouseEnter={() => setHoveredArea(area.name)}
-                  onMouseLeave={() => setHoveredArea(null)}
-                  role="button"
-                  aria-label={`${area.name}で絞り込み`}
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setAreaFilter(areaFilter === area.name ? "all" : area.name);
-                    }
-                  }}
-                />
+                <g key={area.name}>
+                  {/* 透明なヒットゾーン（クリック領域を拡大） */}
+                  <path
+                    d={AREA_PATHS[area.pathKey]}
+                    fill="transparent"
+                    stroke="transparent"
+                    strokeWidth={30}
+                    className={styles.mapAreaHitZone}
+                    onClick={() => setAreaFilter(areaFilter === area.name ? "all" : area.name)}
+                    onMouseEnter={() => setHoveredArea(area.name)}
+                    onMouseLeave={() => setHoveredArea(null)}
+                    role="button"
+                    aria-label={`${area.name}で絞り込み`}
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setAreaFilter(areaFilter === area.name ? "all" : area.name);
+                      }
+                    }}
+                  />
+                  {/* 表示用パス */}
+                  <path
+                    d={AREA_PATHS[area.pathKey]}
+                    fill={area.fillColor}
+                    className={`${styles.mapAreaPath} ${areaFilter === area.name ? styles.mapAreaPathActive : ""} ${hoveredArea === area.name ? styles.mapAreaPathHovered : ""}`}
+                  />
+                </g>
               ))}
             </svg>
             {/* エリアテキストラベル */}
@@ -151,6 +161,8 @@ export default function PropertyListClient({
                   "--label-color": area.color,
                 } as React.CSSProperties}
                 onClick={() => setAreaFilter(areaFilter === area.name ? "all" : area.name)}
+                onMouseEnter={() => setHoveredArea(area.name)}
+                onMouseLeave={() => setHoveredArea(null)}
               >
                 {area.name}
               </button>
@@ -177,8 +189,8 @@ export default function PropertyListClient({
                       <Image
                         src={prop.image}
                         alt={prop.title}
-                        width={280}
-                        height={200}
+                        width={116}
+                        height={128}
                         className={styles.cardImg}
                       />
                     )}

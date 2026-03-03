@@ -121,17 +121,21 @@
   pointer-events: none;
 }
 
-.mapAreaPath {
-  opacity: 0.4;
+.mapAreaHitZone {
   cursor: pointer;
   pointer-events: auto;
-  transition: opacity 0.3s, transform 0.3s;
-  transform-box: fill-box;
-  transform-origin: center center;
   outline: none;
 }
 
-.mapAreaPath:hover {
+.mapAreaPath {
+  opacity: 0.4;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  transform-box: fill-box;
+  transform-origin: center center;
+}
+
+.mapAreaPathHovered {
   opacity: 0.75;
   transform: scale(1.03);
 }
@@ -140,7 +144,7 @@
   opacity: 0.7;
 }
 
-.mapAreaPathActive:hover {
+.mapAreaPathActive.mapAreaPathHovered {
   opacity: 0.8;
 }
 
@@ -150,8 +154,8 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 6px 12px;
-  font-size: 1.3rem;
+  padding: 8px 16px;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--label-color);
   white-space: nowrap;
@@ -171,7 +175,9 @@
 }
 
 .mapLabelHovered {
+  background: var(--label-color);
   color: #fff;
+  border-radius: 20px;
 }
 
 /* ===== List Section ===== */
@@ -189,30 +195,35 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 25px;
 }
 
 .card {
   background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
+  border-radius: 20px;
+  padding: 22px 24px;
   display: flex;
-  flex-direction: column;
-  transition: box-shadow 0.3s;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  height: 176px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
 }
 
 .card:hover {
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-  opacity: 1;
+  opacity: 0.85;
 }
 
 .cardImage {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
+  width: 116px;
+  height: 128px;
   flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
   background: #eef3f1;
 }
 
@@ -225,32 +236,36 @@
 
 .cardBody {
   flex: 1;
-  padding: 16px 20px 20px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 4px 0;
+  text-align: right;
 }
 
 .cardSpecs {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #253c30;
-  line-height: 1.5;
+  text-align: right;
 }
 
 .cardDesc {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 700;
   line-height: 1.6;
   color: #253c30;
-  opacity: 0.7;
-  flex: 1;
+  white-space: pre-line;
+  text-align: right;
 }
 
 .cardPrice {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #253c30;
-  margin-top: 8px;
+  text-align: right;
 }
 
 /* ===== CTA Section ===== */
@@ -321,16 +336,32 @@
   }
 
   .grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 16px;
   }
 
+  .card {
+    padding: 16px 18px;
+    gap: 14px;
+    height: 140px;
+  }
+
+  .cardImage {
+    width: 96px;
+    height: 106px;
+  }
+
   .cardBody {
-    padding: 12px 14px 16px;
+    gap: 8px;
   }
 
   .cardSpecs {
+    font-size: 1.3rem;
+  }
+
+  .cardDesc {
     font-size: 1.2rem;
+    line-height: 1.5;
   }
 
   .cardPrice {
@@ -347,8 +378,4 @@
   }
 }
 
-@media (max-width: 480px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
+/* 480px以下は767px以下と同じ（1カラム横型カード） */

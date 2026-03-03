@@ -74,6 +74,7 @@ export default async function PropertyDetailPage({
     price: string;
     floorPlan?: string | null;
     floorArea?: string | null;
+    landArea?: string | null;
     specs?: string;
     detailsHtml?: string;
     details?: { label: string; value: string }[];
@@ -96,6 +97,7 @@ export default async function PropertyDetailPage({
       price: p.price,
       floorPlan: p.floorPlan,
       floorArea: p.floorArea,
+      landArea: p.landArea,
       specs: p.specs,
       detailsHtml: p.details ?? undefined,
       comment: p.comment,
@@ -115,6 +117,7 @@ export default async function PropertyDetailPage({
       price: p.price,
       floorPlan: p.floorPlan,
       floorArea: p.floorArea,
+      landArea: p.landArea,
       specs: p.specs,
       details: p.details,
       comment: p.comment,
@@ -217,27 +220,18 @@ export default async function PropertyDetailPage({
                 </div>
                 <div className={styles.specItem}>
                   <p className={styles.specLabel}>間取り</p>
-                  <p className={styles.specValue}>
-                    <span className={styles.specFloorPlan}>
-                      {prop.floorPlan}
-                      <svg
-                        className={styles.floorPlanIcon}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                      >
-                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                        <polyline points="9 22 9 12 15 12 15 22" />
-                      </svg>
-                    </span>
-                  </p>
+                  <p className={styles.specValue}>{prop.floorPlan}</p>
                 </div>
                 <div className={styles.specItem}>
                   <p className={styles.specLabel}>延床面積</p>
                   <p className={styles.specValue}>{prop.floorArea}</p>
                 </div>
-                {/* 土地面積は details HTML 内に含まれる */}
+                {prop.landArea && (
+                  <div className={styles.specItem}>
+                    <p className={styles.specLabel}>土地面積</p>
+                    <p className={styles.specValue}>{prop.landArea}</p>
+                  </div>
+                )}
               </div>
 
               <div className={styles.specsDetail}>
@@ -265,43 +259,37 @@ export default async function PropertyDetailPage({
 
         {/* Comment */}
         <section className={styles.commentSection}>
-          <div className={styles.inner}>
-            <div className={styles.commentGrid}>
-              <div className={styles.commentHeader}>
-                <span className={styles.commentVertical}>
-                  担当者
+          <div className={styles.commentHeader}>
+            <span className={styles.commentVertical}>
+              担当者
+            </span>
+            <Image
+              src="/images/property/comment.svg"
+              alt=""
+              width={92}
+              height={99}
+              className={styles.commentBird}
+            />
+            <span className={styles.commentLabel}>
+              コメント
+            </span>
+          </div>
+          <div className={styles.commentBody}>
+            {(prop.comment && prop.comment.trim() !== "") ? (
+              prop.comment.split("\n").map((line, i, arr) => (
+                <span key={i}>
+                  {line}
+                  {i < arr.length - 1 && <br />}
                 </span>
-                <Image
-                  src="/images/property/comment.svg"
-                  alt=""
-                  width={92}
-                  height={99}
-                  className={styles.commentBird}
-                />
-                <span className={styles.commentLabel}>
-                  コメント
-                </span>
-              </div>
-              <div className={styles.commentRight}>
-                <div className={styles.commentBody}>
-                  {(prop.comment && prop.comment.trim() !== "") ? (
-                    prop.comment.split("\n").map((line, i, arr) => (
-                      <span key={i}>
-                        {line}
-                        {i < arr.length - 1 && <br />}
-                      </span>
-                    ))
-                  ) : (
-                    <p>白樺湖の西岸、標高約1,400mに位置する自然豊かなロケーションの物件です。リビングの大きな窓からは四季折々の美しい山並みを望むことができ、特に秋の紅葉シーズンは圧巻の景色が広がります。建物は2018年にフルリノベーション済みで、断熱性能も大幅に向上しています。別荘としてはもちろん、近年はリモートワークの拠点として移住される方も増えています。周辺にはスキー場や温泉施設、地元の農産物直売所もあり、年間を通じて充実した暮らしが楽しめます。車で10分圏内にスーパーや病院もあるので、定住にも安心です。ぜひ一度現地をご覧ください。</p>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className={styles.contactBtn}>
-              <Link href="/#contact" className="c-moreBtn">
-                お問い合わせ
-              </Link>
-            </div>
+              ))
+            ) : (
+              <p>白樺湖の西岸、標高約1,400mに位置する自然豊かなロケーションの物件です。リビングの大きな窓からは四季折々の美しい山並みを望むことができ、特に秋の紅葉シーズンは圧巻の景色が広がります。建物は2018年にフルリノベーション済みで、断熱性能も大幅に向上しています。別荘としてはもちろん、近年はリモートワークの拠点として移住される方も増えています。周辺にはスキー場や温泉施設、地元の農産物直売所もあり、年間を通じて充実した暮らしが楽しめます。車で10分圏内にスーパーや病院もあるので、定住にも安心です。ぜひ一度現地をご覧ください。</p>
+            )}
+          </div>
+          <div className={styles.contactBtn}>
+            <Link href="/#contact" className="c-moreBtn">
+              お問い合わせ
+            </Link>
           </div>
         </section>
 
