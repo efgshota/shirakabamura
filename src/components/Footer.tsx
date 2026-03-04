@@ -67,6 +67,15 @@ export default function Footer() {
                     レイクリゾート
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="https://note.com/laketime"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    これまでの取り組み
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -81,15 +90,6 @@ export default function Footer() {
                     rel="noopener noreferrer"
                   >
                     LINE
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.instagram.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Instagram
                   </a>
                 </li>
               </ul>

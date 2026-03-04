@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { draftMode } from "next/headers";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PropertyGallery from "@/components/PropertyGallery";
@@ -57,11 +58,15 @@ export async function generateMetadata({
 
 export default async function PropertyDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ draftKey?: string }>;
 }) {
   const { slug } = await params;
+  const { draftKey } = await searchParams;
   const decodedSlug = decodeURIComponent(slug);
+  const { isEnabled: isPreview } = await draftMode();
 
   // 正規化された物件データ型
   type NormalizedProperty = {
@@ -129,7 +134,8 @@ export default async function PropertyDetailPage({
   let prop: NormalizedProperty | null = null;
 
   try {
-    const cmsProp = await getProperty(decodedSlug);
+    const queries = isPreview && draftKey ? { draftKey } : undefined;
+    const cmsProp = await getProperty(decodedSlug, queries);
     prop = normalizeCms(cmsProp);
   } catch {
     const staticProp = staticProperties.find((p) => p.slug === decodedSlug);
@@ -180,6 +186,19 @@ export default async function PropertyDetailPage({
   return (
     <div className={styles.page}>
       <JsonLd data={realEstateSchema} />
+      {isPreview && (
+        <div style={{
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999,
+          background: "#1a7f37", color: "#fff", textAlign: "center",
+          padding: "8px 16px", fontSize: "13px", display: "flex",
+          alignItems: "center", justifyContent: "center", gap: "16px",
+        }}>
+          <span>📝 プレビューモード（下書き表示中）</span>
+          <a href="/api/disable-preview" style={{ color: "#fff", textDecoration: "underline" }}>
+            終了する
+          </a>
+        </div>
+      )}
       <Header />
       <main className={styles.main}>
         {/* Breadcrumb */}

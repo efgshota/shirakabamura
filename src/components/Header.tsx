@@ -155,6 +155,14 @@ export default function Header() {
             >
               レイクリゾート
             </a>
+            <a
+              href="https://note.com/laketime"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.navRelatedLink}
+            >
+              これまでの取り組み
+            </a>
           </div>
         </div>
       </nav>

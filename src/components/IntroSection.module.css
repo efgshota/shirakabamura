@@ -141,7 +141,7 @@
 .infoCard {
   position: relative;
   padding: 28px 32px 32px;
-  min-height: 360px;
+  min-height: 280px;
   display: flex;
   flex-direction: column;
   text-decoration: none;
@@ -254,13 +254,14 @@ a.infoCard:hover {
 .cardSocials {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 36px;
   flex-wrap: wrap;
   position: absolute;
-  top: calc(50% + 48px);
+  top: calc(50% + 20px);
   left: 0;
   right: 0;
+  padding-left: 122px;
   transform: translateY(-50%);
   z-index: 1;
 }
@@ -303,7 +304,7 @@ a.infoCard:hover {
   }
 
   .inner {
-    padding: 120px 24px 120px;
+    padding: 120px 20px 120px;
   }
 
   .article {
@@ -332,6 +333,7 @@ a.infoCard:hover {
   .cardContent {
     flex-direction: column;
     gap: 16px;
+    justify-content: center;
   }
 
   .cardTitle {
@@ -341,6 +343,8 @@ a.infoCard:hover {
 
   .cardSocials {
     gap: 20px;
+    justify-content: center;
+    padding-left: 0;
   }
 
   .socialLink {
