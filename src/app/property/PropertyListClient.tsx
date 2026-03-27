@@ -12,8 +12,10 @@ export type PropertyCardData = {
   image: string;
   specs?: string;
   description?: string;
+  comment?: string;
   price: string;
   type: string;
+  kind?: string; // "建物" | "土地" — microCMS kindscat
   location?: string;
 };
 
@@ -38,7 +40,7 @@ export default function PropertyListClient({
   properties: PropertyCardData[];
 }) {
   const [typeFilter, setTypeFilter] = useState("all");
-  const [usageFilter, setUsageFilter] = useState("all");
+  const [kindFilter, setKindFilter] = useState("all");
   const [areaFilter, setAreaFilter] = useState("all");
   const [hoveredArea, setHoveredArea] = useState<string | null>(null);
 
@@ -50,9 +52,10 @@ export default function PropertyListClient({
   const filtered = useMemo(() => {
     let result = [...properties];
     if (typeFilter !== "all") result = result.filter((p) => p.type === typeFilter);
+    if (kindFilter !== "all") result = result.filter((p) => p.kind === kindFilter);
     if (areaFilter !== "all") result = result.filter((p) => p.location === areaFilter);
     return result;
-  }, [properties, typeFilter, areaFilter]);
+  }, [properties, typeFilter, kindFilter, areaFilter]);
 
   return (
     <>
@@ -68,23 +71,22 @@ export default function PropertyListClient({
                 className={styles.select}
               >
                 <option value="all">全て</option>
-                <option value="sell">建物つき</option>
-                <option value="land">土地のみ</option>
+                <option value="sell">売物件</option>
                 <option value="rent">賃貸</option>
               </select>
             </div>
           </div>
           <div className={styles.filterItem}>
-            <span className={styles.filterLabel}>用途：</span>
+            <span className={styles.filterLabel}>建物/土地：</span>
             <div className={styles.selectWrap}>
               <select
-                value={usageFilter}
-                onChange={(e) => setUsageFilter(e.target.value)}
+                value={kindFilter}
+                onChange={(e) => setKindFilter(e.target.value)}
                 className={styles.select}
               >
-                <option value="all">居住用</option>
-                <option value="business">事業用</option>
-                <option value="vacation">別荘</option>
+                <option value="all">全て</option>
+                <option value="建物">建物</option>
+                <option value="土地">土地</option>
               </select>
             </div>
           </div>
@@ -196,18 +198,9 @@ export default function PropertyListClient({
                     )}
                   </div>
                   <div className={styles.cardBody}>
+                    <p className={styles.cardTitle}>{prop.title}</p>
                     {prop.specs && (
                       <p className={styles.cardSpecs}>{prop.specs}</p>
-                    )}
-                    {prop.description && (
-                      <p className={styles.cardDesc}>
-                        {prop.description.split("\n").map((line, i, arr) => (
-                          <span key={i}>
-                            {line}
-                            {i < arr.length - 1 && <br />}
-                          </span>
-                        ))}
-                      </p>
                     )}
                     {prop.price && (
                       <p className={styles.cardPrice}>{prop.price}</p>

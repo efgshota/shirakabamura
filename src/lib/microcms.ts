@@ -22,6 +22,7 @@ export type Property = {
   slug?: string;
   location: string;
   type: string[];
+  kindscat?: string[]; // 建物 / 土地
   image: MicroCMSImage | MicroCMSImage[];
   images?: MicroCMSImage | MicroCMSImage[];
   price: string;

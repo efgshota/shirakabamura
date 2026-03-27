@@ -85,6 +85,8 @@ export default async function PropertyDetailPage({
     details?: { label: string; value: string }[];
     comment?: string;
     description?: string;
+    address?: string;
+    access?: string;
   };
 
   // MicroCMS データを正規化
@@ -107,6 +109,8 @@ export default async function PropertyDetailPage({
       detailsHtml: p.details ?? undefined,
       comment: p.comment,
       description: p.description?.replace(/<[^>]*>/g, ""),
+      address: p.address,
+      access: p.access,
     };
   }
 
@@ -127,6 +131,8 @@ export default async function PropertyDetailPage({
       details: p.details,
       comment: p.comment,
       description: p.description,
+      address: p.address,
+      access: Array.isArray(p.access) ? p.access.join("\n") : p.access,
     };
   }
 
@@ -271,6 +277,30 @@ export default async function PropertyDetailPage({
                     </tbody>
                   </table>
                 ) : null}
+
+                {(prop.address || prop.access) && (
+                  <div className={styles.locationInfo}>
+                    {prop.address && (
+                      <div className={styles.locationItem}>
+                        <p className={styles.locationLabel}>住所</p>
+                        <p className={styles.locationValue}>{prop.address}</p>
+                      </div>
+                    )}
+                    {prop.access && (
+                      <div className={styles.locationItem}>
+                        <p className={styles.locationLabel}>アクセス</p>
+                        <p className={styles.locationValue}>
+                          {prop.access.split("\n").map((line, i, arr) => (
+                            <span key={i}>
+                              {line}
+                              {i < arr.length - 1 && <br />}
+                            </span>
+                          ))}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
