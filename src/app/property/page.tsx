@@ -32,8 +32,10 @@ export default async function PropertyListPage() {
         image: getFirstImageUrl(p.image),
         specs: p.specs,
         description: p.description?.replace(/<[^>]*>/g, ""),
+        comment: p.comment,
         price: p.price,
         type: (p.type?.[0] ?? "sell") as "sell" | "rent",
+        kind: p.kindscat?.[0],
         location: p.location,
       }));
     }
