@@ -53,9 +53,7 @@
 
 ## 🟡 推奨（公開後でも可）
 
-- [ ] `MICROCMS_WEBHOOK_SECRET` を設定して即時反映を有効化
-  - Vercel 環境変数に追加
-  - microCMS Webhook に `/api/revalidate` を追加設定
+- [x] `MICROCMS_WEBHOOK_SECRET` を設定して即時反映を有効化（動作確認済み）
 - [ ] `manifest.json` / `site.webmanifest` 追加（PWA対応）
 - [ ] 物件一覧：`purposecat` フィルターをUIに追加（microCMSデータ入力後）
 - [ ] 物件一覧：`kindscat` フィルターの動作確認（microCMSデータ入力後）
@@ -74,6 +72,10 @@
 - [x] Vercel プロジェクトリンク（shirakabamura.com）
 - [x] Git ブランチ整理（main のみに）
 - [x] PR #34 マージ
+- [x] PR #35 マージ（公開前タスクリスト・lessons learned）
+- [x] `MICROCMS_WEBHOOK_SECRET` 設定（Vercel production + microCMS カスタム通知）
+- [x] Webhook 即時反映の動作確認済み
+- [x] Slack共有用まとめ作成・送信
 
 ---
 
