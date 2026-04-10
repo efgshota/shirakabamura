@@ -90,21 +90,7 @@ export default function PropertyListClient({
               </select>
             </div>
           </div>
-          <div className={styles.filterItem}>
-            <span className={styles.filterLabel}>区画：</span>
-            <div className={styles.selectWrap}>
-              <select
-                value={areaFilter}
-                onChange={(e) => setAreaFilter(e.target.value)}
-                className={styles.select}
-              >
-                <option value="all">全て</option>
-                {locations.map((loc) => (
-                  <option key={loc} value={loc}>{loc}</option>
-                ))}
-              </select>
-            </div>
-          </div>
+{/* 区画フィルターはMAPと重複するため削除 */}
         </div>
 
         <div className={styles.mapWrap}>
@@ -199,8 +185,8 @@ export default function PropertyListClient({
                   </div>
                   <div className={styles.cardBody}>
                     <p className={styles.cardTitle}>{prop.title}</p>
-                    {prop.specs && (
-                      <p className={styles.cardSpecs}>{prop.specs}</p>
+                    {prop.comment && (
+                      <p className={styles.cardComment}>{prop.comment}</p>
                     )}
                     {prop.price && (
                       <p className={styles.cardPrice}>{prop.price}</p>

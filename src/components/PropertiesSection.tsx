@@ -22,8 +22,7 @@ type PropertyItem = {
 const withSqm = (v?: string | number) => v != null ? (String(v).includes("㎡") ? String(v) : `${v}㎡`) : undefined;
 
 const filterTiles = [
-  { key: "land", label: "土地のみ", icon: "/images/tonkachi.png" },
-  { key: "sell", label: "建物つき", icon: "/images/house.png" },
+  { key: "sell", label: "売物件", icon: "/images/house.png" },
   { key: "rent", label: "賃貸物件", icon: "/images/rent.png" },
 ];
 
