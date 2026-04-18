@@ -43,21 +43,12 @@ export const metadata: Metadata = {
     title: "白樺村｜白樺湖周辺での移住・開業・くらしをサポート",
     description:
       "「50年先も続くレイクリゾート」をめざす白樺村。白樺湖周辺での移住・開業・不動産物件・ロケーションレンタルまで、地域での新たなくらしを幅広くサポートします。",
-    images: [
-      {
-        url: "/images/top/mv.jpg",
-        width: 1280,
-        height: 800,
-        alt: "白樺湖のほとり、白樺村",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "白樺村｜白樺湖周辺での移住・開業・くらしをサポート",
     description:
       "「50年先も続くレイクリゾート」をめざす白樺村。白樺湖周辺での移住・開業・不動産物件・ロケーションレンタルまで、地域での新たなくらしを幅広くサポートします。",
-    images: ["/images/top/mv.jpg"],
   },
   robots: {
     index: true,
