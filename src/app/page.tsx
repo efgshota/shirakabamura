@@ -68,8 +68,9 @@ export default async function Home() {
     price?: string;
     floorPlan?: string;
     floorArea?: string;
-    highlight?: string;
+    landArea?: string;
     type?: string;
+    kind?: string;
   }[] = [];
 
   try {
@@ -84,8 +85,8 @@ export default async function Home() {
         floorPlan: p.floorPlan ?? undefined,
         floorArea: p.floorArea ?? undefined,
         landArea: p.landArea ?? undefined,
-        highlight: p.comment ?? undefined,
         type: p.type?.[0] ?? undefined,
+        kind: p.kindscat?.[0] ?? undefined,
       }));
     }
   } catch {
@@ -101,7 +102,7 @@ export default async function Home() {
       price: p.price,
       floorPlan: p.floorPlan,
       floorArea: p.floorArea,
-      highlight: p.comment,
+      landArea: p.landArea,
       type: p.type,
     }));
   }

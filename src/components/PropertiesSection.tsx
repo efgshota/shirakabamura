@@ -15,11 +15,33 @@ type PropertyItem = {
   floorPlan?: string;
   floorArea?: string | number;
   landArea?: string | number;
-  highlight?: string;
   type?: string;
+  kind?: string;
 };
 
 const withSqm = (v?: string | number) => v != null ? (String(v).includes("㎡") ? String(v) : `${v}㎡`) : undefined;
+
+const typeLabel = (type?: string) =>
+  type === "rent" ? "賃貸" : type === "sell" ? "売物件" : undefined;
+
+const formatPrice = (price?: string, type?: string) => {
+  if (!price) return "お問い合わせ";
+  if (type === "rent" && !/\/月|月額|\/\s*month/i.test(price)) {
+    return `${price}/月`;
+  }
+  return price;
+};
+
+const buildTitle = (item: PropertyItem) => {
+  if (item.title) return item.title;
+  const area = withSqm(item.floorArea ?? item.landArea);
+  return [item.area, area].filter(Boolean).join(" ");
+};
+
+const buildMeta = (item: PropertyItem) => {
+  const area = withSqm(item.floorArea ?? item.landArea);
+  return [item.area, item.floorPlan, area].filter(Boolean).join(" / ");
+};
 
 const filterTiles = [
   { key: "sell", label: "売物件", icon: "/images/house.png" },
@@ -122,17 +144,25 @@ export default function PropertiesSection({
                 )}
               </div>
               <div className={styles.cardBody}>
-                {(prop.floorPlan || prop.floorArea || prop.landArea) && (
-                  <p className={styles.cardSpecs}>
-                    {[prop.floorPlan, withSqm(prop.floorArea ?? prop.landArea)].filter(Boolean).join(" / ")}
-                  </p>
+                <div className={styles.cardTags}>
+                  {typeLabel(prop.type) && (
+                    <span className={`${styles.tag} ${styles.tagType}`}>
+                      {typeLabel(prop.type)}
+                    </span>
+                  )}
+                  {prop.kind && (
+                    <span className={`${styles.tag} ${styles.tagKind}`}>
+                      {prop.kind}
+                    </span>
+                  )}
+                </div>
+                <p className={styles.cardTitle}>{buildTitle(prop)}</p>
+                {buildMeta(prop) && (
+                  <p className={styles.cardMeta}>{buildMeta(prop)}</p>
                 )}
-                {prop.highlight && (
-                  <p className={styles.cardHighlight}>{prop.highlight}</p>
-                )}
-                {prop.price && (
-                  <p className={styles.cardPrice}>{prop.price}</p>
-                )}
+                <p className={styles.cardPrice}>
+                  {formatPrice(prop.price, prop.type)}
+                </p>
               </div>
             </Link>
           ))}
