@@ -75,13 +75,6 @@ type FormData = {
 
 type FormErrors = Partial<Record<keyof FormData, string>>;
 type Step = "input" | "confirm" | "sending" | "complete" | "error";
-type DebugInfo = {
-  recaptchaStatus: "ok" | "failed" | "skipped";
-  recaptchaError?: string;
-  httpStatus?: number;
-  apiError?: string;
-  fetchError?: string;
-};
 
 const EMPTY_FORM: FormData = {
   name: "",
@@ -110,8 +103,6 @@ export default function ContactSection() {
   const [step, setStep] = useState<Step>("input");
   const [errors, setErrors] = useState<FormErrors>({});
   const [agreeError, setAgreeError] = useState(false);
-  const [debugInfo, setDebugInfo] = useState<DebugInfo | null>(null);
-
   // ContactSection がマウントされた時点でreCAPTCHAスクリプトの読み込みを開始する。
   // ページ全体にProviderを置く必要はなく、このセクションで完結させる。
   useEffect(() => {
@@ -146,7 +137,6 @@ export default function ContactSection() {
   // ── 送信する ────────────────────────────────────
   const handleSubmit = useCallback(async () => {
     setStep("sending");
-    const debug: DebugInfo = { recaptchaStatus: "skipped" };
 
     // reCAPTCHA v3 トークン取得（見えない検証）
     // 素のGoogle reCAPTCHA APIを直接呼ぶ。失敗しても送信は継続しサーバー側の判定に委ねる。
@@ -154,14 +144,9 @@ export default function ContactSection() {
     if (RECAPTCHA_SITE_KEY) {
       try {
         recaptchaToken = await getRecaptchaToken("contact_form");
-        debug.recaptchaStatus = "ok";
       } catch (err) {
-        debug.recaptchaStatus = "failed";
-        debug.recaptchaError = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
         console.error("[contact] getRecaptchaToken failed:", err);
       }
-    } else {
-      debug.recaptchaError = "NEXT_PUBLIC_RECAPTCHA_SITE_KEY が未設定";
     }
 
     try {
@@ -176,21 +161,16 @@ export default function ContactSection() {
           recaptchaToken,
         }),
       });
-      debug.httpStatus = res.status;
       if (!res.ok) {
         const body = await res.text().catch(() => "");
-        debug.apiError = body;
         console.error("[contact] POST /api/contact failed:", res.status, body);
         throw new Error(`Send failed (${res.status})`);
       }
       setStep("complete");
       setFormData(EMPTY_FORM);
       setAgreed(false);
-      setDebugInfo(null);
     } catch (err) {
-      debug.fetchError = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
       console.error("[contact] submit error:", err);
-      setDebugInfo(debug);
       setStep("error");
     }
   }, [formData]);
@@ -447,35 +427,6 @@ export default function ContactSection() {
             <p className={styles.error}>
               送信に失敗しました。お手数ですが、もう一度お試しください。
             </p>
-            {debugInfo && (
-              <div
-                style={{
-                  marginTop: 24,
-                  padding: 16,
-                  background: "#fff7ed",
-                  border: "1px solid #fdba74",
-                  borderRadius: 8,
-                  fontSize: 12,
-                  color: "#7c2d12",
-                  fontFamily: "monospace",
-                  textAlign: "left",
-                  maxWidth: 600,
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                }}
-              >
-                <div style={{ fontWeight: "bold", marginBottom: 8 }}>
-                  [調査用デバッグ情報（公開安定後に削除）]
-                </div>
-                <div>reCAPTCHA status: {debugInfo.recaptchaStatus}</div>
-                {debugInfo.recaptchaError && (
-                  <div>reCAPTCHA error: {debugInfo.recaptchaError}</div>
-                )}
-                <div>HTTP status: {debugInfo.httpStatus ?? "リクエスト到達せず"}</div>
-                {debugInfo.apiError && <div>API error body: {debugInfo.apiError}</div>}
-                {debugInfo.fetchError && <div>Fetch error: {debugInfo.fetchError}</div>}
-              </div>
-            )}
             <button onClick={handleBack} className="c-moreBtn" style={{ marginTop: 24 }}>
               戻る
             </button>
