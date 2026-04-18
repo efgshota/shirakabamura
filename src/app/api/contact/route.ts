@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const ADMIN_EMAIL = "shirakabamura@cfquod.jp";
+// TODO(公開安定後に削除): 管理者通知の取りこぼし検知用セーフティネット。cfquod.jp 側の迷惑メール判定で
+// 通知が届かないリスクに備え、本番公開直後のみ藤井さん個人アドレスにもBCCで同報する。
+// 運用が安定し管理者通知が確実に届いていることを1-2週間確認できたら、この配列ごと削除する。
+const ADMIN_BCC = ["efgshota@gmail.com"];
 const FROM_EMAIL = "noreply@shirakabamura.com";
 const SITE_NAME = "白樺村";
 
@@ -37,6 +41,7 @@ export async function POST(req: NextRequest) {
     await resend.emails.send({
       from: FROM_EMAIL,
       to: ADMIN_EMAIL,
+      bcc: ADMIN_BCC,
       replyTo: email,
       subject: `【${SITE_NAME}】お問い合わせ：${name} 様`,
       html: `
