@@ -2,6 +2,16 @@
 
 ## 2026-04-18
 
+### 🚨🚨🚨 `echo "$VAR" | vercel env add` は末尾に改行を混入させる（最重要・凡ミス）
+- **問題:** 公開直後のフォーム不動対応で `RESEND_API_KEY` / `RECAPTCHA_SECRET_KEY` / `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` を追加した際、`echo "$VAR" | npx vercel env add XXX production` の形で stdin パイプで値を渡した。しかし `echo` は**末尾に改行を必ず付ける**ため、env値そのものが `"KEY\n"` になって保存され、Googleの「Invalid site key or not loaded in api.js」エラーの根本原因になった。Site Key・Secret Key・API Keyの3つすべてが汚染された
+- **探索に費やした誤道:** 「ライブラリ `react-google-recaptcha-v3` の初期化レース」「reCAPTCHAスコア閾値0.5が厳しすぎる」「Verify Originの判定エッジケース」「ライブラリの二重レンダー問題」—— どれも的外れで、コード修正を4回繰り返した
+- **発見経緯:** `vercel env pull --environment production` でenv値をダンプし、`repr()` で末尾を観察したら `\n` が見えた。見た目では気づけない
+- **ルール:**
+  1. **env値を stdin で渡すときは必ず `printf "%s" "$VAR"` を使う**（改行なし）。`echo` は絶対に使わない
+  2. env追加後は必ず `vercel env pull` で実際の値をダンプし、**末尾の文字と文字数を repr() で確認**する
+  3. 環境変数系の問題でハマったら、コード側を疑う前に**まずenv値の bytes を確認**する
+  4. 「似たような値で動かない」ときは常にホワイトスペース・改行の混入を疑う
+
 ### 🚨 Vercel環境変数は「すべての環境」に入れる（最重要）
 - **問題:** 本番公開後、柴田さんから「フォーム送信できない・Resend Logsにも残らない」と報告。調査すると **本番環境の `RESEND_API_KEY` / `RECAPTCHA_SECRET_KEY` / `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` が未設定**で、`/api/contact` が500エラーで落ちていた。Development/Previewにしか入っていなかった
 - **原因:**
