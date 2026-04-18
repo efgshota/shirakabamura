@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Zen_Kaku_Gothic_Antique, Inter, Noto_Sans_JP } from "next/font/google";
 import Script from "next/script";
 import FloatingButtons from "@/components/FloatingButtons";
-import RecaptchaProvider from "@/components/RecaptchaProvider";
 import JsonLd from "@/components/JsonLd";
 import "./globals.css";
 
@@ -96,9 +95,7 @@ export default function RootLayout({
           url: siteUrl,
           logo: `${siteUrl}/images/common/logo.svg`,
         }} />
-        <RecaptchaProvider>
-          {children}
-        </RecaptchaProvider>
+        {children}
         <FloatingButtons />
       </body>
     </html>

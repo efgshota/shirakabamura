@@ -1,11 +1,69 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useCallback } from "react";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useState, useCallback, useEffect } from "react";
 
 import { useScrollTrigger } from "./useScrollTrigger";
 import styles from "./ContactSection.module.css";
+
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
+const RECAPTCHA_SCRIPT_ID = "grecaptcha-v3-script";
+
+type GrecaptchaLike = {
+  ready: (cb: () => void) => void;
+  execute: (siteKey: string, options: { action: string }) => Promise<string>;
+};
+
+// react-google-recaptcha-v3 のProviderを使うと、api.jsの`?render=KEY`による自動レンダーと
+// ライブラリ側の手動 grecaptcha.render が競合し "Invalid site key or not loaded" が出ていた。
+// ここでは素のGoogle reCAPTCHAスクリプトを直接扱うシンプルな実装に切り替える。
+const ensureRecaptchaScript = () => {
+  if (!RECAPTCHA_SITE_KEY) return;
+  if (typeof document === "undefined") return;
+  if (document.getElementById(RECAPTCHA_SCRIPT_ID)) return;
+  const script = document.createElement("script");
+  script.id = RECAPTCHA_SCRIPT_ID;
+  script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+  script.async = true;
+  script.defer = true;
+  document.body.appendChild(script);
+};
+
+const waitForGrecaptcha = (timeoutMs = 5000) =>
+  new Promise<GrecaptchaLike | null>((resolve) => {
+    const start = Date.now();
+    const tick = () => {
+      if (typeof window !== "undefined") {
+        const g = (window as unknown as { grecaptcha?: GrecaptchaLike }).grecaptcha;
+        if (g && typeof g.ready === "function" && typeof g.execute === "function") {
+          resolve(g);
+          return;
+        }
+      }
+      if (Date.now() - start >= timeoutMs) {
+        resolve(null);
+        return;
+      }
+      setTimeout(tick, 100);
+    };
+    tick();
+  });
+
+const getRecaptchaToken = async (action: string): Promise<string> => {
+  if (!RECAPTCHA_SITE_KEY) throw new Error("NEXT_PUBLIC_RECAPTCHA_SITE_KEY is not set");
+  const g = await waitForGrecaptcha();
+  if (!g) throw new Error("grecaptcha did not become ready within 5s");
+  return new Promise<string>((resolve, reject) => {
+    g.ready(async () => {
+      try {
+        const token = await g.execute(RECAPTCHA_SITE_KEY, { action });
+        resolve(token);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  });
+};
 
 type FormData = {
   name: string;
@@ -35,48 +93,6 @@ const EMPTY_FORM: FormData = {
 
 const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
-// react-google-recaptcha-v3 v1.11.0 の初期化レース対策:
-// executeRecaptcha が hook から返ってくる時点で、内部的な window.grecaptcha.execute が
-// まだ準備できていないケースがある（"Invalid site key or not loaded in api.js" エラーの原因）。
-// 最初に window.grecaptcha.execute の準備を待ち、さらに executeRecaptcha の呼び出しも
-// 短いバックオフでリトライすることで確実にトークンを取得する。
-const waitForRecaptchaReady = (timeoutMs = 5000) =>
-  new Promise<boolean>((resolve) => {
-    const start = Date.now();
-    const tick = () => {
-      if (typeof window !== "undefined") {
-        const g = (window as unknown as { grecaptcha?: { execute?: unknown } }).grecaptcha;
-        if (g && typeof g.execute === "function") {
-          resolve(true);
-          return;
-        }
-      }
-      if (Date.now() - start >= timeoutMs) {
-        resolve(false);
-        return;
-      }
-      setTimeout(tick, 100);
-    };
-    tick();
-  });
-
-const executeRecaptchaWithRetry = async (
-  fn: (action: string) => Promise<string>,
-  action: string,
-  maxRetries = 4,
-): Promise<string> => {
-  let lastErr: unknown;
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      return await fn(action);
-    } catch (err) {
-      lastErr = err;
-      // 200ms → 400ms → 800ms → 1600ms（計3秒）
-      await new Promise((r) => setTimeout(r, 200 * Math.pow(2, i)));
-    }
-  }
-  throw lastErr;
-};
 
 const isValidPhone = (v: string) => {
   const digits = v.replace(/[\-\s\(\)\+]/g, "");
@@ -95,7 +111,12 @@ export default function ContactSection() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [agreeError, setAgreeError] = useState(false);
   const [debugInfo, setDebugInfo] = useState<DebugInfo | null>(null);
-  const { executeRecaptcha } = useGoogleReCaptcha();
+
+  // ContactSection がマウントされた時点でreCAPTCHAスクリプトの読み込みを開始する。
+  // ページ全体にProviderを置く必要はなく、このセクションで完結させる。
+  useEffect(() => {
+    ensureRecaptchaScript();
+  }, []);
 
   const validate = (): FormErrors => {
     const e: FormErrors = {};
@@ -128,25 +149,19 @@ export default function ContactSection() {
     const debug: DebugInfo = { recaptchaStatus: "skipped" };
 
     // reCAPTCHA v3 トークン取得（見えない検証）
-    // window.grecaptcha.execute が Ready になるまで待ってから実行し、
-    // それでも失敗したらバックオフでリトライする。
-    // トークン取得が最終的に失敗した場合でも送信は継続し、サーバー側のスコア判定に委ねる。
+    // 素のGoogle reCAPTCHA APIを直接呼ぶ。失敗しても送信は継続しサーバー側の判定に委ねる。
     let recaptchaToken: string | null = null;
-    try {
-      if (executeRecaptcha) {
-        const ready = await waitForRecaptchaReady();
-        if (!ready) {
-          throw new Error("reCAPTCHA script not ready within 5s");
-        }
-        recaptchaToken = await executeRecaptchaWithRetry(executeRecaptcha, "contact_form");
+    if (RECAPTCHA_SITE_KEY) {
+      try {
+        recaptchaToken = await getRecaptchaToken("contact_form");
         debug.recaptchaStatus = "ok";
-      } else {
-        debug.recaptchaError = "executeRecaptcha関数が未定義（Providerが初期化されていない）";
+      } catch (err) {
+        debug.recaptchaStatus = "failed";
+        debug.recaptchaError = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
+        console.error("[contact] getRecaptchaToken failed:", err);
       }
-    } catch (err) {
-      debug.recaptchaStatus = "failed";
-      debug.recaptchaError = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
-      console.error("[contact] executeRecaptcha failed:", err);
+    } else {
+      debug.recaptchaError = "NEXT_PUBLIC_RECAPTCHA_SITE_KEY が未設定";
     }
 
     try {
@@ -178,7 +193,7 @@ export default function ContactSection() {
       setDebugInfo(debug);
       setStep("error");
     }
-  }, [formData, executeRecaptcha]);
+  }, [formData]);
 
   // ── 入力に戻る ──────────────────────────────────
   const handleBack = () => {
