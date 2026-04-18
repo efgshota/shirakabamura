@@ -35,6 +35,49 @@ const EMPTY_FORM: FormData = {
 
 const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
+// react-google-recaptcha-v3 v1.11.0 の初期化レース対策:
+// executeRecaptcha が hook から返ってくる時点で、内部的な window.grecaptcha.execute が
+// まだ準備できていないケースがある（"Invalid site key or not loaded in api.js" エラーの原因）。
+// 最初に window.grecaptcha.execute の準備を待ち、さらに executeRecaptcha の呼び出しも
+// 短いバックオフでリトライすることで確実にトークンを取得する。
+const waitForRecaptchaReady = (timeoutMs = 5000) =>
+  new Promise<boolean>((resolve) => {
+    const start = Date.now();
+    const tick = () => {
+      if (typeof window !== "undefined") {
+        const g = (window as unknown as { grecaptcha?: { execute?: unknown } }).grecaptcha;
+        if (g && typeof g.execute === "function") {
+          resolve(true);
+          return;
+        }
+      }
+      if (Date.now() - start >= timeoutMs) {
+        resolve(false);
+        return;
+      }
+      setTimeout(tick, 100);
+    };
+    tick();
+  });
+
+const executeRecaptchaWithRetry = async (
+  fn: (action: string) => Promise<string>,
+  action: string,
+  maxRetries = 4,
+): Promise<string> => {
+  let lastErr: unknown;
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn(action);
+    } catch (err) {
+      lastErr = err;
+      // 200ms → 400ms → 800ms → 1600ms（計3秒）
+      await new Promise((r) => setTimeout(r, 200 * Math.pow(2, i)));
+    }
+  }
+  throw lastErr;
+};
+
 const isValidPhone = (v: string) => {
   const digits = v.replace(/[\-\s\(\)\+]/g, "");
   return /^\d{10,11}$/.test(digits);
@@ -85,12 +128,17 @@ export default function ContactSection() {
     const debug: DebugInfo = { recaptchaStatus: "skipped" };
 
     // reCAPTCHA v3 トークン取得（見えない検証）
-    // トークン取得自体が失敗しても送信は継続し、サーバー側でスコア判定に委ねる。
-    // reCAPTCHAのドメイン未登録・スクリプトブロック等でフォーム全体が止まることを防ぐ。
+    // window.grecaptcha.execute が Ready になるまで待ってから実行し、
+    // それでも失敗したらバックオフでリトライする。
+    // トークン取得が最終的に失敗した場合でも送信は継続し、サーバー側のスコア判定に委ねる。
     let recaptchaToken: string | null = null;
     try {
       if (executeRecaptcha) {
-        recaptchaToken = await executeRecaptcha("contact_form");
+        const ready = await waitForRecaptchaReady();
+        if (!ready) {
+          throw new Error("reCAPTCHA script not ready within 5s");
+        }
+        recaptchaToken = await executeRecaptchaWithRetry(executeRecaptcha, "contact_form");
         debug.recaptchaStatus = "ok";
       } else {
         debug.recaptchaError = "executeRecaptcha関数が未定義（Providerが初期化されていない）";
