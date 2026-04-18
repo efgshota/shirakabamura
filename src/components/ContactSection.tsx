@@ -74,13 +74,20 @@ export default function ContactSection() {
   // ── 送信する ────────────────────────────────────
   const handleSubmit = useCallback(async () => {
     setStep("sending");
+
+    // reCAPTCHA v3 トークン取得（見えない検証）
+    // トークン取得自体が失敗しても送信は継続し、サーバー側でスコア判定に委ねる。
+    // reCAPTCHAのドメイン未登録・スクリプトブロック等でフォーム全体が止まることを防ぐ。
+    let recaptchaToken: string | null = null;
     try {
-      // reCAPTCHA v3 トークン取得（見えない検証）
-      let recaptchaToken: string | null = null;
       if (executeRecaptcha) {
         recaptchaToken = await executeRecaptcha("contact_form");
       }
+    } catch (err) {
+      console.error("[contact] executeRecaptcha failed:", err);
+    }
 
+    try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -92,11 +99,16 @@ export default function ContactSection() {
           recaptchaToken,
         }),
       });
-      if (!res.ok) throw new Error("Send failed");
+      if (!res.ok) {
+        const body = await res.text().catch(() => "");
+        console.error("[contact] POST /api/contact failed:", res.status, body);
+        throw new Error(`Send failed (${res.status})`);
+      }
       setStep("complete");
       setFormData(EMPTY_FORM);
       setAgreed(false);
-    } catch {
+    } catch (err) {
+      console.error("[contact] submit error:", err);
       setStep("error");
     }
   }, [formData, executeRecaptcha]);
