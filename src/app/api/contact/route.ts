@@ -24,7 +24,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "必須項目が不足しています" }, { status: 400 });
     }
 
-    // reCAPTCHA v3 サーバーサイド検証（スコア 0.5 未満はボットと判定）
+    // reCAPTCHA v3 サーバーサイド検証
+    // しきい値を 0.3 に設定: 問い合わせフォームは低〜中リスクのため誤判定を減らす寄りに調整。
+    // 0.5 だと初回訪問・プライバシー強化ブラウザで弾かれるケースが多い。
+    // 本番で実スコアを観測してから再調整する判断材料として、結果をログ出力する。
     if (process.env.RECAPTCHA_SECRET_KEY) {
       const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
         method: "POST",
@@ -32,7 +35,14 @@ export async function POST(req: NextRequest) {
         body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
       });
       const verifyData = await verifyRes.json();
-      if (!verifyData.success || verifyData.score < 0.5) {
+      console.log("[contact] recaptcha", {
+        success: verifyData.success,
+        score: verifyData.score,
+        action: verifyData.action,
+        hostname: verifyData.hostname,
+        errors: verifyData["error-codes"],
+      });
+      if (!verifyData.success || verifyData.score < 0.3) {
         return NextResponse.json({ error: "スパムの疑いがあるため送信できませんでした" }, { status: 400 });
       }
     }
